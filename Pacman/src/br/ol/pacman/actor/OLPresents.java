@@ -13,7 +13,7 @@ import java.awt.Graphics2D;
  */
 public class OLPresents extends PacmanActor {
     
-    private String text = "O.L. PRESENTS";
+    private String text = "YOLO Matthieu \n j'ai deja trouve \n ou ecrire";
     private int textIndex;
 
     public OLPresents(PacmanGame game) {
