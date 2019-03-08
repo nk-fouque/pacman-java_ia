@@ -11,10 +11,11 @@ import java.awt.Graphics2D;
  * 
  * 28 x 31 cells
  * 
- * @author Leonardo Ono (ono.leo@gmail.com)
+ * @ClassUtility Gestion du background
  */
 public class Background extends PacmanActor {
     
+	/* Gère les carrés "solides" du background, ceux sur lesquels on peut avancer ou non */
     private boolean showBlockedCellColor = false;
     private Color blockedCellColor = new Color(255, 0, 0, 128);
     private int frameCount;
@@ -28,6 +29,11 @@ public class Background extends PacmanActor {
         loadFrames("/res/background_0.png", "/res/background_1.png");
     }
 
+    /**
+     * Met à jour les attributs de Actor en fonction du temps écoulé (currentTimeMillis())
+     * Je ne sais pas pourquoi, à suivre...
+     * Si on passe par le case 4, on met à jour framecount
+     */
     @Override
     public void updateLevelCleared() {
         yield:
@@ -35,15 +41,15 @@ public class Background extends PacmanActor {
             switch (instructionPointer) {
                 case 0:
                     frameCount = 0;
-                    waitTime = System.currentTimeMillis();
-                    instructionPointer = 1;
+                    waitTime = System.currentTimeMillis();	//long waitTime from Actor
+                    instructionPointer = 1;					// int instructionPointer from Actor
                 case 1:
                     if (System.currentTimeMillis() - waitTime < 1500) {
                         break yield;
                     }
                     instructionPointer = 2;
                 case 2:
-                    frame = frames[1];
+                    frame = frames[1];		// BufferedImage frame et BufferedImage frames[] from Actor
                     waitTime = System.currentTimeMillis();
                     instructionPointer = 3;
                 case 3:
@@ -65,6 +71,8 @@ public class Background extends PacmanActor {
                     game.broadcastMessage("hideAll");
                     waitTime = System.currentTimeMillis();
                     instructionPointer = 5;
+                
+                /* Fin de la partie */
                 case 5:
                     if (System.currentTimeMillis() - waitTime < 500) {
                         break yield;
