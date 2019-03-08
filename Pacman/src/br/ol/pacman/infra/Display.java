@@ -8,15 +8,16 @@ import java.awt.image.BufferStrategy;
 
 /**
  * Display class.
- * 
+ *
  * @author Leonardo Ono (ono.leo@gmail.com)
+ * @author nfouque
  */
 public class Display extends Canvas {
-   
+
     private Game game;
     private boolean running;
     private BufferStrategy bs;
-    
+
     public Display(Game game) {
         this.game = game;
         int sx = (int) (game.screenSize.width * game.screenScale.getX());
@@ -36,12 +37,16 @@ public class Display extends Canvas {
         Thread thread = new Thread(new MainLoop());
         thread.start();
     }
-    
+
     private class MainLoop implements Runnable {
+
+        //This param might be modifiable and we can set up the run() to depend on its usage
+        private long FPS = 60;
+
 
         @Override
         public void run() {
-            long desiredFrameRateTime = 1000 / 60;
+            long desiredFrameRateTime = 1000 / FPS;
             long currentTime = System.currentTimeMillis();
             long lastTime = currentTime - desiredFrameRateTime;
             long unprocessedTime = 0;
@@ -50,13 +55,17 @@ public class Display extends Canvas {
                 currentTime = System.currentTimeMillis();
                 unprocessedTime += currentTime - lastTime;
                 lastTime = currentTime;
-                
+
+                /**
+                 * Constantly checks if it is time to render (based on the number of FPS specified
+                 */
                 while (unprocessedTime >= desiredFrameRateTime) {
                     unprocessedTime -= desiredFrameRateTime;
-                    update();
+                    update(); //<-- This is what actually runs the game
                     needsRender = true;
                 }
-                
+
+                /** If it's time to render, draws everything */
                 if (needsRender) {
                     Graphics2D g = (Graphics2D) bs.getDrawGraphics();
                     g.setBackground(Color.BLACK);
@@ -66,8 +75,7 @@ public class Display extends Canvas {
                     g.dispose();
                     bs.show();
                     needsRender = false;
-                }
-                else {
+                } else {
                     try {
                         Thread.sleep(1);
                     } catch (InterruptedException ex) {
@@ -75,15 +83,16 @@ public class Display extends Canvas {
                 }
             }
         }
-        
+
     }
-    
+
+
     public void update() {
         game.update();
     }
-    
+
     public void draw(Graphics2D g) {
         game.draw(g);
     }
-    
+
 }
