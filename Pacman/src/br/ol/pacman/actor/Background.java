@@ -106,8 +106,10 @@ public class Background extends PacmanActor {
     }
 
     
-    
+    /* Probable debug mais je sais pas trop */
     // broadcast messages
+    
+    
     /**
      * Gestion de l'affichage du bg en fonction de l'état du jeu
      */
