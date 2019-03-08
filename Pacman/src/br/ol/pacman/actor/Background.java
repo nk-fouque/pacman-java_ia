@@ -33,6 +33,7 @@ public class Background extends PacmanActor {
      * Met à jour les attributs de Actor en fonction du temps écoulé (currentTimeMillis())
      * Je ne sais pas pourquoi, à suivre...
      * Si on passe par le case 4, on met à jour framecount
+     * @author ehummel
      */
     @Override
     public void updateLevelCleared() {
@@ -84,6 +85,11 @@ public class Background extends PacmanActor {
         }
     }
     
+    /**
+     * Affiche le background = le labyrinthe
+     * @author ehummel
+     * @param g Graphics2D l'affichage 2D
+     */
     @Override
     public void draw(Graphics2D g) {
         super.draw(g);
@@ -99,8 +105,14 @@ public class Background extends PacmanActor {
         }
     }
 
+    
+    /* Probable debug mais je sais pas trop */
     // broadcast messages
-
+    
+    
+    /**
+     * Gestion de l'affichage du bg en fonction de l'état du jeu
+     */
     @Override
     public void stateChanged() {
         if (game.getState() == State.TITLE) {
