@@ -6,6 +6,7 @@ import java.util.List;
 
 /**
  * ShortestPathFinder class.
+ * Helps the Ghosts returning home
  * 
  * @author Leonardo Ono (ono.leo@gmail.com)
  */

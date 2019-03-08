@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 
 /**
  * Keyboard class.
+ * Makes it easier to read calls to keyboard listeners, will probably be replaced by our AI listeners
  * 
  * @author Leonardo Ono (ono.leo@gmail.com)
  */
