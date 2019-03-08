@@ -7,8 +7,10 @@ import javax.imageio.ImageIO;
 
 /**
  * BitmapFontRenderer class.
+ * Contains the functions to draw textes like the crdits, title screen, "HI-SCORE" etc...
  * 
  * @author Leonardo Ono (ono.leo@gmail.com)
+ * @author nfouque
  */
 public class BitmapFontRenderer {
     
