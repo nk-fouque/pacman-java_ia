@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>br.ol.pacman</OriginalElement>
+  <nodes>
+    <node x="466.0" y="359.0">br.ol.pacman.infra.Keyboard</node>
+    <node x="778.75" y="81.0">br.ol.pacman.PacmanGame</node>
+    <node x="609.0" y="283.0">br.ol.pacman.actor.Point</node>
+    <node x="1316.0" y="283.0">br.ol.pacman.actor.GameOver</node>
+    <node x="500.0" y="283.0">br.ol.pacman.actor.Ghost</node>
+    <node x="714.0" y="283.0">br.ol.pacman.actor.Background</node>
+    <node x="1069.0" y="283.0">br.ol.pacman.actor.Ready</node>
+    <node x="767.0" y="359.0">main.Main</node>
+    <node x="0.0" y="359.0">br.ol.pacman.infra.BitmapFontRenderer</node>
+    <node x="238.0" y="359.0">br.ol.pacman.infra.ShortestPathFinder</node>
+    <node x="645.75" y="162.0">br.ol.pacman.PacmanActor</node>
+    <node x="402.0" y="283.0">br.ol.pacman.actor.Title</node>
+    <node x="969.0" y="283.0">br.ol.pacman.actor.HUD</node>
+    <node x="254.0" y="283.0">br.ol.pacman.actor.OLPresents</node>
+    <node x="739.0" y="0.0">br.ol.pacman.infra.Game</node>
+    <node x="1178.0" y="283.0">br.ol.pacman.actor.PowerBall</node>
+    <node x="624.0" y="359.0">br.ol.pacman.infra.Display</node>
+    <node x="672.75" y="81.0">br.ol.pacman.infra.Actor</node>
+    <node x="122.0" y="283.0">br.ol.pacman.actor.Initializer</node>
+    <node x="866.0" y="283.0">br.ol.pacman.actor.Food</node>
+    <node x="0.0" y="283.0">br.ol.pacman.actor.Pacman</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="br.ol.pacman.PacmanActor" target="br.ol.pacman.infra.Actor">
+      <point x="0.0" y="-15.5" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="br.ol.pacman.infra.Actor" target="br.ol.pacman.infra.Game">
+      <point x="0.0" y="-15.5" />
+      <point x="715.75" y="56.0" />
+      <point x="760.75" y="56.0" />
+      <point x="-21.75" y="15.5" />
+    </edge>
+    <edge source="br.ol.pacman.actor.OLPresents" target="br.ol.pacman.PacmanActor">
+      <point x="0.0" y="-15.5" />
+      <point x="318.0" y="233.0" />
+      <point x="674.9166666666667" y="233.0" />
+      <point x="-40.83333333333337" y="15.5" />
+    </edge>
+    <edge source="br.ol.pacman.actor.Point" target="br.ol.pacman.PacmanActor">
+      <point x="0.0" y="-15.5" />
+      <point x="651.5" y="263.0" />
+      <point x="709.9166666666667" y="263.0" />
+      <point x="-5.833333333333371" y="15.5" />
+    </edge>
+    <edge source="br.ol.pacman.actor.GameOver" target="br.ol.pacman.PacmanActor">
+      <point x="0.0" y="-15.5" />
+      <point x="1376.5" y="213.0" />
+      <point x="779.9166666666667" y="213.0" />
+      <point x="64.16666666666663" y="15.5" />
+    </edge>
+    <edge source="br.ol.pacman.actor.Title" target="br.ol.pacman.PacmanActor">
+      <point x="0.0" y="-15.5" />
+      <point x="441.0" y="243.0" />
+      <point x="686.5833333333335" y="243.0" />
+      <point x="-29.16666666666663" y="15.5" />
+    </edge>
+    <edge source="br.ol.pacman.actor.HUD" target="br.ol.pacman.PacmanActor">
+      <point x="0.0" y="-15.5" />
+      <point x="1009.0" y="243.0" />
+      <point x="744.9166666666667" y="243.0" />
+      <point x="29.16666666666663" y="15.5" />
+    </edge>
+    <edge source="br.ol.pacman.actor.Ghost" target="br.ol.pacman.PacmanActor">
+      <point x="0.0" y="-15.5" />
+      <point x="544.5" y="253.0" />
+      <point x="698.25" y="253.0" />
+      <point x="-17.5" y="15.5" />
+    </edge>
+    <edge source="br.ol.pacman.actor.Ready" target="br.ol.pacman.PacmanActor">
+      <point x="5.6843418860808015E-14" y="-15.5" />
+      <point x="1113.5" y="233.0" />
+      <point x="756.5833333333333" y="233.0" />
+      <point x="40.83333333333326" y="15.5" />
+    </edge>
+    <edge source="br.ol.pacman.actor.PowerBall" target="br.ol.pacman.PacmanActor">
+      <point x="0.0" y="-15.5" />
+      <point x="1237.0" y="223.0" />
+      <point x="768.25" y="223.0" />
+      <point x="52.5" y="15.5" />
+    </edge>
+    <edge source="br.ol.pacman.actor.Food" target="br.ol.pacman.PacmanActor">
+      <point x="0.0" y="-15.5" />
+      <point x="907.5" y="253.0" />
+      <point x="733.25" y="253.0" />
+      <point x="17.5" y="15.5" />
+    </edge>
+    <edge source="br.ol.pacman.actor.Pacman" target="br.ol.pacman.PacmanActor">
+      <point x="0.0" y="-15.5" />
+      <point x="51.0" y="213.0" />
+      <point x="651.5833333333335" y="213.0" />
+      <point x="-64.16666666666663" y="15.5" />
+    </edge>
+    <edge source="br.ol.pacman.actor.Initializer" target="br.ol.pacman.PacmanActor">
+      <point x="0.0" y="-15.5" />
+      <point x="178.0" y="223.0" />
+      <point x="663.25" y="223.0" />
+      <point x="-52.5" y="15.5" />
+    </edge>
+    <edge source="br.ol.pacman.actor.Background" target="br.ol.pacman.PacmanActor">
+      <point x="0.0" y="-15.5" />
+      <point x="780.0" y="263.0" />
+      <point x="721.5833333333333" y="263.0" />
+      <point x="5.8333333333332575" y="15.5" />
+    </edge>
+    <edge source="br.ol.pacman.PacmanGame" target="br.ol.pacman.infra.Game">
+      <point x="0.0" y="-15.5" />
+      <point x="849.25" y="56.0" />
+      <point x="804.25" y="56.0" />
+      <point x="21.75" y="15.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.9" x="733.3333333333334" y="110.55555555555554" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

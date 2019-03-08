@@ -6,6 +6,8 @@ import br.ol.pacman.infra.Actor;
  * PacmanActor class.
  * 
  * @author Leonardo Ono (ono.leo@gmail.com)
+ *
+ * @ClassUtility Only a class handling the functions called when states of state machine changed
  */
 public class PacmanActor extends Actor<PacmanGame> {
 
