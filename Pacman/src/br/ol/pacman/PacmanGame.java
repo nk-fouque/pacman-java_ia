@@ -21,6 +21,8 @@ import java.awt.geom.Point2D;
  * PacmanGame class.
  * 
  * @author Leonardo Ono (ono.leo@gmail.com)
+ *
+ * @ClassUtility Creates the maze and makes all the functions for the whole game itself
  */
 public class PacmanGame extends Game {
     
