@@ -30,7 +30,7 @@ public class Background extends PacmanActor {
     }
 
     /**
-     * Met à jour les attributs de Actor en fonction du temps écoulé (currentTimeMillis())
+     * Met à jour les attributs de l'héritage en fonction du temps écoulé (currentTimeMillis())
      * Je ne sais pas pourquoi, à suivre...
      * Si on passe par le case 4, on met à jour framecount
      * @author ehummel
@@ -42,22 +42,22 @@ public class Background extends PacmanActor {
             switch (instructionPointer) {
                 case 0:
                     frameCount = 0;
-                    waitTime = System.currentTimeMillis();	//long waitTime from Actor
-                    instructionPointer = 1;					// int instructionPointer from Actor
+                    waitTime = System.currentTimeMillis();	//long waitTime
+                    instructionPointer = 1;					// int instructionPointer
                 case 1:
                     if (System.currentTimeMillis() - waitTime < 1500) {
                         break yield;
                     }
                     instructionPointer = 2;
                 case 2:
-                    frame = frames[1];		// BufferedImage frame et BufferedImage frames[] from Actor
+                    frame = frames[1];		// BufferedImage frame et BufferedImage frames[]
                     waitTime = System.currentTimeMillis();
                     instructionPointer = 3;
                 case 3:
                     if (System.currentTimeMillis() - waitTime < 200) {
                         break yield;
                     }
-                    frame = frames[0];
+                    frame = Actor.frames[0];
                     waitTime = System.currentTimeMillis();
                     instructionPointer = 4;
                 case 4:

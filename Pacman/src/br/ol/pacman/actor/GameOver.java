@@ -16,6 +16,10 @@ public class GameOver extends PacmanActor {
         super(game);
     }
 
+    /**
+     * Initialisation du Game Over
+     *  + set up des coordonnées pour l'affichage
+     */
     @Override
     public void init() {
         x = 77;
@@ -23,6 +27,9 @@ public class GameOver extends PacmanActor {
         loadFrames("/res/gameover.png");
     }
     
+    /**
+     * Mise à jour des attributs en fonction du temps écoulé
+     */
     @Override
     public void updateGameOver() {
         yield:
