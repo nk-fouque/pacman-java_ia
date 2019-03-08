@@ -40,17 +40,17 @@ public class Actor<T extends Game> {
     }
     
     public void draw(Graphics2D g) {
-        if (!visible) {
-            return;
+        if (visible) {
+        	if (frame != null) {
+                g.drawImage(frame, (int) x, (int) y, frame.getWidth(), frame.getHeight(), null);
+            }
+            if (DRAW_COLLIDER && collider != null) {
+                updateCollider();
+                g.setColor(Color.RED);
+                g.draw(collider);
+            }
         }
-        if (frame != null) {
-            g.drawImage(frame, (int) x, (int) y, frame.getWidth(), frame.getHeight(), null);
-        }
-        if (DRAW_COLLIDER && collider != null) {
-            updateCollider();
-            g.setColor(Color.RED);
-            g.draw(collider);
-        }
+        
     }
     
     protected void loadFrames(String ... framesRes) {
