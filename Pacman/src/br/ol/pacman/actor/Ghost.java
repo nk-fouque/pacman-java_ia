@@ -23,9 +23,20 @@ public class Ghost extends PacmanActor {
         new Point(18, 14), new Point(20, 14)};
     public int cageUpDownCount;
 
+    /**
+     * State machine of the ghost
+     * @author Gregre
+     *
+     */
     public static enum Mode { CAGE, NORMAL, VULNERABLE, DIED }
+    /**
+     * Actual state of the ghost
+     */
     public Mode mode = Mode.CAGE;
     
+    /**
+     * Position of the ghost
+     */
     public int dx;
     public int dy;
     public int col;
@@ -44,6 +55,13 @@ public class Ghost extends PacmanActor {
     // in this version, i'm using path finder just to return the ghost to the center (cage)
     public ShortestPathFinder pathFinder; 
     
+    
+    /**
+     * Constructor 
+     * @param game the current game
+     * @param pacman the target of the ghost
+     * @param type the color and behavior of the ghost
+     */
     public Ghost(PacmanGame game, Pacman pacman, int type) {
         super(game);
         this.pacman = pacman;
@@ -51,21 +69,28 @@ public class Ghost extends PacmanActor {
         this.pathFinder = new ShortestPathFinder(game.maze);
     }
 
+    /**
+     * Setter of the mode (the state of the ghost)
+     * @param mode the next mode
+     */
     private void setMode(Mode mode) {
         this.mode = mode;
         modeChanged();
     }
     
+    /**
+     * Initialisation of the view and collider of the ghost
+     */
     @Override
     public void init() {
         String[] ghostFrameNames = new String[8 + 4 + 4];
-        for (int i=0; i<8; i++) {
+        for (int i=0; i<8; i++) {	// from 0 to 7 = frames of 'ghost'
             ghostFrameNames[i] = "/res/ghost_" + type + "_" + i + ".png";
         }
-        for (int i=0; i<4; i++) {
+        for (int i=0; i<4; i++) {	// from 8 to 11 = frames of 'ghost_vulnerable'
             ghostFrameNames[8 + i] = "/res/ghost_vulnerable_" + i + ".png";
         }
-        for (int i=0; i<4; i++) {
+        for (int i=0; i<4; i++) {	// from 12 to 15 = frames of 'ghost_died'
             ghostFrameNames[12 + i] = "/res/ghost_died_" + i + ".png";
         }
         loadFrames(ghostFrameNames);
@@ -73,25 +98,50 @@ public class Ghost extends PacmanActor {
         setMode(Mode.CAGE);
     }
     
+    /**
+     * Getter of the X coordinate between the 2 scales
+     * @param col the coordinate in the grid scale
+     * @return the coordinate in the other scale
+     */
     private int getTargetX(int col) {
         return col * 8 - 3 - 32;
     }
 
+    /**
+     * Getter of the Y coordinate between the 2 frames
+     * @param row the coordinate in the grid frame
+     * @return the coordinate in the other frame
+     */
     private int getTargetY(int row) {
         return (row + 3) * 8 - 2;
     }
 
+    /**
+     * Update the collider position
+     */
     public void updatePosition() {
         x = getTargetX(col);
         y = getTargetY(row);
     }
     
+    /**
+     * Update the ghost position
+     * @param col the X coordinate in the grid frame
+     * @param row the Y position in the grid frame
+     */
     private void updatePosition(int col, int row) {
         this.col = col;
         this.row = row;
         updatePosition();
     }
     
+    /**
+     * Move in the direction of a given target (using its coordinates)
+     * @param targetX the X coordinate of the target
+     * @param targetY the Y coordinate of the target
+     * @param velocity the speed of the ghost
+     * @return boolean (if the ghost has moved or not)
+     */
     private boolean moveToTargetPosition(int targetX, int targetY, int velocity) {
         int sx = (int) (targetX - x);
         int sy = (int) (targetY - y);
@@ -104,12 +154,22 @@ public class Ghost extends PacmanActor {
         return sx != 0 || sy != 0;
     }
 
+    /**
+     * Move in the direction of the point (col,row) in the grid
+     * @param col the X coordinate of the destination
+     * @param row the Y coordinate of the destination
+     * @param velocity the speed of the ghost
+     * @return boolean (if the ghost has moved or not via {@link #moveToTargetPosition(int,int,int)} )
+     */
     private boolean moveToGridPosition(int col, int row, int velocity) {
         int targetX = getTargetX(col);
         int targetY = getTargetY(row);
         return moveToTargetPosition(targetX, targetY, velocity);
     }
     
+    /**
+     * Adjust the movement while going out of the grid
+     */
     private void adjustHorizontalOutsideMovement() {
         if (col == 1) {
             col = 34;
@@ -121,6 +181,9 @@ public class Ghost extends PacmanActor {
         }
     }
     
+    /**
+     * Update the frame of the title depending on pacman direction
+     */
     @Override
     public void updateTitle() {
         int frameIndex = 0;
@@ -135,6 +198,10 @@ public class Ghost extends PacmanActor {
         frame = frames[frameIndex];
     }
     
+    /**
+     * Update the animation of the ghost depending on its state
+     * {@link updateAnimation()}
+     */
     @Override
     public void updatePlaying() {
         switch (mode) {
@@ -146,6 +213,9 @@ public class Ghost extends PacmanActor {
         updateAnimation();
     }
 
+    /**
+     * Update the frames of the ghost
+     */
     public void updateAnimation() {
         int frameIndex = 0;
         switch (mode) {

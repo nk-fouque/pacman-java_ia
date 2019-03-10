@@ -11,11 +11,10 @@ import java.awt.Graphics2D;
  * 
  * 28 x 31 cells
  * 
- * @ClassUtility Gestion du background
  */
 public class Background extends PacmanActor {
     
-	/* Gère les carrés "solides" du background, ceux sur lesquels on peut avancer ou non */
+	/* Display of the cells depending on if they are blocked */
     private boolean showBlockedCellColor = false;
     private Color blockedCellColor = new Color(255, 0, 0, 128);
     private int frameCount;
@@ -24,16 +23,18 @@ public class Background extends PacmanActor {
         super(game);
     }
 
+    /**
+     * Initialisation of the type of background
+     */
     @Override
     public void init() {
         loadFrames("/res/background_0.png", "/res/background_1.png");
     }
-
+    
     /**
-     * Met à jour les attributs de l'héritage en fonction du temps écoulé (currentTimeMillis())
-     * Je ne sais pas pourquoi, à suivre...
-     * Si on passe par le case 4, on met à jour framecount
-     * @author ehummel
+     * Update of the attributes of the class depending on the time (currentTimeMillis)
+     * I don't know why, to be continued...
+     * If we switch on the case 4 we update framecount
      */
     @Override
     public void updateLevelCleared() {
@@ -50,14 +51,14 @@ public class Background extends PacmanActor {
                     }
                     instructionPointer = 2;
                 case 2:
-                    frame = frames[1];		// BufferedImage frame et BufferedImage frames[]
+                    frame = frames[1];		// BufferedImage frame and BufferedImage frames[]
                     waitTime = System.currentTimeMillis();
                     instructionPointer = 3;
                 case 3:
                     if (System.currentTimeMillis() - waitTime < 200) {
                         break yield;
                     }
-                    frame = Actor.frames[0];
+                    frame = frames[0];
                     waitTime = System.currentTimeMillis();
                     instructionPointer = 4;
                 case 4:
@@ -73,7 +74,7 @@ public class Background extends PacmanActor {
                     waitTime = System.currentTimeMillis();
                     instructionPointer = 5;
                 
-                /* Fin de la partie */
+                /* Game over */
                 case 5:
                     if (System.currentTimeMillis() - waitTime < 500) {
                         break yield;
@@ -85,10 +86,10 @@ public class Background extends PacmanActor {
         }
     }
     
+    
     /**
-     * Affiche le background = le labyrinthe
-     * @author ehummel
-     * @param g Graphics2D l'affichage 2D
+     * Display of the graphic view
+     * @param g the graphic view in 2D
      */
     @Override
     public void draw(Graphics2D g) {
@@ -106,12 +107,10 @@ public class Background extends PacmanActor {
     }
 
     
-    /* Probable debug mais je sais pas trop */
     // broadcast messages
     
-    
     /**
-     * Gestion de l'affichage du bg en fonction de l'état du jeu
+     * Display of the background depending on the state of the game
      */
     @Override
     public void stateChanged() {
@@ -126,6 +125,9 @@ public class Background extends PacmanActor {
         }
     }
 
+    /**
+     * Hide the background
+     */
     public void hideAll() {
         visible = false;
     }

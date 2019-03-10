@@ -17,8 +17,8 @@ public class GameOver extends PacmanActor {
     }
 
     /**
-     * Initialisation du Game Over
-     *  + set up des coordonnées pour l'affichage
+     * Initialisation of the Game Over
+     *  + set up of the coordinates of the square
      */
     @Override
     public void init() {
@@ -28,7 +28,7 @@ public class GameOver extends PacmanActor {
     }
     
     /**
-     * Mise à jour des attributs en fonction du temps écoulé
+     * Update of the attributes depending on the time
      */
     @Override
     public void updateGameOver() {

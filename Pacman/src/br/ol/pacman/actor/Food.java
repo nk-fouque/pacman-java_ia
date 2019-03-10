@@ -15,7 +15,9 @@ import java.awt.event.KeyEvent;
  */
 public class Food extends PacmanActor {
     
-	/* Coordonnées des boules de food */
+	/*/
+	 * Coordinates of the food on the grid frame
+	 */
     private int col;
     private int row;
     
@@ -26,22 +28,22 @@ public class Food extends PacmanActor {
     }
 
     /**
-     * Initialisation des boules de nourriture et de leur collider
+     * Initialisation of the food and its collider
      */
     @Override
     public void init() {
         loadFrames("/res/food.png");			// Vue
         /* x et y sont les coordonnées d'un collider */
-        x = col * 8 + 3 - 32;				// cf le système de coordonnées du collider ? 
+        x = col * 8 + 3 - 32;				// cf le systeme de coordonnees du collider ? 
         y = (row + 3) * 8 + 3;			// same
         collider = new Rectangle(0, 0, 2, 2);	// collider associé
     }
 
     /**
-     * Gestion de la collision avec la boule de food ->
-     * - la boule disparait
-     * - le compteur de nourriture décrémente
-     * - le score augmente de 10
+     * Collision with the food ->
+     * - it disappears
+     * - the food counter decrements
+     * - the score increases by 10
      */
     @Override
     public void updatePlaying() {
@@ -58,9 +60,10 @@ public class Food extends PacmanActor {
         }
     }
 
-    /**
-     * Gestion de l'affichage sur la vue 2D des bouboules
-     */
+	/**
+	 * Display of the Food on the graphic view
+	 * @param g the graphics view in 2D
+	 */
     @Override
     public void draw(Graphics2D g) {
         if (!visible) {
@@ -70,11 +73,10 @@ public class Food extends PacmanActor {
         g.fillRect((int) (x), (int) (y), 2, 2);
     }
     
-    /* Probable debug mais je sais pas trop */
     // broadcast messages
 
     /**
-     * Gestion de l'affichage des bouboules en fonction de l'état du jeu
+     * Display of the food depending on the state of the game
      */
     @Override
     public void stateChanged() {
