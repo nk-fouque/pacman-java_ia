@@ -1,3 +1,5 @@
 Tests/*
 .idea/vcs.xml
 Pacman/out
+.project
+.classpath
