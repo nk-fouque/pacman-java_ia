@@ -151,7 +151,7 @@ public class Pacman extends PacmanActor {
 //            desiredDirection = 1;
 //        }*
 
-        desiredDirection = ia.randDirection();
+        desiredDirection = ia.randDirection(desiredDirection);
         
         /* Manage the movement of pacman */
         yield:
