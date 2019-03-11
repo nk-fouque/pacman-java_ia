@@ -77,10 +77,19 @@ public class PacmanGame extends Game {
     
     public int foodCount;
     public int currentFoodCount;
+
+
     
     public PacmanGame() {
         screenSize = new Dimension(224, 288);
         screenScale = new Point2D.Double(2, 2);
+        FPS = 60; // Used only by the base game
+    }
+
+    public PacmanGame(long fps) {
+        screenSize = new Dimension(224, 288);
+        screenScale = new Point2D.Double(2, 2);
+        FPS = fps;
     }
 
     public State getState() {
