@@ -125,7 +125,7 @@ public class Pacman extends PacmanActor {
 //            desiredDirection = 1;
 //        }*
 
-        desiredDirection = ia.askDirection(game);
+        desiredDirection = ia.randDirection();
         
         yield:
         while (true) {
@@ -184,7 +184,7 @@ public class Pacman extends PacmanActor {
     public void updatePacmanDied() {
         yield:
         while (true) {
-            switch (instructionPointer) {
+            switch (4) { //modified to skip
                 case 0:
                     waitTime = System.currentTimeMillis();
                     instructionPointer = 1;
