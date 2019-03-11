@@ -33,9 +33,9 @@ public class Ready extends PacmanActor {
                     waitTime = System.currentTimeMillis();
                     instructionPointer = 1;
                 case 1:
-                    if (System.currentTimeMillis() - waitTime < 2000) { // || game.sounds.get("start").isPlaying()) {
-                        break yield;
-                    }
+//                    if (System.currentTimeMillis() - waitTime < 2000) { // || game.sounds.get("start").isPlaying()) {
+//                        break yield;
+//                    }
                     game.setState(State.READY2);
                     break yield;
             }
@@ -52,9 +52,9 @@ public class Ready extends PacmanActor {
                     waitTime = System.currentTimeMillis();
                     instructionPointer = 1;
                 case 1:
-                    if (System.currentTimeMillis() - waitTime < 2000) { // || game.sounds.get("start").isPlaying()) {
-                        break yield;
-                    }
+//                    if (System.currentTimeMillis() - waitTime < 2000) { // || game.sounds.get("start").isPlaying()) {
+//                        break yield;
+//                    }
                     game.setState(State.PLAYING);
                     break yield;
             }
