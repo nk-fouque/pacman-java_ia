@@ -10,6 +10,8 @@ import java.awt.event.KeyEvent;
 
 /**
  * Title class.
+ *
+ * Displays the title card
  * 
  * @author Leonardo Ono (ono.leo@gmail.com)
  */
@@ -21,13 +23,22 @@ public class Title extends PacmanActor {
         super(game);
     }
 
+    /**
+     * 
+     */
+
     @Override
     public void init() {
         loadFrames("/res/title.png");
         x = 21;
         y = 100;
     }
-    
+
+    /**
+     * Update of the attributes of the class depending on the time (currentTimeMillis)
+     * case 4 : start the game if the space key is pressed
+     */
+
     @Override
     public void updateTitle() {
         yield:
@@ -64,17 +75,21 @@ public class Title extends PacmanActor {
         }
     }
 
+    /**
+     * Displays the credits when the game is launched
+     * @param g
+     */
     @Override
     public void draw(Graphics2D g) {
-        if (!visible) {
-            return;
+        if (visible) {
+            super.draw(g);
+            if (pushSpaceToStartVisible) {
+                game.drawText(g, "PUSH SPACE TO START", 37, 170);
+            }
+            game.drawText(g, "PROGRAMMED BY O.L. 2017", 20, 240);
+            game.drawText(g, "ORIGINAL GAME BY NAMCO 1980", 5, 255);
         }
-        super.draw(g);
-        if (pushSpaceToStartVisible) {
-            game.drawText(g, "PUSH SPACE TO START", 37, 170);
-        }
-        game.drawText(g, "PROGRAMMED BY O.L. 2017", 20, 240);
-        game.drawText(g, "ORIGINAL GAME BY NAMCO 1980", 5, 255);
+
     }
 
     

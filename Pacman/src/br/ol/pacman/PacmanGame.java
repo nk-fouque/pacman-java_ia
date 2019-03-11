@@ -63,6 +63,11 @@ public class PacmanGame extends Game {
         {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
     };
 
+    /**
+     * READY = State at the beginning of the game
+     * READY 2 = State when PacMan respawns
+     */
+
     public static enum State { INITIALIZING, OL_PRESENTS, TITLE, READY, READY2
         , PLAYING, PACMAN_DIED, GHOST_CATCHED, LEVEL_CLEARED, GAME_OVER }
     
