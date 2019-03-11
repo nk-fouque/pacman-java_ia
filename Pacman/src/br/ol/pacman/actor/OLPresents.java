@@ -24,7 +24,7 @@ public class OLPresents extends PacmanActor {
     public void updateOLPresents() {
         yield:
         while (true) {
-            switch (instructionPointer) {
+            switch (3) {
                 case 0:
                     waitTime = System.currentTimeMillis();
                     instructionPointer = 1;
@@ -50,7 +50,7 @@ public class OLPresents extends PacmanActor {
                     while (System.currentTimeMillis() - waitTime < 1500) {
                         break yield;
                     }
-                    game.setState(State.TITLE);
+                    game.setState(State.READY);
                     break yield;
             }
         }
@@ -73,6 +73,7 @@ public class OLPresents extends PacmanActor {
         if (game.state == State.OL_PRESENTS) {
             visible = true;
             textIndex = 0;
+
         }
     }
         
