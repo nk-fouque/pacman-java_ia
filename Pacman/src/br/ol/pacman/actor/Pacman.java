@@ -1,4 +1,5 @@
 package br.ol.pacman.actor;
+import IA.IA;
 
 import br.ol.pacman.PacmanActor;
 import br.ol.pacman.PacmanGame;
@@ -13,19 +14,32 @@ import java.awt.event.KeyEvent;
  * @author Leonardo Ono (ono.leo@gmail.com)
  */
 public class Pacman extends PacmanActor {
-    
+    /* x-coordinate in grid frame */
     public int col;
+    /* y-coordinate in grid frame */
     public int row;
+    
+    /* goal */
     public int desiredDirection;
+    /* actual direction */
     public int direction;
+    /* x-coordinate of the goal on the screen frame */
     public int dx;
+    /* y-coordinate of the goal on the screen frame */
     public int dy;
+    
     public long diedTime;
+    
+    /* Intelligence of pacman */
+    public IA ia;
     
     public Pacman(PacmanGame game) {
         super(game);
     }
 
+    /**
+     * Initialisation of pacman's frames and its collider
+     */
     @Override
     public void init() {
         String[] pacmanFrameNames = new String[30];
@@ -40,8 +54,12 @@ public class Pacman extends PacmanActor {
         loadFrames(pacmanFrameNames);
         reset();
         collider = new Rectangle(0, 0, 8, 8);
+        ia = new IA();
     }
 
+    /**
+     * Reset at start position
+     */
     private void reset() {
         col = 18;
         row = 23;
@@ -50,11 +68,21 @@ public class Pacman extends PacmanActor {
         direction = desiredDirection = 0;
     }
     
+    /**
+     * Update the collider position in the screen frame
+     */
     public void updatePosition() {
         x = col * 8 - 4 - 32 - 4;
         y = (row + 3) * 8 - 4;
     }
 
+    /**
+     * Move in the direction of a given target (using its coordinates)
+     * @param targetX the X coordinate of the target
+     * @param targetY the Y coordinate of the target
+     * @param velocity the speed of the ghost
+     * @return boolean (if the ghost has moved or not)
+     */
     private boolean moveToTargetPosition(int targetX, int targetY, int velocity) {
         int sx = (int) (targetX - x);
         int sy = (int) (targetY - y);
@@ -109,19 +137,23 @@ public class Pacman extends PacmanActor {
             return;
         }
         
-        if (Keyboard.keyPressed[KeyEvent.VK_LEFT]) {
-            desiredDirection = 2;
-        }
-        else if (Keyboard.keyPressed[KeyEvent.VK_RIGHT]) {
-            desiredDirection = 0;
-        }
-        else if (Keyboard.keyPressed[KeyEvent.VK_UP]) {
-            desiredDirection = 3;
-        }
-        else if (Keyboard.keyPressed[KeyEvent.VK_DOWN]) {
-            desiredDirection = 1;
-        }
+        /* Comments by Nicolas */
+//        /*if (Keyboard.keyPressed[KeyEvent.VK_LEFT]) {
+//            desiredDirection = 2;
+//        }
+//        else if (Keyboard.keyPressed[KeyEvent.VK_RIGHT]) {
+//            desiredDirection = 0;
+//        }
+//        else if (Keyboard.keyPressed[KeyEvent.VK_UP]) {
+//            desiredDirection = 3;
+//        }
+//        else if (Keyboard.keyPressed[KeyEvent.VK_DOWN]) {
+//            desiredDirection = 1;
+//        }*
+
+        desiredDirection = ia.randDirection(desiredDirection);
         
+        /* Manage the movement of pacman */
         yield:
         while (true) {
             switch (instructionPointer) {
@@ -179,7 +211,7 @@ public class Pacman extends PacmanActor {
     public void updatePacmanDied() {
         yield:
         while (true) {
-            switch (instructionPointer) {
+            switch (4) { //modified to skip
                 case 0:
                     waitTime = System.currentTimeMillis();
                     instructionPointer = 1;

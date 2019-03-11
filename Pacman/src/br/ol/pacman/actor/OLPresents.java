@@ -24,7 +24,7 @@ public class OLPresents extends PacmanActor {
     public void updateOLPresents() {
         yield:
         while (true) {
-            switch (3) {
+            switch (3) { //originally switch instructionPointer
                 case 0:
                     waitTime = System.currentTimeMillis();
                     instructionPointer = 1;
