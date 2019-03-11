@@ -16,9 +16,10 @@ public class IA {
     /**
      * @return 0 = RIGHT, 1 = DOWN, 2 = LEFT, 3 = UP
      */
-    public int randDirection(int actualDirectionPacman){
+    public int randDirection(int actualDirectionPacman, Game game){
         int res = ThreadLocalRandom.current().nextInt(0, 4);
         while(res == uTurn[actualDirectionPacman]){
+
             System.out.println("Res is "+res+" and Pacman goes "+actualDirectionPacman);
             res = ThreadLocalRandom.current().nextInt(0, 4);
         }
