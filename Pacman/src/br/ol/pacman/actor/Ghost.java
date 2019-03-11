@@ -60,7 +60,7 @@ public class Ghost extends PacmanActor {
      * Constructor 
      * @param game the current game
      * @param pacman the target of the ghost
-     * @param type the color and behavior of the ghost
+     * @param type the color and behavior of the ghost (0 is red, 1 is pink, 2 is blue, 3 is orange)
      */
     public Ghost(PacmanGame game, Pacman pacman, int type) {
         super(game);
@@ -240,6 +240,18 @@ public class Ghost extends PacmanActor {
         frame = frames[frameIndex];
     }
 
+    /**
+     * Update the behavior of the ghost while it's in cage state
+     * - case 0 : in the cage. Case 6 is for the red one, case 2 for the blue one
+     * - case 1 : move the ghost to a precise position
+     * - case 2 : move the ghost to another position
+     * - case 3 : move the ghost to another position again
+     * - case 4 : move the ghost to another position again and again
+     * - case 5 : same but is a random number between 0 and 2 = 0, jump to 7
+     * - case 6 : update desiredDirection and lastDirection to 0 and update position
+     * - case 7 : update desiredDirection and lastDirection to 2 and update position
+     * - case 8 : switch to normal mode
+     */
     private void updateGhostCage() {
         yield:
         while (true) {
@@ -318,6 +330,11 @@ public class Ghost extends PacmanActor {
     
     private PacmanCatchedAction pacmanCatchedAction = new PacmanCatchedAction();
     
+    /**
+     * Pacman died : victory of ghosts
+     * @author Gregre
+     *
+     */
     private class PacmanCatchedAction implements Runnable {
         @Override
         public void run() {
@@ -325,6 +342,11 @@ public class Ghost extends PacmanActor {
         }
     }
     
+    /**
+     * Update the behavior of the ghost in normal mode : classic mode
+     * The red and pink ones chase pacman while the others act almost randomly
+     * Check if the ghost are vulnerable first
+     */
     private void updateGhostNormal() {
         if (checkVulnerableModeTime() && markAsVulnerable) {
             setMode(Mode.VULNERABLE);
@@ -359,6 +381,11 @@ public class Ghost extends PacmanActor {
     
     private GhostCatchedAction ghostCatchedAction = new GhostCatchedAction();
     
+    /**
+     * The ghosts dies
+     * @author Gregre
+     *
+     */
     private class GhostCatchedAction implements Runnable {
         @Override
         public void run() {
@@ -366,6 +393,9 @@ public class Ghost extends PacmanActor {
         }
     }
     
+    /**
+     * Vulnerable mode of the ghosts : unmarked them to avoid keeping them in the state then run away movement. Stop the vulnerable state after 8s
+     */
     private void updateGhostVulnerable() {
         if (markAsVulnerable) {
             markAsVulnerable = false;
@@ -378,10 +408,17 @@ public class Ghost extends PacmanActor {
         }
     }
     
+    /**
+     * Chronometer for the vulnerable mode
+     * @return true after 8 seconds
+     */
     private boolean checkVulnerableModeTime() {
         return System.currentTimeMillis() - vulnerableModeStartTime <= 8000;
     }
     
+    /**
+     * Update the behavior of the ghost when they died : they go beck to the cage using a pathfinder
+     */
     private void updateGhostDied() {
         yield:
         while (true) {
@@ -428,11 +465,23 @@ public class Ghost extends PacmanActor {
         }
     }    
     
+    /**
+     * Make the ghosts move
+     * @param useTarget true if the ghost look for a target, false otherwise
+     * @param targetCol the target x-coordinate in grid frame
+     * @param targetRow the target y-coordinate in grid frame
+     * @param velocity speed of the ghost
+     * @param collisionWithPacmanAction {@link GhostCatchedAction}
+     * @param desiredDirectionsMap coordinate of the goal
+     */
     private void updateGhostMovement(boolean useTarget, int targetCol, int targetRow
             , int velocity, Runnable collisionWithPacmanAction, int ... desiredDirectionsMap) {
         
+    	/**
+    	 * Update the desiredDirections
+    	 */
         desiredDirections.clear();
-        if (useTarget) {
+        if (useTarget) {				// if the ghost has a target, change the desiredDirections
             if (targetCol - col > 0) {
                 desiredDirections.add(desiredDirectionsMap[0]);
             }
@@ -451,6 +500,9 @@ public class Ghost extends PacmanActor {
             desiredDirection = desiredDirections.get(selectedChaseDirection);
         }
         
+        /**
+         * Manage the movement of the ghosts
+         */
         yield:
         while (true) {
             switch (instructionPointer) {
@@ -496,6 +548,9 @@ public class Ghost extends PacmanActor {
         }        
     }
 
+    /**
+     * Display of the death of the ghost
+     */
     @Override
     public void updateGhostCatched() {
         if (mode == Mode.DIED) {
@@ -504,6 +559,9 @@ public class Ghost extends PacmanActor {
         }
     }
 
+    /**
+     * Set the ghosts at the start of the game
+     */
     @Override
     public void updatePacmanDied() {
         yield:
@@ -525,6 +583,9 @@ public class Ghost extends PacmanActor {
         updateAnimation();
     }
 
+    /**
+     * I don't understand the difference between this methode and {@link updatePacmanDied()}
+     */
     @Override
     public void updateLevelCleared() {
         yield:
@@ -547,12 +608,19 @@ public class Ghost extends PacmanActor {
         }
     }
    
+    /**
+     * Check if the ghost touch pacman
+     * @return if the pacman and the ghost touched
+     */
     private boolean checkCollisionWithPacman() {
         pacman.updateCollider();
         updateCollider();
         return pacman.collider.intersects(collider);
     }
 
+    /**
+     * Update of the collider depending on the position of the ghost
+     */
     @Override
     public void updateCollider() {
         collider.setLocation((int) (x + 4), (int) (y + 4));
@@ -564,6 +632,9 @@ public class Ghost extends PacmanActor {
     
     // broadcast messages
 
+    /**
+     * Display : Set the state of the ghost depending on the state of the game
+     */
     @Override
     public void stateChanged() {
         if (game.getState() == PacmanGame.State.TITLE) {
