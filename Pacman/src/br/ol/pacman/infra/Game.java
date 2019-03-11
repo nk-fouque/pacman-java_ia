@@ -20,6 +20,11 @@ public class Game {
     public List<Actor> actors = new ArrayList<Actor>();
     public BitmapFontRenderer bitmapFontRenderer = new BitmapFontRenderer("/res/font8x8.png", 16, 16);
 
+    /**
+     * Will be useful, set by default to 60
+     */
+    public long FPS;
+
     public void init() {
     }
     

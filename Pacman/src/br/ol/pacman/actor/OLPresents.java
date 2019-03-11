@@ -47,9 +47,9 @@ public class OLPresents extends PacmanActor {
                     waitTime = System.currentTimeMillis();
                     instructionPointer = 3;
                 case 3:
-                    while (System.currentTimeMillis() - waitTime < 1500) {
-                        break yield;
-                    }
+//                    while (System.currentTimeMillis() - waitTime < 1500) {
+//                        break yield;
+//                    }
                     game.setState(State.READY);
                     break yield;
             }

@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 
+
 /**
  * Display class.
  *
@@ -34,19 +35,23 @@ public class Display extends Canvas {
         bs = getBufferStrategy();
         game.init();
         running = true;
-        Thread thread = new Thread(new MainLoop());
+        Thread thread = new Thread(new MainLoop(game));
         thread.start();
     }
 
     private class MainLoop implements Runnable {
+        private Game game;
 
-        //This param might be modifiable and we can set up the run() to depend on its usage
-        private long FPS = 60;
+        public MainLoop(Game game){
+            super();
+            this.game = game;
+        }
+
 
 
         @Override
         public void run() {
-            long desiredFrameRateTime = 1000 / FPS;
+            long desiredFrameRateTime = 1000 / game.FPS;
             long currentTime = System.currentTimeMillis();
             long lastTime = currentTime - desiredFrameRateTime;
             long unprocessedTime = 0;

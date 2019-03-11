@@ -63,11 +63,6 @@ public class PacmanGame extends Game {
         {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
     };
 
-    /**
-     * READY = State at the beginning of the game
-     * READY 2 = State when PacMan respawns
-     */
-
     public static enum State { INITIALIZING, OL_PRESENTS, TITLE, READY, READY2
         , PLAYING, PACMAN_DIED, GHOST_CATCHED, LEVEL_CLEARED, GAME_OVER }
     
@@ -82,10 +77,19 @@ public class PacmanGame extends Game {
     
     public int foodCount;
     public int currentFoodCount;
+
+
     
     public PacmanGame() {
         screenSize = new Dimension(224, 288);
         screenScale = new Point2D.Double(2, 2);
+        FPS = 60; // Used only by the base game
+    }
+
+    public PacmanGame(long fps) {
+        screenSize = new Dimension(224, 288);
+        screenScale = new Point2D.Double(2, 2);
+        FPS = fps;
     }
 
     public State getState() {
