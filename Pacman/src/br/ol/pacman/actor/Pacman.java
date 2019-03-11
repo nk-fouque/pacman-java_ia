@@ -1,4 +1,5 @@
 package br.ol.pacman.actor;
+import IA.IA;
 
 import br.ol.pacman.PacmanActor;
 import br.ol.pacman.PacmanGame;
@@ -21,6 +22,7 @@ public class Pacman extends PacmanActor {
     public int dx;
     public int dy;
     public long diedTime;
+    public IA ia;
     
     public Pacman(PacmanGame game) {
         super(game);
@@ -40,6 +42,7 @@ public class Pacman extends PacmanActor {
         loadFrames(pacmanFrameNames);
         reset();
         collider = new Rectangle(0, 0, 8, 8);
+        ia = new IA();
     }
 
     private void reset() {
@@ -109,18 +112,20 @@ public class Pacman extends PacmanActor {
             return;
         }
         
-        if (Keyboard.keyPressed[KeyEvent.VK_LEFT]) {
-            desiredDirection = 2;
-        }
-        else if (Keyboard.keyPressed[KeyEvent.VK_RIGHT]) {
-            desiredDirection = 0;
-        }
-        else if (Keyboard.keyPressed[KeyEvent.VK_UP]) {
-            desiredDirection = 3;
-        }
-        else if (Keyboard.keyPressed[KeyEvent.VK_DOWN]) {
-            desiredDirection = 1;
-        }
+//        /*if (Keyboard.keyPressed[KeyEvent.VK_LEFT]) {
+//            desiredDirection = 2;
+//        }
+//        else if (Keyboard.keyPressed[KeyEvent.VK_RIGHT]) {
+//            desiredDirection = 0;
+//        }
+//        else if (Keyboard.keyPressed[KeyEvent.VK_UP]) {
+//            desiredDirection = 3;
+//        }
+//        else if (Keyboard.keyPressed[KeyEvent.VK_DOWN]) {
+//            desiredDirection = 1;
+//        }*
+
+        desiredDirection = ia.askDirection(game);
         
         yield:
         while (true) {
