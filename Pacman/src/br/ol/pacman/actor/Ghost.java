@@ -18,14 +18,21 @@ public class Ghost extends PacmanActor {
     
     public Pacman pacman;
     public int type;
+    //Target point when ghost are in scatter mode
     public Point[] initialPositions = { 
         new Point(18, 11), new Point(16, 14), 
         new Point(18, 14), new Point(20, 14)};
     public int cageUpDownCount;
 
+    
+    /**
+     * Trying to code better ghosts
+     * @author Gregre
+     */
+    public static int scatterCount;	// FIXME tentative de meilleur scatter mode
+    
     /**
      * State machine of the ghost
-     * @author Gregre
      *
      */
     public static enum Mode { CAGE, NORMAL, VULNERABLE, DIED }
@@ -67,6 +74,7 @@ public class Ghost extends PacmanActor {
         this.pacman = pacman;
         this.type = type;
         this.pathFinder = new ShortestPathFinder(game.maze);
+        this.scatterCount = 0; // FIXME tentative de meilleur scatter mode
     }
 
     /**
@@ -240,8 +248,30 @@ public class Ghost extends PacmanActor {
         frame = frames[frameIndex];
     }
 
+    /** 
+     * FIXME tentative de meilleur scatter mode
+     * @author Gregre is trying to code better ghost : Scatter mode
+     */
+    private void updateGhostScatterMode() {
+    	waitTime = System.currentTimeMillis();
+    	Point initialPosition = initialPositions[type];
+    	updateGhostMovement(true, initialPosition.x, initialPosition.y, 1, pacmanCatchedAction, 0,1,2,3);
+    	if(scatterCount < 2) {
+    		while(System.currentTimeMillis()-waitTime < 7000) {
+    			// Scatter for 7 seconds
+    		}
+    	}else{
+    		while(System.currentTimeMillis()-waitTime < 5000) {
+    			// Scatter for 5 seconds
+    		}
+    	}
+    	scatterCount++;
+    	this.mode = Mode.NORMAL;
+    }
+    
+    
     /**
-     * Update the behavior of the ghost while it's in cage state
+     * Update the behavior of the ghost while it's in scatter (?) mode
      * - case 0 : in the cage. Case 6 is for the red one, case 2 for the blue one
      * - case 1 : move the ghost to a precise position
      * - case 2 : move the ghost to another position
@@ -257,7 +287,7 @@ public class Ghost extends PacmanActor {
         while (true) {
             switch (instructionPointer) {
                 case 0:
-                    Point initialPosition = initialPositions[type];
+                	Point initialPosition = initialPositions[type];
                     updatePosition(initialPosition.x, initialPosition.y);
                     x -= 4;
                     cageUpDownCount = 0;
@@ -271,12 +301,12 @@ public class Ghost extends PacmanActor {
                     }
                     instructionPointer = 1;
                 case 1:
-                    if (moveToTargetPosition((int) x, 134 + 4, 1)) {
+                	if (moveToTargetPosition((int) x, 134 + 4, 1)) {
                         break yield;
                     }
                     instructionPointer = 2;
                 case 2:
-                    if (moveToTargetPosition((int) x, 134 - 4, 1)) {
+                	if (moveToTargetPosition((int) x, 134 - 4, 1)) {
                         break yield;
                     }
                     cageUpDownCount++;
@@ -286,17 +316,17 @@ public class Ghost extends PacmanActor {
                     }
                     instructionPointer = 3;
                 case 3:
-                    if (moveToTargetPosition((int) x, 134, 1)) {
+                	if (moveToTargetPosition((int) x, 134, 1)) {
                         break yield;
                     }
                     instructionPointer = 4;
                 case 4:
-                    if (moveToTargetPosition((int) 105, 134, 1)) {
+                	if (moveToTargetPosition((int) 105, 134, 1)) {
                         break yield;
                     }
                     instructionPointer = 5;
                 case 5:
-                    if (moveToTargetPosition((int) 105, 110, 1)) {
+                	if (moveToTargetPosition((int) 105, 110, 1)) {
                         break yield;
                     }
                     if ((int) (2 * Math.random()) == 0) {
@@ -305,7 +335,7 @@ public class Ghost extends PacmanActor {
                     }
                     instructionPointer = 6;
                 case 6:
-                    if (moveToTargetPosition((int) 109, 110, 1)) {
+                	if (moveToTargetPosition((int) 109, 110, 1)) {
                         break yield;
                     }
                     desiredDirection = 0;
@@ -314,7 +344,7 @@ public class Ghost extends PacmanActor {
                     instructionPointer = 8;
                     continue yield;
                 case 7:
-                    if (moveToTargetPosition((int) 101, 110, 1)) {
+                	if (moveToTargetPosition((int) 101, 110, 1)) {
                         break yield;
                     }
                     desiredDirection = 2;
@@ -322,7 +352,7 @@ public class Ghost extends PacmanActor {
                     updatePosition(17, 11);
                     instructionPointer = 8;
                 case 8:
-                    setMode(Mode.NORMAL);
+                	setMode(Mode.NORMAL);
                     break yield;
             }
         }
@@ -340,6 +370,50 @@ public class Ghost extends PacmanActor {
         public void run() {
             game.setState(State.PACMAN_DIED);
         }
+    }
+    
+    
+    /** 
+     * FIXME tentative de meilleur normal/chase mode
+     * 0 = RIGHT, 1 = DOWN, 2 = LEFT, 3 = UP
+     * @author Gregre is trying to code better ghost : Chase mode
+     */
+    private void updateGhostNormalMode() {
+    	if (checkVulnerableModeTime() && markAsVulnerable) {
+            setMode(Mode.VULNERABLE);
+            markAsVulnerable = false;
+        }
+    	yield:
+    		while(true) {
+    			switch(type) {
+    				case 0:	// Red ghost : Blinky
+    					updateGhostMovement(true, pacman.col, pacman.row, 1, pacmanCatchedAction, 0, 1, 2, 3);
+    					break yield;
+    				case 1:	// Pink ghost : Pinky
+    					switch(pacman.direction) {
+    						case 0:
+    							
+    							break;
+							case 1:
+    							
+    							break;
+							case 2:
+    							
+    							break;
+							case 3:
+    							
+    							break;
+    					}
+    					updateGhostMovement(true, pacman.col, pacman.row, 1, pacmanCatchedAction, 0, 1, 2, 3);
+    					break yield;
+    				case 2:	// Cyan ghost : Inky
+    					
+    					break yield;
+    				case 3:	// Orange ghost : Clyde
+    					
+    					break yield;
+    			}
+    		}
     }
     
     /**
@@ -383,7 +457,6 @@ public class Ghost extends PacmanActor {
     
     /**
      * The ghosts dies
-     * @author Gregre
      *
      */
     private class GhostCatchedAction implements Runnable {
