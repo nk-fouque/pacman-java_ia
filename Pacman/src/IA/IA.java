@@ -19,11 +19,10 @@ public class IA {
     public int randDirection(int actualDirectionPacman, Game game){
         int res = ThreadLocalRandom.current().nextInt(0, 4);
         while(res == uTurn[actualDirectionPacman]){
-
-            System.out.println("Res is "+res+" and Pacman goes "+actualDirectionPacman);
+            //System.out.println("Res is "+res+" and Pacman goes "+actualDirectionPacman);
             res = ThreadLocalRandom.current().nextInt(0, 4);
         }
-        System.out.println("Now he goes :"+res);
+        //System.out.println("Now he goes :"+res);
         return res;
     }
 

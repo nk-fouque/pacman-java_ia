@@ -71,6 +71,7 @@ public class Display extends Canvas {
                 }
 
                 /** If it's time to render, draws everything */
+                /* FIXME : removes the whole graphic update and visual drawing (Matthieu)
                 if (needsRender) {
                     Graphics2D g = (Graphics2D) bs.getDrawGraphics();
                     g.setBackground(Color.BLACK);
@@ -85,7 +86,7 @@ public class Display extends Canvas {
                         Thread.sleep(1);
                     } catch (InterruptedException ex) {
                     }
-                }
+                }*/
             }
         }
 

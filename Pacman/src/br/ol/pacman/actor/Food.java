@@ -34,7 +34,7 @@ public class Food extends PacmanActor {
     public void init() {
         loadFrames("/res/food.png");			// Vue
         /* x et y sont les coordonnées d'un collider */
-        x = col * 8 + 3 - 32;				// cf le systeme de coordonnees du collider ? 
+        x = col * 8 + 3 - 32;				// cf le système de coordonnées du collider ?
         y = (row + 3) * 8 + 3;			// same
         collider = new Rectangle(0, 0, 2, 2);	// collider associé
     }
@@ -73,6 +73,7 @@ public class Food extends PacmanActor {
         g.fillRect((int) (x), (int) (y), 2, 2);
     }
     
+    /* Probable debug mais je sais pas trop */
     // broadcast messages
 
     /**

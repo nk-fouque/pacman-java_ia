@@ -236,6 +236,7 @@ public class Pacman extends PacmanActor {
                     instructionPointer = 4;
                 case 4:
                     game.nextLife();
+                    System.out.println("Pacman just died"); //FIXME Matthieu : just to debug and try to play w/o graphics
                     break yield;
             }
         }

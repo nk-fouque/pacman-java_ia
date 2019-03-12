@@ -123,8 +123,8 @@ public class PacmanGame extends Game {
     }
     
     @Override
-    public void init() {
-        addAllObjs();
+    public void init() {    //FIXME (Matt) : function slowing the game at start, long time for setup
+        addAllObjs();   //FIXME (Matt) : we have to make a second version of these 2, to init a game with the current state of our game, to resume from "main" game position
         initAllObjs();
     }
     

@@ -19,7 +19,7 @@ public class Main {
 
             @Override
             public void run() {
-                Game game = new PacmanGame();
+                Game game = new PacmanGame(1000);    //FIXME (Matthieu) : param fps is the "speed" of the game, max = 1000
                 Display view = new Display(game);
                 JFrame frame = new JFrame();
                 frame.setTitle("Pacman");
@@ -27,7 +27,7 @@ public class Main {
                 frame.getContentPane().add(view);
                 frame.pack();
                 frame.setLocationRelativeTo(null);
-                frame.setVisible(true);
+                //frame.setVisible(true); //FIXME (Matt) : Makes the whole graphic interface visible, runs in the back
                 view.requestFocus();
                 view.start();
             }
