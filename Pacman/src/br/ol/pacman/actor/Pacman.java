@@ -15,23 +15,23 @@ import java.awt.event.KeyEvent;
  */
 public class Pacman extends PacmanActor {
     /* x-coordinate in grid frame */
-    public int col;
+    protected int col;
     /* y-coordinate in grid frame */
-    public int row;
+    protected int row;
     
     /* goal */
-    public int desiredDirection;
+    private int desiredDirection;
     /* actual direction */
-    public int direction;
+    protected int direction;
     /* x-coordinate of the goal on the screen frame */
-    public int dx;
+    private int dx;
     /* y-coordinate of the goal on the screen frame */
-    public int dy;
+    private int dy;
     
-    public long diedTime;
+    private long diedTime;
     
     /* Intelligence of pacman */
-    public IA ia;
+    private IA ia;
     
     public Pacman(PacmanGame game) {
         super(game);
@@ -71,7 +71,7 @@ public class Pacman extends PacmanActor {
     /**
      * Update the collider position in the screen frame
      */
-    public void updatePosition() {
+    protected void updatePosition() {
         x = col * 8 - 4 - 32 - 4;
         y = (row + 3) * 8 - 4;
     }

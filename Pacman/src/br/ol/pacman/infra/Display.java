@@ -42,7 +42,7 @@ public class Display extends Canvas {
     private class MainLoop implements Runnable {
         private Game game;
 
-        public MainLoop(Game game){
+        protected MainLoop(Game game){
             super();
             this.game = game;
         }
@@ -67,11 +67,11 @@ public class Display extends Canvas {
                 while (unprocessedTime >= desiredFrameRateTime) {
                     unprocessedTime -= desiredFrameRateTime;
                     update(); //<-- This is what actually runs the game
-                    needsRender = true;
+                    //needsRender = true; FIXME Matt : useless for running in the back, uncomment for graphics
                 }
 
                 /** If it's time to render, draws everything */
-                /* FIXME : removes the whole graphic update and visual drawing (Matthieu)
+                /* FIXME Matt : removes the whole graphic update and visual drawing (Matthieu)
                 if (needsRender) {
                     Graphics2D g = (Graphics2D) bs.getDrawGraphics();
                     g.setBackground(Color.BLACK);

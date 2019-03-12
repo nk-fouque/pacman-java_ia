@@ -22,7 +22,7 @@ import java.awt.geom.Point2D;
  * 
  * @author Leonardo Ono (ono.leo@gmail.com)
  *
- * @ClassUtility Creates the maze and makes all the functions for the whole game itself
+ * Creates the maze and makes all the functions for the whole game itself
  */
 public class PacmanGame extends Game {
     
@@ -63,19 +63,19 @@ public class PacmanGame extends Game {
         {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
     };
 
-    public static enum State { INITIALIZING, OL_PRESENTS, TITLE, READY, READY2
+    public enum State { INITIALIZING, OL_PRESENTS, TITLE, READY, READY2
         , PLAYING, PACMAN_DIED, GHOST_CATCHED, LEVEL_CLEARED, GAME_OVER }
     
     public State state = State.INITIALIZING;
     public int lives = 3;
-    public int score;
-    public int hiscore;
+    private int score;
+    private int hiscore;
     
     public Ghost catchedGhost;
     public int currentCatchedGhostScoreTableIndex = 0;
     public final int[] catchedGhostScoreTable = { 200, 400, 800, 1600 };
     
-    public int foodCount;
+    private int foodCount;
     public int currentFoodCount;
 
 
