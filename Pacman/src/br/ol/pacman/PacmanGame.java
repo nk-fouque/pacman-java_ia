@@ -77,6 +77,7 @@ public class PacmanGame extends Game {
     
     private int foodCount;
     public int currentFoodCount;
+    public int totalFood;
 
 
     
@@ -126,6 +127,7 @@ public class PacmanGame extends Game {
     public void init() {    //FIXME (Matt) : function slowing the game at start, long time for setup
         addAllObjs();   //FIXME (Matt) : we have to make a second version of these 2, to init a game with the current state of our game, to resume from "main" game position
         initAllObjs();
+        totalFood = currentFoodCount;
     }
     
     private void addAllObjs() {

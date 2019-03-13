@@ -26,12 +26,6 @@ public class Ghost extends PacmanActor {
 
     
     /**
-     * Trying to code better ghosts
-     * @author Gregre
-     */
-    public static int scatterCount;	// FIXME tentative de meilleur scatter mode
-    
-    /**
      * State machine of the ghost
      *
      */
@@ -74,7 +68,6 @@ public class Ghost extends PacmanActor {
         this.pacman = pacman;
         this.type = type;
         this.pathFinder = new ShortestPathFinder(game.maze);
-        this.scatterCount = 0; // FIXME tentative de meilleur scatter mode
     }
 
     /**
@@ -247,27 +240,6 @@ public class Ghost extends PacmanActor {
         }
         frame = frames[frameIndex];
     }
-
-    /** 
-     * FIXME tentative de meilleur scatter mode
-     * @author Gregre is trying to code better ghost : Scatter mode
-     */
-    private void updateGhostScatterMode() {
-    	waitTime = System.currentTimeMillis();
-    	Point initialPosition = initialPositions[type];
-    	updateGhostMovement(true, initialPosition.x, initialPosition.y, 1, pacmanCatchedAction, 0,1,2,3);
-    	if(scatterCount < 2) {
-    		while(System.currentTimeMillis()-waitTime < 7000) {
-    			// Scatter for 7 seconds
-    		}
-    	}else{
-    		while(System.currentTimeMillis()-waitTime < 5000) {
-    			// Scatter for 5 seconds
-    		}
-    	}
-    	scatterCount++;
-    	this.mode = Mode.NORMAL;
-    }
     
     
     /**
@@ -372,50 +344,7 @@ public class Ghost extends PacmanActor {
         }
     }
     
-    
-    /** 
-     * FIXME tentative de meilleur normal/chase mode
-     * 0 = RIGHT, 1 = DOWN, 2 = LEFT, 3 = UP
-     * @author Gregre is trying to code better ghost : Chase mode
-     */
-    private void updateGhostNormalMode() {
-    	if (checkVulnerableModeTime() && markAsVulnerable) {
-            setMode(Mode.VULNERABLE);
-            markAsVulnerable = false;
-        }
-    	yield:
-    		while(true) {
-    			switch(type) {
-    				case 0:	// Red ghost : Blinky
-    					updateGhostMovement(true, pacman.col, pacman.row, 1, pacmanCatchedAction, 0, 1, 2, 3);
-    					break yield;
-    				case 1:	// Pink ghost : Pinky
-    					switch(pacman.direction) {
-    						case 0:
-    							
-    							break;
-							case 1:
-    							
-    							break;
-							case 2:
-    							
-    							break;
-							case 3:
-    							
-    							break;
-    					}
-    					updateGhostMovement(true, pacman.col, pacman.row, 1, pacmanCatchedAction, 0, 1, 2, 3);
-    					break yield;
-    				case 2:	// Cyan ghost : Inky
-    					
-    					break yield;
-    				case 3:	// Orange ghost : Clyde
-    					
-    					break yield;
-    			}
-    		}
-    }
-    
+
     /**
      * Update the behavior of the ghost in normal mode : classic mode
      * The red and pink ones chase pacman while the others act almost randomly
