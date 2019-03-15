@@ -14,10 +14,6 @@ public class GameState {
     public int pacmanRow;
     public int pacmanCol;
 
-    public int distanceToNearestFood;
-    public int getDistanceToNearestPowerBall;
-    public int ditanceToNearestGhost;
-
     public GameState(PacmanGame game){
         this.game = game;
         for(Actor a : game.actors){
@@ -35,11 +31,6 @@ public class GameState {
                 this.pacmanRow = ((Pacman) a).getRow();
             }
         }
-    }
-
-    public int evaluateState(){
-        int score = game.getScoreInt();
-        return score;
     }
 
     public int pacmanEat(){
