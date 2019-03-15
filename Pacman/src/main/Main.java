@@ -35,8 +35,8 @@ public class Main {
                 if(visibleGame) {
                     frame.setVisible(true); //Makes the whole graphic interface visible, runs in the back
                     frame.setTitle("Pacman");
+                    view.requestFocus();
                 }
-                view.requestFocus();
                 view.start();
             }
 
