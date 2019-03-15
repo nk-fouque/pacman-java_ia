@@ -228,7 +228,7 @@ public class Ghost extends PacmanActor {
                     break;
                 }
             case VULNERABLE:
-                if (System.currentTimeMillis() - vulnerableModeStartTime > 5000) {
+                if (System.currentTimeMillis() - vulnerableModeStartTime > 5000*60/game.FPS) {
                     frameIndex = 8 + (int) (System.nanoTime() * 0.00000002) % 4;
                 }
                 else {
@@ -416,7 +416,7 @@ public class Ghost extends PacmanActor {
      * @return true after 8 seconds
      */
     private boolean checkVulnerableModeTime() {
-        return System.currentTimeMillis() - vulnerableModeStartTime <= 8000;
+        return System.currentTimeMillis() - vulnerableModeStartTime <= 8000*60/game.FPS;
     }
     
     /**
@@ -574,7 +574,7 @@ public class Ghost extends PacmanActor {
                     waitTime = System.currentTimeMillis();
                     instructionPointer = 1;
                 case 1:
-                    if (System.currentTimeMillis() - waitTime < 1500) {
+                    if (System.currentTimeMillis() - waitTime < 1500*60/game.FPS) {
                         break yield;
                     }
                     visible = false;
@@ -598,7 +598,7 @@ public class Ghost extends PacmanActor {
                     waitTime = System.currentTimeMillis();
                     instructionPointer = 1;
                 case 1:
-                    if (System.currentTimeMillis() - waitTime < 1500) {
+                    if (System.currentTimeMillis() - waitTime < 1500*60/game.FPS) {
                         break yield;
                     }
                     visible = false;

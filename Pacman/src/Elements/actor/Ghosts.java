@@ -240,7 +240,7 @@ public class Ghosts extends PacmanActor {
                     break;
                 }
             case VULNERABLE:
-                if (System.currentTimeMillis() - vulnerableModeStartTime > 5000) {
+                if (System.currentTimeMillis() - vulnerableModeStartTime > 5000*60/game.FPS) {
                     frameIndex = 8 + (int) (System.nanoTime() * 0.00000002) % 4;
                 }
                 else {
@@ -263,11 +263,11 @@ public class Ghosts extends PacmanActor {
     	Point scatterDestination = scatterDestinations[type];
     	updateGhostMovement(true, scatterDestination.x, scatterDestination.y, 1, pacmanCatchedAction, 0,1,2,3);
     	if(scatterCount < 2) {
-    		while(System.currentTimeMillis()-waitTime < 7000) {
+    		while(System.currentTimeMillis()-waitTime < 7000*60/game.FPS) {
     			// Scatter for 7 seconds
     		}
     	}else{
-    		while(System.currentTimeMillis()-waitTime < 5000) {
+    		while(System.currentTimeMillis()-waitTime < 5000*60/game.FPS) {
     			// Scatter for 5 seconds
     		}
     	}
@@ -363,7 +363,7 @@ public class Ghosts extends PacmanActor {
     					break yield;
     				case 2:	// Cyan ghost : Inky
     					waitTime = System.currentTimeMillis();
-    					if(System.currentTimeMillis() - waitTime > 3000) {	// change d'objectif toutes les 3 secondes, en attendant de trouver comment g�n�rer le vrai algo 
+    					if(System.currentTimeMillis() - waitTime > 3000*60/game.FPS) {	// change d'objectif toutes les 3 secondes, en attendant de trouver comment g�n�rer le vrai algo 
     						int rand_col = 1 + (int) (Math.random() * 32);
     						int rand_row = 1 + (int) (Math.random() * 32);
     						updateGhostMovement(true, rand_col, rand_row, 1, pacmanCatchedAction, 0, 1, 2, 3);
@@ -430,7 +430,7 @@ public class Ghosts extends PacmanActor {
      * @return true after 8 seconds
      */
     private boolean checkVulnerableModeTime() {
-        return System.currentTimeMillis() - vulnerableModeStartTime <= 8000;
+        return System.currentTimeMillis() - vulnerableModeStartTime <= 8000*60/game.FPS;
     }
     
     /**
@@ -591,7 +591,7 @@ public class Ghosts extends PacmanActor {
                     waitTime = System.currentTimeMillis();
                     instructionPointer = 1;
                 case 1:
-                    if (System.currentTimeMillis() - waitTime < 1500) {
+                    if (System.currentTimeMillis() - waitTime < 1500*60/game.FPS) {
                         break yield;
                     }
                     visible = false;
@@ -615,7 +615,7 @@ public class Ghosts extends PacmanActor {
                     waitTime = System.currentTimeMillis();
                     instructionPointer = 1;
                 case 1:
-                    if (System.currentTimeMillis() - waitTime < 1500) {
+                    if (System.currentTimeMillis() - waitTime < 1500*60/game.FPS) {
                         break yield;
                     }
                     visible = false;
