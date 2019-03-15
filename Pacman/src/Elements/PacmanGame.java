@@ -1,19 +1,20 @@
-package br.ol.pacman;
+package Elements;
 
-import br.ol.pacman.actor.Background;
-import br.ol.pacman.actor.Food;
-import br.ol.pacman.actor.GameOver;
-import br.ol.pacman.actor.Ghost;
-import br.ol.pacman.actor.HUD;
-import br.ol.pacman.actor.Initializer;
-import br.ol.pacman.actor.OLPresents;
-import br.ol.pacman.actor.Pacman;
-import br.ol.pacman.actor.Point;
-import br.ol.pacman.actor.PowerBall;
-import br.ol.pacman.actor.Ready;
-import br.ol.pacman.actor.Title;
-import br.ol.pacman.infra.Actor;
-import br.ol.pacman.infra.Game;
+import Elements.infra.Actor;
+import Elements.infra.Game;
+import Elements.actor.Background;
+import Elements.actor.Food;
+import Elements.actor.GameOver;
+import Elements.actor.Ghost;
+import Elements.actor.HUD;
+import Elements.actor.Initializer;
+import Elements.actor.OLPresents;
+import Elements.actor.Pacman;
+import Elements.actor.Point;
+import Elements.actor.PowerBall;
+import Elements.actor.Ready;
+import Elements.actor.Title;
+
 import java.awt.Dimension;
 import java.awt.geom.Point2D;
 
@@ -25,7 +26,7 @@ import java.awt.geom.Point2D;
  * Creates the maze and makes all the functions for the whole game itself
  */
 public class PacmanGame extends Game {
-    
+
     // maze[row][col] 
     // 36 x 31 
     // cols: 0-3|4-31|32-35

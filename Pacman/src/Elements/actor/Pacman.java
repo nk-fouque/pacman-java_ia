@@ -1,12 +1,11 @@
-package br.ol.pacman.actor;
+package Elements.actor;
 import IA.IA;
 
-import br.ol.pacman.PacmanActor;
-import br.ol.pacman.PacmanGame;
-import br.ol.pacman.PacmanGame.State;
-import br.ol.pacman.infra.Keyboard;
+import Elements.PacmanActor;
+import Elements.PacmanGame;
+import Elements.PacmanGame.State;
+
 import java.awt.Rectangle;
-import java.awt.event.KeyEvent;
 
 /**
  * Pacman class.

@@ -1,10 +1,11 @@
-package br.ol.pacman.actor;
+package Elements.actor;
 
 
-import br.ol.pacman.PacmanActor;
-import br.ol.pacman.PacmanGame;
-import br.ol.pacman.PacmanGame.State;
-import br.ol.pacman.infra.Keyboard;
+import Elements.infra.Keyboard;
+import Elements.PacmanActor;
+import Elements.PacmanGame;
+import Elements.PacmanGame.State;
+
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 

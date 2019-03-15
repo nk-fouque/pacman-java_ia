@@ -1,7 +1,6 @@
 package IA;
 
-import br.ol.pacman.PacmanGame;
-import br.ol.pacman.infra.Game;
+import Elements.infra.Game;
 
 import java.util.concurrent.ThreadLocalRandom;
 

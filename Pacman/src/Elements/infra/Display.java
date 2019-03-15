@@ -1,7 +1,6 @@
-package br.ol.pacman.infra;
+package Elements.infra;
 
 import java.awt.Canvas;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
@@ -14,6 +13,8 @@ import java.awt.image.BufferStrategy;
  * @author nfouque
  */
 public class Display extends Canvas {
+
+    //public static boolean visible; //linked to Main one from PacmanGame one
 
     private Game game;
     private boolean running;
@@ -31,6 +32,8 @@ public class Display extends Canvas {
         if (running) {
             return;
         }
+        //visible = game.visible;
+
         createBufferStrategy(3);
         bs = getBufferStrategy();
         game.init();
@@ -70,8 +73,9 @@ public class Display extends Canvas {
                     //needsRender = true; FIXME Matt : useless for running in the back, uncomment for graphics
                 }
 
-                /** If it's time to render, draws everything */
-                /* FIXME Matt : removes the whole graphic update and visual drawing (Matthieu)
+                if(main.Main.visibleGame) {
+                    /** If it's time to render, draws everything */
+                //FIXME Matt : removes the whole graphic update and visual drawing (Matthieu)
                 if (needsRender) {
                     Graphics2D g = (Graphics2D) bs.getDrawGraphics();
                     g.setBackground(Color.BLACK);
@@ -86,7 +90,8 @@ public class Display extends Canvas {
                         Thread.sleep(1);
                     } catch (InterruptedException ex) {
                     }
-                }*/
+                }
+                }
             }
         }
 

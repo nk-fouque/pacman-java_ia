@@ -1,4 +1,4 @@
-package br.ol.pacman.infra;
+package Elements.infra;
 
 import java.awt.Dimension;
 import java.awt.Graphics2D;

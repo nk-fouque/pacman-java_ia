@@ -1,9 +1,10 @@
-package br.ol.pacman.actor;
+package Elements.actor;
 
-import br.ol.pacman.PacmanActor;
-import br.ol.pacman.PacmanGame;
-import br.ol.pacman.PacmanGame.State;
-import br.ol.pacman.infra.ShortestPathFinder;
+import Elements.infra.ShortestPathFinder;
+import Elements.PacmanActor;
+import Elements.PacmanGame;
+import Elements.PacmanGame.State;
+
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
@@ -60,7 +61,7 @@ public class Ghosts extends PacmanActor {
     public boolean markAsVulnerable;
     
     // in this version, i'm using path finder just to return the ghost to the center (cage)
-    public ShortestPathFinder pathFinder; 
+    public ShortestPathFinder pathFinder;
     
     
     /**
@@ -359,7 +360,7 @@ public class Ghosts extends PacmanActor {
     					break yield;
     				case 2:	// Cyan ghost : Inky
     					waitTime = System.currentTimeMillis();
-    					if(System.currentTimeMillis() - waitTime > 3000) {	// change d'objectif toutes les 3 secondes, en attendant de trouver comment générer le vrai algo 
+    					if(System.currentTimeMillis() - waitTime > 3000) {	// change d'objectif toutes les 3 secondes, en attendant de trouver comment gï¿½nï¿½rer le vrai algo 
     						int rand_col = 1 + (int) (Math.random() * 32);
     						int rand_row = 1 + (int) (Math.random() * 32);
     						updateGhostMovement(true, rand_col, rand_row, 1, pacmanCatchedAction, 0, 1, 2, 3);

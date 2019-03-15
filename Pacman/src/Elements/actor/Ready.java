@@ -1,8 +1,8 @@
-package br.ol.pacman.actor;
+package Elements.actor;
 
-import br.ol.pacman.PacmanActor;
-import br.ol.pacman.PacmanGame;
-import br.ol.pacman.PacmanGame.State;
+import Elements.PacmanActor;
+import Elements.PacmanGame;
+import Elements.PacmanGame.State;
 
 /**
  * Ready class.

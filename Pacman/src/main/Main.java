@@ -1,8 +1,8 @@
 package main;
 
-import br.ol.pacman.PacmanGame;
-import br.ol.pacman.infra.Display;
-import br.ol.pacman.infra.Game;
+import Elements.PacmanGame;
+import Elements.infra.Display;
+import Elements.infra.Game;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
@@ -14,11 +14,15 @@ import javax.swing.SwingUtilities;
  */
 public class Main {
 
+    public static boolean visibleGame;       //Used to switch between to versions of the game running
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
 
             @Override
             public void run() {
+                visibleGame = false;       //TODO : set it to true to play a normal game, false will make the game play in background
+
                 Game game = new PacmanGame(1000);    //FIXME (Matthieu) : param fps is the "speed" of the game, max = 1000
                 Display view = new Display(game);
                 JFrame frame = new JFrame();
@@ -27,7 +31,9 @@ public class Main {
                 frame.getContentPane().add(view);
                 frame.pack();
                 frame.setLocationRelativeTo(null);
-                //frame.setVisible(true); //FIXME (Matt) : Makes the whole graphic interface visible, runs in the back
+
+               if(visibleGame)
+                    frame.setVisible(true); //Makes the whole graphic interface visible, runs in the back
                 view.requestFocus();
                 view.start();
             }
