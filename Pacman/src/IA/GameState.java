@@ -67,9 +67,9 @@ public class GameState {
     public void move(int dir){
         switch (dir){
             case 0 : pacmanCol++;
-            case 1 : pacmanRow--;
+            case 1 : pacmanRow++;
             case 2 : pacmanCol--;
-            case 3 : pacmanRow++;
+            case 3 : pacmanRow--;
         }
     }
 
