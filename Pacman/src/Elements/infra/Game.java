@@ -12,7 +12,7 @@ import java.util.List;
  * 
  * @author Leonardo Ono (ono.leo@gmail.com)
  */
-public class Game {
+public abstract class Game {
     
     public Dimension screenSize;
     public Point2D screenScale;

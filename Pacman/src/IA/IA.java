@@ -6,10 +6,9 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class IA {
 
-    private int[] uTurn;
+    private final int[] uTurn = new int[]{2, 3, 0, 1};
 
     public IA(){
-        this.uTurn = new int[]{2, 3, 0, 1};
     }
 
     /**
