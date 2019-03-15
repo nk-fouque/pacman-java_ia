@@ -4,6 +4,7 @@ package Elements.actor;
 import Elements.PacmanActor;
 import Elements.PacmanGame;
 import Elements.PacmanGame.State;
+import main.Main;
 
 /**
  * GameOver class.
@@ -24,7 +25,8 @@ public class GameOver extends PacmanActor {
     public void init() {
         x = 77;
         y = 160;
-        loadFrames("/res/gameover.png");
+        if(Main.visibleGame)
+            loadFrames("/res/gameover.png");
     }
     
     /**
@@ -32,20 +34,22 @@ public class GameOver extends PacmanActor {
      */
     @Override
     public void updateGameOver() {
-//        yield:
-//        while (true) {
-//            switch (instructionPointer) {
-//                case 0:
-//                    waitTime = System.currentTimeMillis();
-//                    instructionPointer = 1;
-//                case 1:
-//                    if (System.currentTimeMillis() - waitTime < 3000) {
-//                        break yield;
-//                    }
-                    game.returnToTitle();
-//                    break yield;
-//            }
-//        }
+        if(Main.visibleGame){
+            yield:
+            while (true) {
+                switch (instructionPointer) {
+                    case 0:
+                        waitTime = System.currentTimeMillis();
+                        instructionPointer = 1;
+                    case 1:
+                        if (System.currentTimeMillis() - waitTime < 3000) {
+                            break yield;
+                        }
+                        game.returnToTitle();
+                        break yield;
+                }
+            }
+        }else game.returnToReady(); //FIXME : here, makes it play infinitly, change to "returnToTitle" to pause, or change return function for state eval
     }
 
     // broadcast messages

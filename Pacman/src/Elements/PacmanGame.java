@@ -14,6 +14,7 @@ import Elements.actor.Point;
 import Elements.actor.PowerBall;
 import Elements.actor.Ready;
 import Elements.actor.Title;
+import main.Main;
 
 import java.awt.Dimension;
 import java.awt.geom.Point2D;
@@ -133,10 +134,14 @@ public class PacmanGame extends Game {
     
     private void addAllObjs() {
         Pacman pacman = new Pacman(this);
-        actors.add(new Initializer(this));
-        actors.add(new OLPresents(this));
-        actors.add(new Title(this));
-        actors.add(new Background(this));
+        if(main.Main.visibleGame) {
+            actors.add(new Initializer(this));
+            actors.add(new OLPresents(this));
+            actors.add(new Title(this));
+            actors.add(new Background(this));
+        }else{
+            this.startGame();
+        }
         foodCount = 0;
         for (int row=0; row<31; row++) {
             for (int col=0; col<36; col++) {
@@ -216,6 +221,12 @@ public class PacmanGame extends Game {
         lives = 3;
         score = 0;
         setState(State.TITLE);
+    }
+
+    public void returnToReady() {
+        lives = 3;
+        score = 0;
+        setState(State.READY);
     }
     
 }

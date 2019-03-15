@@ -6,7 +6,9 @@ import Elements.PacmanGame.State;
 
 /**
  * Initializer class.
- * 
+ *
+ * Only makes a long waiting time
+ *
  * @author Leonardo Ono (ono.leo@gmail.com)
  */
 public class Initializer extends PacmanActor {

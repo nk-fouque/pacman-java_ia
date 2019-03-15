@@ -21,19 +21,21 @@ public class Main {
 
             @Override
             public void run() {
-                visibleGame = true;       //TODO : set it to true to play a normal game, false will make the game play in background
+                visibleGame = false;       //TODO : set it to true to play a normal game, false will make the game play in background
 
-                Game game = new PacmanGame(1000);    //FIXME (Matthieu) : param fps is the "speed" of the game, max = 1000
+                Game game = new PacmanGame(1000);    //FIXME (Matthieu) : param fps is the "speed" of the game, 1<fps<1000, COOL = 60
+
                 Display view = new Display(game);
                 JFrame frame = new JFrame();
-                frame.setTitle("Pacman");
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.getContentPane().add(view);
                 frame.pack();
                 frame.setLocationRelativeTo(null);
 
-               if(visibleGame)
+                if(visibleGame) {
                     frame.setVisible(true); //Makes the whole graphic interface visible, runs in the back
+                    frame.setTitle("Pacman");
+                }
                 view.requestFocus();
                 view.start();
             }

@@ -4,6 +4,7 @@ import IA.IA;
 import Elements.PacmanActor;
 import Elements.PacmanGame;
 import Elements.PacmanGame.State;
+import main.Main;
 
 import java.awt.Rectangle;
 
@@ -41,16 +42,18 @@ public class Pacman extends PacmanActor {
      */
     @Override
     public void init() {
-        String[] pacmanFrameNames = new String[30];
-        for (int d=0; d<4; d++) {
-            for (int i=0; i<4; i++) {
-                pacmanFrameNames[i + 4 * d] = "/res/pacman_" + d + "_" + i + ".png";
+        if(Main.visibleGame) {
+            String[] pacmanFrameNames = new String[30];
+            for (int d = 0; d < 4; d++) {
+                for (int i = 0; i < 4; i++) {
+                    pacmanFrameNames[i + 4 * d] = "/res/pacman_" + d + "_" + i + ".png";
+                }
             }
+            for (int i = 0; i < 14; i++) {
+                pacmanFrameNames[16 + i] = "/res/pacman_died_" + i + ".png";
+            }
+            loadFrames(pacmanFrameNames);
         }
-        for (int i=0; i<14; i++) {
-            pacmanFrameNames[16 + i] = "/res/pacman_died_" + i + ".png";
-        }
-        loadFrames(pacmanFrameNames);
         reset();
         collider = new Rectangle(0, 0, 8, 8);
         ia = new IA();
@@ -63,7 +66,8 @@ public class Pacman extends PacmanActor {
         col = 18;
         row = 23;
         updatePosition();
-        frame = frames[0];
+        if(Main.visibleGame)
+            frame = frames[0];
         direction = desiredDirection = 0;
     }
     
@@ -127,7 +131,8 @@ public class Pacman extends PacmanActor {
                     break yield;
             }
         }
-        updateAnimation();
+        if(Main.visibleGame)
+            updateAnimation();
     }
     
     @Override
