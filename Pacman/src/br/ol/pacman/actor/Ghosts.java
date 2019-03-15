@@ -18,7 +18,7 @@ public class Ghosts extends PacmanActor {
     
     public Pacman pacman;
     public int type;
-    //Target point when ghost are in scatter mode
+    // Start of the ghosts
     public Point[] initialPositions = { 
         new Point(18, 11), new Point(16, 14), 
         new Point(18, 14), new Point(20, 14)};
@@ -29,7 +29,10 @@ public class Ghosts extends PacmanActor {
      * Trying to code better ghosts
      * @author Gregre
      */
-    public static int scatterCount;	// FIXME tentative de meilleur scatter mode
+    public static int scatterCount;	// tentative de scatter mode
+    public Point[] scatterDestinations = { 
+            new Point(0, 31), new Point(0, 2), 
+            new Point(33, 0), new Point(33, 33)};
     
     /**
      * State machine of the ghost
@@ -256,8 +259,8 @@ public class Ghosts extends PacmanActor {
      */
     private void updateGhostScatter() {
     	waitTime = System.currentTimeMillis();
-    	Point initialPosition = initialPositions[type];
-    	updateGhostMovement(true, initialPosition.x, initialPosition.y, 1, pacmanCatchedAction, 0,1,2,3);
+    	Point scatterDestination = scatterDestinations[type];
+    	updateGhostMovement(true, scatterDestination.x, scatterDestination.y, 1, pacmanCatchedAction, 0,1,2,3);
     	if(scatterCount < 2) {
     		while(System.currentTimeMillis()-waitTime < 7000) {
     			// Scatter for 7 seconds
@@ -369,7 +372,7 @@ public class Ghosts extends PacmanActor {
     					if((Math.pow((pacman.col - col), 2) + Math.pow((pacman.row - row), 2))>64) {	// if pacman is far of more than 8 tiles
     						updateGhostMovement(true, pacman.col, pacman.row, 1, pacmanCatchedAction, 0, 1, 2, 3);
     					}else {
-    						this.mode = Mode.CAGE;
+    						this.mode = Mode.SCATTER;
     					}
     					break yield;
     			}
