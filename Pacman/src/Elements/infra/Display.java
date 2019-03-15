@@ -1,5 +1,7 @@
 package Elements.infra;
 
+import main.Main;
+
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -14,8 +16,6 @@ import java.awt.image.BufferStrategy;
  * @author nfouque
  */
 public class Display extends Canvas {
-
-    //public static boolean visible; //linked to Main one from PacmanGame one
 
     private Game game;
     private boolean running;
@@ -33,8 +33,6 @@ public class Display extends Canvas {
         if (running) {
             return;
         }
-        //visible = game.visible;
-
         createBufferStrategy(3);
         bs = getBufferStrategy();
         game.init();
@@ -71,27 +69,27 @@ public class Display extends Canvas {
                 while (unprocessedTime >= desiredFrameRateTime) {
                     unprocessedTime -= desiredFrameRateTime;
                     update(); //<-- This is what actually runs the game
-                    //needsRender = true; FIXME Matt : useless for running in the back, uncomment for graphics
+                    if(Main.visibleGame)
+                        needsRender = true; //useless for running in the back, uncomment for graphics
                 }
 
                 if(main.Main.visibleGame) {
                     /** If it's time to render, draws everything */
-                //FIXME Matt : removes the whole graphic update and visual drawing (Matthieu)
-                if (needsRender) {
-                    Graphics2D g = (Graphics2D) bs.getDrawGraphics();
-                    g.setBackground(Color.BLACK);
-                    g.clearRect(0, 0, getWidth(), getHeight());
-                    g.scale(game.screenScale.getX(), game.screenScale.getY());
-                    draw(g);
-                    g.dispose();
-                    bs.show();
-                    needsRender = false;
-                } else {
-                    try {
-                        Thread.sleep(1);
-                    } catch (InterruptedException ex) {
+                    // Removes the whole graphic update and visual drawing (Matthieu)
+                    if (needsRender) {
+                        Graphics2D g = (Graphics2D) bs.getDrawGraphics();
+                        g.setBackground(Color.BLACK);
+                        g.clearRect(0, 0, getWidth(), getHeight());
+                        g.scale(game.screenScale.getX(), game.screenScale.getY());
+                        draw(g);
+                        g.dispose();
+                        bs.show();
+                        needsRender = false;
+                    } else {
+                        try{
+                            Thread.sleep(1);
+                        }catch (InterruptedException ex) { }
                     }
-                }
                 }
             }
         }
