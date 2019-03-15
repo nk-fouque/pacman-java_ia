@@ -21,9 +21,9 @@ public class Main {
 
             @Override
             public void run() {
-                visibleGame = false;       //TODO : set it to true to play a normal game, false will make the game play in background
+                visibleGame = true;       //TODO : set it to true to play a normal game, false will make the game play in background
 
-                Game game = new PacmanGame(1000);    //FIXME (Matthieu) : param fps is the "speed" of the game, max = 1000
+                Game game = new PacmanGame(60);    //FIXME (Matthieu) : param fps is the "speed" of the game, max = 1000
                 Display view = new Display(game);
                 JFrame frame = new JFrame();
                 frame.setTitle("Pacman");
