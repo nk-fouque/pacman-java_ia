@@ -3,6 +3,7 @@ package Elements.actor;
 import Elements.PacmanActor;
 import Elements.PacmanGame;
 import Elements.PacmanGame.State;
+import main.Main;
 
 /**
  * Ready class.
@@ -19,7 +20,8 @@ public class Ready extends PacmanActor {
     public void init() {
         x = 11 * 8;
         y = 20 * 8;
-        loadFrames("/res/ready.png");
+        if(Main.visibleGame)
+            loadFrames("/res/ready.png");
     }
 
     @Override
@@ -33,9 +35,11 @@ public class Ready extends PacmanActor {
                     waitTime = System.currentTimeMillis();
                     instructionPointer = 1;
                 case 1:
-//                    if (System.currentTimeMillis() - waitTime < 2000) { // || game.sounds.get("start").isPlaying()) {
-//                        break yield;
-//                    }
+                    if(Main.visibleGame) {
+                       if (System.currentTimeMillis() - waitTime < 2000) { // || game.sounds.get("start").isPlaying()) {
+                            break yield;
+                       }
+                    }
                     game.setState(State.READY2);
                     break yield;
             }
@@ -48,13 +52,17 @@ public class Ready extends PacmanActor {
         while (true) {
             switch (instructionPointer) {
                 case 0:
-                    game.broadcastMessage("showAll");
+                    if(Main.visibleGame) {
+                        game.broadcastMessage("showAll");
+                    }
                     waitTime = System.currentTimeMillis();
                     instructionPointer = 1;
                 case 1:
-//                    if (System.currentTimeMillis() - waitTime < 2000) { // || game.sounds.get("start").isPlaying()) {
-//                        break yield;
-//                    }
+                    if(Main.visibleGame) {
+                        if (System.currentTimeMillis() - waitTime < 2000) { // || game.sounds.get("start").isPlaying()) {
+                            break yield;
+                        }
+                    }
                     game.setState(State.PLAYING);
                     break yield;
             }

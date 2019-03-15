@@ -26,6 +26,7 @@ public class Display extends Canvas {
         int sx = (int) (game.screenSize.width * game.screenScale.getX());
         int sy = (int) (game.screenSize.height * game.screenScale.getY());
         setPreferredSize(new Dimension(sx, sy));
+        // TODO Nico : a mettre en test "playerGame", si le joueur joue on regarde les input keyboard sinon ballecs
         addKeyListener(new Keyboard());
     }
 
@@ -33,8 +34,10 @@ public class Display extends Canvas {
         if (running) {
             return;
         }
-        createBufferStrategy(3);
-        bs = getBufferStrategy();
+        if(Main.visibleGame) {
+            createBufferStrategy(3);
+            bs = getBufferStrategy();
+        }
         game.init();
         running = true;
         Thread thread = new Thread(new MainLoop(game));
