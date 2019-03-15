@@ -1,7 +1,9 @@
 package IA;
 
+import Elements.PacmanGame;
 import Elements.infra.Game;
 
+import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class IA {
@@ -29,9 +31,24 @@ public class IA {
      * @param game, on verra ce qu'on en fait, pour l'instant je le mets là
      * @return 0 = RIGHT, 1 = DOWN, 2 = LEFT, 3 = UP
      */
-    public int askDirection(Game game){
+    public int askDirection(PacmanGame game){
+        int res = 0;
+        GameState state = new GameState(game);
+        GameState[] states = state.possibleGameStates();
+        int[] evaluateDirs = new int[4];
+        for(int i = 0;i<4;i++){
+            if(!Objects.isNull(states[i])) {
+                evaluateDirs[i] = states[i].newScore();
+            } else {
+                evaluateDirs[i] = 0;
+            }
+            if (evaluateDirs[i]>evaluateDirs[res]){
+                res = i;
+            }
+        }
 
-        return 0;
+        System.out.println("Right "+evaluateDirs[0]+" Down "+evaluateDirs[1]+" Left "+evaluateDirs[2]+" Up "+evaluateDirs[3]+" Res "+res);
+        return res;
     }
 
     public void searchGame(Game game){

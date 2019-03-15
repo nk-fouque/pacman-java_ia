@@ -26,6 +26,14 @@ public class Food extends PacmanActor {
         this.row = row;
     }
 
+    public int getCol() {
+        return col;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
     /**
      * Initialisation of the food and its collider
      */

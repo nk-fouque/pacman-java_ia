@@ -30,6 +30,9 @@ public class PacmanGame extends Game {
     // maze[row][col] 
     // 36 x 31 
     // cols: 0-3|4-31|32-35
+
+    //After launching the game, all the 2 and 3 are replaced by 0, the cases we can walk on
+    //After launching the game, the 1 are replaced by -1, the walls
     public int maze[][] = {
         {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
         {1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,1,1,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1},
@@ -110,6 +113,10 @@ public class PacmanGame extends Game {
         if (score > hiscore) {
             hiscore = score;
         }
+    }
+
+    public int getScoreInt(){
+        return score;
     }
     
     public String getScore() {
