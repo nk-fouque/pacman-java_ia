@@ -178,7 +178,7 @@ public class GameState {
      * Tries every different positions
      * @return all possible GameStates
      */
-    public GameState[] possibleGameStates(){
+    public GameState[] possibleFollowingStates(){
        GameState[] res = new GameState[4];
         if(!wallRight()) {
             res[0]=new GameState(game,0);
@@ -206,23 +206,16 @@ public class GameState {
 
 
     public int searchBestGamestate(int depth){
-        int res = 0;
-        GameState[] states = this.possibleGameStates();
+        PathfindNode tree = new PathfindNode(this);
         if (depth==0){
-            int[] evaluateDirs = new int[4];
-            for(int i = 0;i<4;i++){
-                if(!Objects.isNull(states[i])) {
-                    evaluateDirs[i] = states[i].newScore();
-                }
-                if (evaluateDirs[i]>evaluateDirs[res]){
-                    res = i;
-                }
-            }
+            tree.leaf();
         } else {
+            for (int i = 0;i<4;i++){
 
+            }
         }
 
-        return res;
+        return tree.bestDirection;
     }
 
 

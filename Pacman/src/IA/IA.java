@@ -36,7 +36,7 @@ public class IA {
     public int askDirectionEatmaxOneStep(PacmanGame game){
         int res = 0;
         GameState state = new GameState(game);
-        GameState[] states = state.possibleGameStates();
+        GameState[] states = state.possibleFollowingStates();
         int[] evaluateDirs = new int[4];
         for(int i = 0;i<4;i++){
             if(!Objects.isNull(states[i])) {
@@ -56,6 +56,7 @@ public class IA {
         int res = 0;
         GameState state = new GameState(game);
         res = state.searchBestGamestate(0);
+
         return res;
     }
 
