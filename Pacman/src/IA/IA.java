@@ -10,8 +10,10 @@ import java.util.concurrent.ThreadLocalRandom;
 public class IA {
 
     private final int[] uTurn = new int[]{2, 3, 0, 1};
+    private int lastInput;
 
     public IA(){
+        lastInput=3;
     }
 
     /**
@@ -27,36 +29,12 @@ public class IA {
         return res;
     }
 
-    /* TODO JE SAIS PAS SI ON GARDE CA, L'AUTRE FAIT LA MEME CHOSE QUAND IL EST EN DEPTH = 0
-    /**
-     *
-     * @param game
-     * @return 0 = RIGHT, 1 = DOWN, 2 = LEFT, 3 = UP
-
-    public int askDirectionEatmaxOneStep(PacmanGame game){
-        int res = 0;
-        GameState state = new GameState(game);
-        GameState[] states = state.possibleFollowingStates();
-        int[] evaluateDirs = new int[4];
-        for(int i = 0;i<4;i++){
-            if(!Objects.isNull(states[i])) {
-                evaluateDirs[i] = states[i].newScore();
-            }
-            if (evaluateDirs[i]>evaluateDirs[res]){
-                res = i;
-            }
-        }
-
-//        System.out.println("Right "+evaluateDirs[0]+" Down "+evaluateDirs[1]+" Left "+evaluateDirs[2]+" Up "+evaluateDirs[3]+" Res "+res);
-        return res;
-    }
-    */
-
     public int askDirectionEatmaxTreeSearch(PacmanGame game){
         int res = 0;
-        GameState state = new GameState(game);
-        res = state.searchBestGamestate(1);
+        GameState state = new GameState(game,lastInput);
+        res = state.searchBestGamestate(0);
         System.out.println("\n");
+        lastInput=res; //Records the input before sending it
         return res;
     }
 
