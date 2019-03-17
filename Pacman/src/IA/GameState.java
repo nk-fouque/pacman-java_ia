@@ -7,7 +7,13 @@ import Elements.infra.*;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * Stores important information about the board, temporary class until we can play real games
+ */
 public class GameState {
+    /**
+     * Information stored about the game
+     */
     public PacmanGame game;
     public ArrayList<Ghost> ghosts = new ArrayList<>();
     public ArrayList<Food> food= new ArrayList<>();
@@ -16,9 +22,14 @@ public class GameState {
     public int pacmanRow;
     public int pacmanCol;
 
-    private boolean verbose = false;
+    /**
+     * Activates the debug prints
+     */
+    private boolean verbose = true;
 
-
+    /**
+     * Stores the score once calculated
+     */
     public int newScore;
 
     /**
@@ -27,7 +38,10 @@ public class GameState {
      */
     public int dir;
 
-
+    /**
+     * Base constructor
+     * @param game
+     */
     public GameState(PacmanGame game){
         this.game = game;
         this.newScore=game.getScoreInt();
@@ -49,6 +63,11 @@ public class GameState {
         }
     }
 
+    /**
+     * Constructor for "future gamestates"
+     * @param game
+     * @param dir : the direction we will have input to get there
+     */
     public GameState(PacmanGame game,int dir){
         this.game = game;
         this.newScore=game.getScoreInt();
@@ -108,6 +127,10 @@ public class GameState {
         return res;
     }
 
+    /**
+     * Currently factors eating food, capturing a ghost and dying
+     * @return the new score if we obtain this gamestate
+     */
     public int newScore(){
         newScore+=pacmanEat();
         int getghost = pacmanGetGhost();
@@ -120,6 +143,10 @@ public class GameState {
         return newScore;
     }
 
+    /**
+     * Checks if pacman will be able to eat there and updates the score
+     * @return
+     */
     public int pacmanEat(){
         int res = 0;
         if (pacmanGetFood()){
@@ -158,6 +185,10 @@ public class GameState {
         return res;
     }
 
+    /**
+     * Check if pacman has walls around him
+     * @return
+     */
     public boolean wallRight(){
         return this.game.maze[pacmanRow][pacmanCol+1]==-1;
     }
@@ -204,17 +235,14 @@ public class GameState {
     }
 
 
-
+    /**
+     * Activate tree search
+     * @param depth
+     * @return
+     */
     public int searchBestGamestate(int depth){
         PathfindNode tree = new PathfindNode(this);
-        if (depth==0){
-            tree.leaf();
-        } else {
-            for (int i = 0;i<4;i++){
-
-            }
-        }
-
+        tree.node(depth);
         return tree.bestDirection;
     }
 
