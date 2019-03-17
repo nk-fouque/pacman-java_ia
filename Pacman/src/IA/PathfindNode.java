@@ -28,5 +28,26 @@ public class PathfindNode {
                 bestScore = evaluateDirs[i];
             }
         }
+        System.out.println("Leaf : "+bestDirection+" Score : "+bestScore);
+    }
+
+    public void node(int depth){
+        if(depth == 0){
+            leaf();
+        } else {
+            PathfindNode[] sons = new PathfindNode[4];
+            for(int i = 0;i<4;i++){
+                if(!Objects.isNull(states[i])) {
+                    sons[i] = new PathfindNode(states[i]);
+                    sons[i].node(depth -1);
+                    evaluateDirs[i]=sons[i].bestScore;
+                }
+                if (evaluateDirs[i]>evaluateDirs[bestDirection]){
+                    bestDirection = i;
+                    bestScore = evaluateDirs[i];
+                }
+            }
+            System.out.println("Node : "+bestDirection+" Score : "+bestScore);
+        }
     }
 }

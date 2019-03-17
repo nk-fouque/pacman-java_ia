@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0b9cffbb-2e40-4eae-a4fd-e47475cddbe7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/IA/PathfindNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pacman.iws" beforeDir="false" afterPath="$PROJECT_DIR$/Pacman.iws" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/IA/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IA/GameState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/IA/IA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IA/IA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/IA/PathfindNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IA/PathfindNode.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -96,31 +96,31 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/IA/GameState.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="694">
-              <caret line="218" column="33" selection-start-line="218" selection-start-column="33" selection-end-line="218" selection-end-column="33" />
+            <state relative-caret-position="405">
+              <caret line="27" column="34" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3828#3829#0" expanded="true" />
-                <element signature="e#3893#3894#0" expanded="true" />
-                <element signature="e#3925#3926#0" expanded="true" />
-                <element signature="e#3990#3991#0" expanded="true" />
-                <element signature="e#4022#4023#0" expanded="true" />
-                <element signature="e#4087#4088#0" expanded="true" />
-                <element signature="e#4117#4118#0" expanded="true" />
-                <element signature="e#4182#4183#0" expanded="true" />
+                <element signature="e#4690#4691#0" expanded="true" />
+                <element signature="e#4755#4756#0" expanded="true" />
+                <element signature="e#4787#4788#0" expanded="true" />
+                <element signature="e#4852#4853#0" expanded="true" />
+                <element signature="e#4884#4885#0" expanded="true" />
+                <element signature="e#4949#4950#0" expanded="true" />
+                <element signature="e#4979#4980#0" expanded="true" />
+                <element signature="e#5044#5045#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/IA/PathfindNode.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="27" column="44" lean-forward="true" selection-start-line="27" selection-start-column="44" selection-end-line="27" selection-end-column="44" />
+            <state relative-caret-position="465">
+              <caret line="49" column="23" lean-forward="true" selection-start-line="49" selection-start-column="23" selection-end-line="49" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -213,9 +213,9 @@
         <option value="$PROJECT_DIR$/src/Elements/actor/Pacman.java" />
         <option value="$PROJECT_DIR$/src/Elements/actor/Ghost.java" />
         <option value="$PROJECT_DIR$/src/Elements/PacmanGame.java" />
-        <option value="$PROJECT_DIR$/src/IA/IA.java" />
-        <option value="$PROJECT_DIR$/src/IA/PathfindNode.java" />
         <option value="$PROJECT_DIR$/src/IA/GameState.java" />
+        <option value="$PROJECT_DIR$/src/IA/PathfindNode.java" />
+        <option value="$PROJECT_DIR$/src/IA/IA.java" />
       </list>
     </option>
   </component>
@@ -292,7 +292,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552840877509" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552843713038" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -335,7 +335,7 @@
       <workItem from="1552307867128" duration="6985000" />
       <workItem from="1552633647498" duration="7010000" />
       <workItem from="1552650301263" duration="2459000" />
-      <workItem from="1552831303756" duration="9424000" />
+      <workItem from="1552831303756" duration="12403000" />
     </task>
     <task id="LOCAL-00001" summary="Ajout du jeu Pacman déjà codé">
       <created>1551793955622</created>
@@ -428,11 +428,18 @@
       <option name="project" value="LOCAL" />
       <updated>1552839188034</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Further improved the code, now closer to a proper tree search">
+      <created>1552840914091</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1552840914091</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28111000" />
+    <option name="totallyTimeSpent" value="31090000" />
   </component>
   <component name="TodoView" selected-index="4">
     <todo-panel id="selected-file">
@@ -456,7 +463,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32937366" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32937366" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32937366" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -546,7 +553,8 @@
     <MESSAGE value="Currently eatmax thinks wall is on left when it's on right or down" />
     <MESSAGE value="Eatmax fixed, now sees walls properly, only searches visible food,&#10;still struggles in certain corners, &#10;doesn't finish eating the food and stays locked next to it" />
     <MESSAGE value="Now eatmax looks more like minmax since it tries not to die&#10;Still doesn't predict future states but code adapted for treesearch" />
-    <option name="LAST_COMMIT_MESSAGE" value="Now eatmax looks more like minmax since it tries not to die&#10;Still doesn't predict future states but code adapted for treesearch" />
+    <MESSAGE value="Further improved the code, now closer to a proper tree search" />
+    <option name="LAST_COMMIT_MESSAGE" value="Further improved the code, now closer to a proper tree search" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/br/ol/pacman/infra/Keyboard.java" />
@@ -709,19 +717,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Elements/actor/Food.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="64" column="81" lean-forward="true" selection-start-line="64" selection-start-column="81" selection-end-line="64" selection-end-column="81" />
-          <folding>
-            <element signature="e#534#535#0" expanded="true" />
-            <element signature="e#560#561#0" expanded="true" />
-            <element signature="e#587#588#0" expanded="true" />
-            <element signature="e#613#614#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Elements/actor/Ghosts.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -760,6 +755,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Elements/actor/Food.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="239">
+          <caret line="64" column="81" lean-forward="true" selection-start-line="64" selection-start-column="81" selection-end-line="64" selection-end-column="81" />
+          <folding>
+            <element signature="e#534#535#0" expanded="true" />
+            <element signature="e#560#561#0" expanded="true" />
+            <element signature="e#587#588#0" expanded="true" />
+            <element signature="e#613#614#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/IA/GameState.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" column="34" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4690#4691#0" expanded="true" />
+            <element signature="e#4755#4756#0" expanded="true" />
+            <element signature="e#4787#4788#0" expanded="true" />
+            <element signature="e#4852#4853#0" expanded="true" />
+            <element signature="e#4884#4885#0" expanded="true" />
+            <element signature="e#4949#4950#0" expanded="true" />
+            <element signature="e#4979#4980#0" expanded="true" />
+            <element signature="e#5044#5045#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/IA/IA.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="389">
@@ -772,26 +798,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/IA/PathfindNode.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="44" lean-forward="true" selection-start-line="27" selection-start-column="44" selection-end-line="27" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/IA/GameState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="694">
-          <caret line="218" column="33" selection-start-line="218" selection-start-column="33" selection-end-line="218" selection-end-column="33" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3828#3829#0" expanded="true" />
-            <element signature="e#3893#3894#0" expanded="true" />
-            <element signature="e#3925#3926#0" expanded="true" />
-            <element signature="e#3990#3991#0" expanded="true" />
-            <element signature="e#4022#4023#0" expanded="true" />
-            <element signature="e#4087#4088#0" expanded="true" />
-            <element signature="e#4117#4118#0" expanded="true" />
-            <element signature="e#4182#4183#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="465">
+          <caret line="49" column="23" lean-forward="true" selection-start-line="49" selection-start-column="23" selection-end-line="49" selection-end-column="23" />
         </state>
       </provider>
     </entry>

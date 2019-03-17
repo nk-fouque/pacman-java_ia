@@ -55,8 +55,8 @@ public class IA {
     public int askDirectionEatmaxTreeSearch(PacmanGame game){
         int res = 0;
         GameState state = new GameState(game);
-        res = state.searchBestGamestate(0);
-
+        res = state.searchBestGamestate(1);
+        System.out.println("\n");
         return res;
     }
 
