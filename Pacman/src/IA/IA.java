@@ -1,6 +1,7 @@
 package IA;
 
 import Elements.PacmanGame;
+import Elements.actor.Pacman;
 import Elements.infra.Game;
 
 import java.util.Objects;
@@ -26,12 +27,13 @@ public class IA {
         return res;
     }
 
+    /* TODO JE SAIS PAS SI ON GARDE CA, L'AUTRE FAIT LA MEME CHOSE QUAND IL EST EN DEPTH = 0
     /**
      *
-     * @param game, on verra ce qu'on en fait, pour l'instant je le mets là
+     * @param game
      * @return 0 = RIGHT, 1 = DOWN, 2 = LEFT, 3 = UP
-     */
-    public int askDirection(PacmanGame game){
+
+    public int askDirectionEatmaxOneStep(PacmanGame game){
         int res = 0;
         GameState state = new GameState(game);
         GameState[] states = state.possibleGameStates();
@@ -45,12 +47,17 @@ public class IA {
             }
         }
 
-        System.out.println("Right "+evaluateDirs[0]+" Down "+evaluateDirs[1]+" Left "+evaluateDirs[2]+" Up "+evaluateDirs[3]+" Res "+res);
+//        System.out.println("Right "+evaluateDirs[0]+" Down "+evaluateDirs[1]+" Left "+evaluateDirs[2]+" Up "+evaluateDirs[3]+" Res "+res);
+        return res;
+    }
+    */
+
+    public int askDirectionEatmaxTreeSearch(PacmanGame game){
+        int res = 0;
+        GameState state = new GameState(game);
+        res = state.searchBestGamestate(0);
         return res;
     }
 
-    public void searchGame(Game game){
-
-    }
 
 }

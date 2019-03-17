@@ -5,14 +5,21 @@ import Elements.actor.*;
 import Elements.infra.*;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class GameState {
     public PacmanGame game;
     public ArrayList<Ghost> ghosts = new ArrayList<>();
     public ArrayList<Food> food= new ArrayList<>();
     public ArrayList<PowerBall> powerBalls= new ArrayList<>();
+
     public int pacmanRow;
     public int pacmanCol;
+
+    private boolean verbose = false;
+
+
+    public int newScore;
 
     /**
      * indicates if this gamestate was created from a direction : 0 = RIGHT, 1 = DOWN, 2 = LEFT, 3 = UP
@@ -23,6 +30,7 @@ public class GameState {
 
     public GameState(PacmanGame game){
         this.game = game;
+        this.newScore=game.getScoreInt();
         this.dir = -1;
         for(Actor a : game.actors){
             if (a instanceof Ghost){
@@ -43,6 +51,7 @@ public class GameState {
 
     public GameState(PacmanGame game,int dir){
         this.game = game;
+        this.newScore=game.getScoreInt();
         this.dir= dir;
         for(Actor a : game.actors){
             if (a instanceof Ghost){
@@ -100,9 +109,15 @@ public class GameState {
     }
 
     public int newScore(){
-        int res = game.getScoreInt();
-        res+=pacmanEat();
-        return res;
+        newScore+=pacmanEat();
+        int getghost = pacmanGetGhost();
+        if (getghost == -1){
+            newScore = 0;
+        } else {
+            newScore += (game.catchedGhostScoreTable[game.currentCatchedGhostScoreTableIndex]*getghost);
+        }
+
+        return newScore;
     }
 
     public int pacmanEat(){
@@ -125,30 +140,20 @@ public class GameState {
     }
 
     /**
-     * Tries every different positions
-     * @return all possible GameStates
+     *
+     * @return 0 if no ghost, 1 if vulnerable ghost, -1 if normal ghost
      */
-    public GameState[] possibleGameStates(){
-       GameState[] res = new GameState[4];
-        if(!wallRight()) {
-            res[0]=new GameState(game,0);
-        } else {
-            System.out.println("Wall on right");
-        }
-        if (!wallDown()) {
-            res[1] = new GameState(game,1);
-        } else {
-            System.out.println("Wall on down");
-        }
-        if (!wallLeft()) {
-            res[2] = new GameState(game,2);
-        } else {
-            System.out.println("Wall on left");
-        }
-        if (!wallUp()) {
-            res[3] = new GameState(game,3);
-        } else {
-            System.out.println("Wall on up");
+    public int pacmanGetGhost(){
+        int res = 0;
+        for(Ghost g : ghosts){
+            if (g.getCol()==pacmanCol+dCol() && g.getRow() == pacmanRow+dRow() && g.visible==true){
+                if (g.markAsVulnerable){
+                    res = 1;
+                } else {
+                    res = -1;
+                }
+                break;
+            }
         }
         return res;
     }
@@ -169,6 +174,56 @@ public class GameState {
         return this.game.maze[pacmanRow-1][pacmanCol]==-1;
     }
 
+    /**
+     * Tries every different positions
+     * @return all possible GameStates
+     */
+    public GameState[] possibleGameStates(){
+       GameState[] res = new GameState[4];
+        if(!wallRight()) {
+            res[0]=new GameState(game,0);
+        } else {
+            if(verbose) System.out.println("Wall on right");
+        }
+        if (!wallDown()) {
+            res[1] = new GameState(game,1);
+        } else {
+            if (verbose) System.out.println("Wall on down");
+        }
+        if (!wallLeft()) {
+            res[2] = new GameState(game,2);
+        } else {
+            if (verbose) System.out.println("Wall on left");
+        }
+        if (!wallUp()) {
+            res[3] = new GameState(game,3);
+        } else {
+            if (verbose) System.out.println("Wall on up");
+        }
+        return res;
+    }
+
+
+
+    public int searchBestGamestate(int depth){
+        int res = 0;
+        GameState[] states = this.possibleGameStates();
+        if (depth==0){
+            int[] evaluateDirs = new int[4];
+            for(int i = 0;i<4;i++){
+                if(!Objects.isNull(states[i])) {
+                    evaluateDirs[i] = states[i].newScore();
+                }
+                if (evaluateDirs[i]>evaluateDirs[res]){
+                    res = i;
+                }
+            }
+        } else {
+
+        }
+
+        return res;
+    }
 
 
 

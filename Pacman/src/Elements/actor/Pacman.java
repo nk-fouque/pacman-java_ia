@@ -174,7 +174,7 @@ public class Pacman extends PacmanActor {
                 desiredDirection = ia.randDirection(desiredDirection, game);
             }
             case "eatmax": {
-                desiredDirection = ia.askDirection(game);
+                desiredDirection = ia.askDirectionEatmaxTreeSearch(game);
             }
         }
         
