@@ -14,8 +14,16 @@ public class GameState {
     public int pacmanRow;
     public int pacmanCol;
 
+    /**
+     * indicates if this gamestate was created from a direction : 0 = RIGHT, 1 = DOWN, 2 = LEFT, 3 = UP
+     * -1 = no dir
+     */
+    public int dir;
+
+
     public GameState(PacmanGame game){
         this.game = game;
+        this.dir = -1;
         for(Actor a : game.actors){
             if (a instanceof Ghost){
                 ghosts.add((Ghost)a);
@@ -33,10 +41,60 @@ public class GameState {
         }
     }
 
-    public int pacmanEat(){
+    public GameState(PacmanGame game,int dir){
+        this.game = game;
+        this.dir= dir;
+        for(Actor a : game.actors){
+            if (a instanceof Ghost){
+                ghosts.add((Ghost)a);
+            }
+            if(a instanceof Food){
+                food.add((Food)a);
+            }
+            if(a instanceof PowerBall ){
+                powerBalls.add((PowerBall)a);
+            }
+            if(a instanceof Pacman ){
+                this.pacmanRow = ((Pacman) a).getRow()+dRow();
+                this.pacmanCol = ((Pacman) a).getCol()+dCol();
+            }
+        }
+    }
+
+    /**
+     * converts a direction into a vertical deplacement
+     * @return 1 = down, -1 = down
+     */
+    public int dRow(){
         int res = 0;
-        if (pacmanOnFood() && !pacmanOnWall()){
-            res += 10;
+        switch(dir){
+            case 1 : {
+                res++;
+                break;
+            }
+            case 3 : {
+                res--;
+                break;
+            }
+        }
+        return res;
+    }
+
+    /**
+     * converts a direction into a horizontal deplacement
+     * @return 1 = right, -1 = left
+     */
+    public int dCol(){
+        int res = 0;
+        switch(dir){
+            case 0 : {
+                res++;
+                break;
+            }
+            case 2 : {
+                res--;
+                break;
+            }
         }
         return res;
     }
@@ -47,30 +105,23 @@ public class GameState {
         return res;
     }
 
-    public boolean pacmanOnFood(){
+    public int pacmanEat(){
+        int res = 0;
+        if (pacmanGetFood()){
+            res += 10;
+        }
+        return res;
+    }
+
+    public boolean pacmanGetFood(){
         boolean res = false;
         for(Food f : food){
-            if (f.getCol()==pacmanCol && f.getRow() == pacmanRow){
+            if (f.getCol()==pacmanCol+dCol() && f.getRow() == pacmanRow+dRow() && f.visible==true){
                 res= true;
                 break;
             }
         }
         return res;
-    }
-
-    public boolean pacmanOnWall(){
-        if(game.maze[pacmanRow][pacmanCol]==(-1)){
-            return true;
-        } else { return false ;}
-    }
-
-    public void move(int dir){
-        switch (dir){
-            case 0 : pacmanCol++;
-            case 1 : pacmanRow++;
-            case 2 : pacmanCol--;
-            case 3 : pacmanRow--;
-        }
     }
 
     /**
@@ -79,19 +130,44 @@ public class GameState {
      */
     public GameState[] possibleGameStates(){
        GameState[] res = new GameState[4];
-        for (int i = 0;i<4;i++) {
-            res[i] = new GameState(game);
-            res[i].move(i);
-            if (res[i].pacmanOnWall()){
-                System.out.println("Wall on "+i);
-                res[i]=null;
-            }
+        if(!wallRight()) {
+            res[0]=new GameState(game,0);
+        } else {
+            System.out.println("Wall on right");
         }
-       return res;
+        if (!wallDown()) {
+            res[1] = new GameState(game,1);
+        } else {
+            System.out.println("Wall on down");
+        }
+        if (!wallLeft()) {
+            res[2] = new GameState(game,2);
+        } else {
+            System.out.println("Wall on left");
+        }
+        if (!wallUp()) {
+            res[3] = new GameState(game,3);
+        } else {
+            System.out.println("Wall on up");
+        }
+        return res;
     }
 
+    public boolean wallRight(){
+        return this.game.maze[pacmanRow][pacmanCol+1]==-1;
+    }
 
+    public boolean wallLeft(){
+        return this.game.maze[pacmanRow][pacmanCol-1]==-1;
+    }
 
+    public boolean wallDown(){
+        return this.game.maze[pacmanRow+1][pacmanCol]==-1;
+    }
+
+    public boolean wallUp(){
+        return this.game.maze[pacmanRow-1][pacmanCol]==-1;
+    }
 
 
 

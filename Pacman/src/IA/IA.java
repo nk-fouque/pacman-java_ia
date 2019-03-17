@@ -39,8 +39,6 @@ public class IA {
         for(int i = 0;i<4;i++){
             if(!Objects.isNull(states[i])) {
                 evaluateDirs[i] = states[i].newScore();
-            } else {
-                evaluateDirs[i] = 0;
             }
             if (evaluateDirs[i]>evaluateDirs[res]){
                 res = i;

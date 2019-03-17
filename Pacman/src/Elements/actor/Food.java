@@ -58,7 +58,6 @@ public class Food extends PacmanActor {
 //        if (Keyboard.keyPressed[KeyEvent.VK_A]) {
 //            game.currentFoodCount = 0;
 //        }
-        
         if (game.checkCollision(this, Pacman.class) != null) {
             visible = false;
             game.currentFoodCount--;

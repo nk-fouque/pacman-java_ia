@@ -34,8 +34,6 @@ public class Pacman extends PacmanActor {
     
     /* Intelligence of pacman */
     private IA ia;
-    private int fakeRow;
-    private int fakeCol;
 
     
     public Pacman(PacmanGame game) {
