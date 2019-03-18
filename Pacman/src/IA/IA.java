@@ -1,14 +1,19 @@
 package IA;
 
+import Elements.PacmanGame;
+import Elements.actor.Pacman;
 import Elements.infra.Game;
 
+import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class IA {
 
     private final int[] uTurn = new int[]{2, 3, 0, 1};
+    private int lastInput;
 
     public IA(){
+        lastInput=3;
     }
 
     /**
@@ -24,18 +29,14 @@ public class IA {
         return res;
     }
 
-    /**
-     *
-     * @param game, on verra ce qu'on en fait, pour l'instant je le mets là
-     * @return 0 = RIGHT, 1 = DOWN, 2 = LEFT, 3 = UP
-     */
-    public int askDirection(Game game){
-
-        return 0;
+    public int askDirectionEatmaxTreeSearch(PacmanGame game){
+        int res = 0;
+        GameState state = new GameState(game,lastInput);
+        res = state.searchBestGamestate(0);
+        System.out.println("\n");
+        lastInput=res; //Records the input before sending it
+        return res;
     }
 
-    public void searchGame(Game game){
-
-    }
 
 }

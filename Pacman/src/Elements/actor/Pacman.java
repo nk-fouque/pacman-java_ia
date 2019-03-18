@@ -1,4 +1,5 @@
 package Elements.actor;
+import Elements.infra.Keyboard;
 import IA.IA;
 
 import Elements.PacmanActor;
@@ -7,8 +8,10 @@ import Elements.PacmanGame.State;
 import Elements.infra.Keyboard;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import main.Main;
 
 import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
 
 /**
  * Pacman class.
@@ -34,6 +37,7 @@ public class Pacman extends PacmanActor {
     
     /* Intelligence of pacman */
     private IA ia;
+
     
     public Pacman(PacmanGame game) {
         super(game);
@@ -44,19 +48,29 @@ public class Pacman extends PacmanActor {
      */
     @Override
     public void init() {
-        String[] pacmanFrameNames = new String[30];
-        for (int d=0; d<4; d++) {
-            for (int i=0; i<4; i++) {
-                pacmanFrameNames[i + 4 * d] = "/res/pacman_" + d + "_" + i + ".png";
+        if(Main.visibleGame) {
+            String[] pacmanFrameNames = new String[30];
+            for (int d = 0; d < 4; d++) {
+                for (int i = 0; i < 4; i++) {
+                    pacmanFrameNames[i + 4 * d] = "/res/pacman_" + d + "_" + i + ".png";
+                }
             }
+            for (int i = 0; i < 14; i++) {
+                pacmanFrameNames[16 + i] = "/res/pacman_died_" + i + ".png";
+            }
+            loadFrames(pacmanFrameNames);
         }
-        for (int i=0; i<14; i++) {
-            pacmanFrameNames[16 + i] = "/res/pacman_died_" + i + ".png";
-        }
-        loadFrames(pacmanFrameNames);
         reset();
         collider = new Rectangle(0, 0, 8, 8);
         ia = new IA();
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getCol() {
+        return col;
     }
 
     /**
@@ -66,7 +80,8 @@ public class Pacman extends PacmanActor {
         col = 18;
         row = 23;
         updatePosition();
-        frame = frames[0];
+        if(Main.visibleGame)
+            frame = frames[0];
         direction = desiredDirection = 0;
     }
     
@@ -76,6 +91,7 @@ public class Pacman extends PacmanActor {
     protected void updatePosition() {
         x = col * 8 - 4 - 32 - 4;
         y = (row + 3) * 8 - 4;
+
     }
 
     /**
@@ -130,30 +146,56 @@ public class Pacman extends PacmanActor {
                     break yield;
             }
         }
-        updateAnimation();
+        if(Main.visibleGame)
+            updateAnimation();
     }
     
     @Override
-    public void updatePlaying() {
+    public void updatePlaying() {;
+//        System.out.println("row : "+row+" col : "+col+" maze : "+game.maze[row][col-1]);
         if (!visible) {
             return;
         }
         
         /* Comments by Nicolas */
-		 if (Keyboard.keyPressed[KeyEvent.VK_LEFT]) {
-		 desiredDirection = 2;
-		 }
-		 else if (Keyboard.keyPressed[KeyEvent.VK_RIGHT]) {
-		 desiredDirection = 0;
-		 }
-		 else if (Keyboard.keyPressed[KeyEvent.VK_UP]) {
-		 desiredDirection = 3;
-		 }
-		 else if (Keyboard.keyPressed[KeyEvent.VK_DOWN]) {
-		 desiredDirection = 1;
-		 }
+//		 if (Keyboard.keyPressed[KeyEvent.VK_LEFT]) {
+//		 desiredDirection = 2;
+//		 }
+//		 else if (Keyboard.keyPressed[KeyEvent.VK_RIGHT]) {
+//		 desiredDirection = 0;
+//		 }
+//		 else if (Keyboard.keyPressed[KeyEvent.VK_UP]) {
+//		 desiredDirection = 3;
+//		 }
+//		 else if (Keyboard.keyPressed[KeyEvent.VK_DOWN]) {
+//		 desiredDirection = 1;
+//		 }
 
        // desiredDirection = ia.randDirection(desiredDirection,game);
+
+        //Change this string depending on what you want to do
+        //manual is self explanatory, maddog is random and eatmax is bugged
+        String movementMode = "eatmax";
+
+        switch (movementMode) {
+            case "manual": {
+                if (Keyboard.keyPressed[KeyEvent.VK_LEFT]) {
+                    desiredDirection = 2;
+                } else if (Keyboard.keyPressed[KeyEvent.VK_RIGHT]) {
+                    desiredDirection = 0;
+                } else if (Keyboard.keyPressed[KeyEvent.VK_UP]) {
+                    desiredDirection = 3;
+                } else if (Keyboard.keyPressed[KeyEvent.VK_DOWN]) {
+                    desiredDirection = 1;
+                }
+            }
+            case "maddog": {
+                desiredDirection = ia.randDirection(desiredDirection, game);
+            }
+            case "eatmax": {
+                desiredDirection = ia.askDirectionEatmaxTreeSearch(game);
+            }
+        }
         
         /* Manage the movement of pacman */
         yield:

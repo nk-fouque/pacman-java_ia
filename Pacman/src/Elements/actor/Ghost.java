@@ -80,6 +80,14 @@ public class Ghost extends PacmanActor {
         this.pathFinder = new ShortestPathFinder(game.maze);
     }
 
+    public int getCol() {
+        return col;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
     /**
      * Setter of the mode (the state of the ghost)
      * @param mode the next mode

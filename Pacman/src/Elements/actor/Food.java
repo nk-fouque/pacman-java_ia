@@ -26,6 +26,14 @@ public class Food extends PacmanActor {
         this.row = row;
     }
 
+    public int getCol() {
+        return col;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
     /**
      * Initialisation of the food and its collider
      */
@@ -50,7 +58,6 @@ public class Food extends PacmanActor {
 //        if (Keyboard.keyPressed[KeyEvent.VK_A]) {
 //            game.currentFoodCount = 0;
 //        }
-        
         if (game.checkCollision(this, Pacman.class) != null) {
             visible = false;
             game.currentFoodCount--;
