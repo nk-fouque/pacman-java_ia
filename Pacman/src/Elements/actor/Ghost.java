@@ -4,6 +4,7 @@ import Elements.infra.ShortestPathFinder;
 import Elements.PacmanActor;
 import Elements.PacmanGame;
 import Elements.PacmanGame.State;
+import Elements.actor.Ghosts.Mode;
 
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -24,13 +25,21 @@ public class Ghost extends PacmanActor {
         new Point(18, 11), new Point(16, 14), 
         new Point(18, 14), new Point(20, 14)};
     public int cageUpDownCount;
+    
+    /**
+     * Trying to code better ghosts
+     * @author Gregre
+     */
+    public Point[] scatterDestinations = { 
+            new Point(4, 28), new Point(4, 2), 
+            new Point(31, 2), new Point(31, 28)};
 
     
     /**
      * State machine of the ghost
      *
      */
-    public static enum Mode { CAGE, NORMAL, VULNERABLE, DIED }
+    public static enum Mode { CAGE, NORMAL, SCATTER, VULNERABLE, DIED }
     /**
      * Actual state of the ghost
      */
@@ -209,6 +218,7 @@ public class Ghost extends PacmanActor {
         switch (mode) {
             case CAGE: updateGhostCage(); break;
             case NORMAL: updateGhostNormal(); break;
+            case SCATTER: updateGhostScatter(); break;
             case VULNERABLE: updateGhostVulnerable(); break;
             case DIED: updateGhostDied(); break;
         }
@@ -222,6 +232,7 @@ public class Ghost extends PacmanActor {
         int frameIndex = 0;
         switch (mode) {
             case CAGE: 
+            case SCATTER:
             case NORMAL:
                 frameIndex = 2 * direction + (int) (System.nanoTime() * 0.00000001) % 2;
                 if (!markAsVulnerable) {
@@ -245,16 +256,15 @@ public class Ghost extends PacmanActor {
     
     /**
      * Update the behavior of the ghost while it's in scatter (?) mode
-     * - case 0 : in the cage. Case 6 is for the red one, case 2 for the blue one
-     * - case 1 : move the ghost to a precise position
-     * - case 2 : move the ghost to another position
-     * - case 3 : move the ghost to another position again
-     * - case 4 : move the ghost to another position again and again
-     * - case 5 : same but is a random number between 0 and 2 = 0, jump to 7
-     * - case 6 : update desiredDirection and lastDirection to 0 and update position
-     * - case 7 : update desiredDirection and lastDirection to 2 and update position
-     * - case 8 : switch to normal mode
+     * - case 0 : initialisation of the ghosts
+     * - case 1-3 : move the ghost so it looks alive
+     * - case 4 : check the type of the ghost for the next case
+     * - case 5 : blue ghost : if 30 balls of food have been eaten it goes out
+     * - case 6 : orange ghost : if a third of the food have been eaten it goes out
+     * - case 7 : update desiredDirection and lastDirection for the escape
+     * - case 8 : switch to normal/scatter mode
      */
+    
     private void updateGhostCage() {
         yield:
         while (true) {
@@ -263,16 +273,12 @@ public class Ghost extends PacmanActor {
                 	Point initialPosition = initialPositions[type];
                     updatePosition(initialPosition.x, initialPosition.y);
                     x -= 4;
-                    cageUpDownCount = 0;
-                    if (type == 0) {
-                        instructionPointer = 6;
-                        break;
-                    }
-                    else if (type == 2) {
-                        instructionPointer = 2;
+                    if (type <= 1) {
+                        instructionPointer = 7;
                         break;
                     }
                     instructionPointer = 1;
+                /* Pseudo-random movements */
                 case 1:
                 	if (moveToTargetPosition((int) x, 134 + 4, 1)) {
                         break yield;
@@ -282,54 +288,182 @@ public class Ghost extends PacmanActor {
                 	if (moveToTargetPosition((int) x, 134 - 4, 1)) {
                         break yield;
                     }
-                    cageUpDownCount++;
-                    if (cageUpDownCount <= type * 2) {
-                        instructionPointer = 1;
-                        break yield;
-                    }
-                    instructionPointer = 3;
+                	instructionPointer = 3;
                 case 3:
                 	if (moveToTargetPosition((int) x, 134, 1)) {
                         break yield;
                     }
                     instructionPointer = 4;
+                /* Check the type of the ghost */
                 case 4:
-                	if (moveToTargetPosition((int) 105, 134, 1)) {
-                        break yield;
+                    if(type == 2) {
+                    	instructionPointer = 5;
+                    	break yield;
+                    }else {
+                    	instructionPointer = 6;
+                    	break yield;
                     }
-                    instructionPointer = 5;
                 case 5:
-                	if (moveToTargetPosition((int) 105, 110, 1)) {
-                        break yield;
-                    }
-                    if ((int) (2 * Math.random()) == 0) {
-                        instructionPointer = 7;
-                        continue yield;
-                    }
-                    instructionPointer = 6;
+                	if((game.totalFood - game.currentFoodCount)>30) {
+                		instructionPointer = 7;
+                		break yield;
+                	}else {
+                		instructionPointer = 1;
+                		break yield;
+                	}
                 case 6:
-                	if (moveToTargetPosition((int) 109, 110, 1)) {
-                        break yield;
-                    }
-                    desiredDirection = 0;
-                    lastDirection = 0;
-                    updatePosition(18, 11);
-                    instructionPointer = 8;
-                    continue yield;
+                	if((game.totalFood - game.currentFoodCount)>(game.totalFood/3)) {
+                		instructionPointer = 7;
+                	} else {
+                		instructionPointer = 1;
+                		break yield;
+                	}
                 case 7:
                 	if (moveToTargetPosition((int) 101, 110, 1)) {
                         break yield;
                     }
-                    desiredDirection = 2;
-                    lastDirection = 2;
-                    updatePosition(17, 11);
+                	if(type == 0) {
+                		desiredDirection = 0;
+                        lastDirection = 0;
+                        updatePosition(18, 11);
+                	}else {
+                		desiredDirection = 2;
+                        lastDirection = 2;
+                        updatePosition(17, 11);
+                	}
+                    
                     instructionPointer = 8;
                 case 8:
-                	setMode(Mode.NORMAL);
+                	instructionPointer = 0;
+                	setMode(Mode.SCATTER);
+                	//setMode(Mode.NORMAL);
                     break yield;
             }
         }
     }
+    
+    /**
+     * The original version of ghost's CageMode : not accurate
+     */
+//    private void updateGhostCage2() {
+//        yield:
+//        while (true) {
+//            switch (instructionPointer) {
+//                case 0:
+//                	Point initialPosition = initialPositions[type];
+//                    updatePosition(initialPosition.x, initialPosition.y);
+//                    x -= 4;
+//                    cageUpDownCount = 0;
+//                    if (type == 0) {
+//                        instructionPointer = 6;
+//                        break;
+//                    }
+//                    else if (type == 2) {
+//                        instructionPointer = 2;
+//                        break;
+//                    }
+//                    instructionPointer = 1;
+//                case 1:
+//                	if (moveToTargetPosition((int) x, 134 + 4, 1)) {
+//                        break yield;
+//                    }
+//                    instructionPointer = 2;
+//                case 2:
+//                	if (moveToTargetPosition((int) x, 134 - 4, 1)) {
+//                        break yield;
+//                    }
+//                    cageUpDownCount++;
+//                    if (cageUpDownCount <= type * 2) {
+//                        instructionPointer = 1;
+//                        break yield;
+//                    }
+//                    instructionPointer = 3;
+//                case 3:
+//                	if (moveToTargetPosition((int) x, 134, 1)) {
+//                        break yield;
+//                    }
+//                    instructionPointer = 4;
+//                case 4:
+//                	if (moveToTargetPosition((int) 105, 134, 1)) {
+//                        break yield;
+//                    }
+//                    instructionPointer = 5;
+//                case 5:
+//                	if (moveToTargetPosition((int) 105, 110, 1)) {
+//                        break yield;
+//                    }
+//                    if ((int) (2 * Math.random()) == 0) {
+//                        instructionPointer = 7;
+//                        continue yield;
+//                    }
+//                    instructionPointer = 6;
+//                case 6:
+//                	if (moveToTargetPosition((int) 109, 110, 1)) {
+//                        break yield;
+//                    }
+//                    desiredDirection = 0;
+//                    lastDirection = 0;
+//                    updatePosition(18, 11);
+//                    instructionPointer = 8;
+//                    continue yield;
+//                case 7:
+//                	if (moveToTargetPosition((int) 101, 110, 1)) {
+//                        break yield;
+//                    }
+//                    desiredDirection = 2;
+//                    lastDirection = 2;
+//                    updatePosition(17, 11);
+//                    instructionPointer = 8;
+//                case 8:
+//                	//setMode(Mode.SCATTER);
+//                	setMode(Mode.NORMAL);
+//                    break yield;
+//            }
+//        }
+//    }
+    
+    /** 
+     * FIXME tentative de meilleur scatter mode
+     * @author Gregre is trying to code better ghost : Scatter mode
+     */
+    private void updateGhostScatter() {
+    	if (checkVulnerableModeTime() && markAsVulnerable) {
+            setMode(Mode.VULNERABLE);
+            markAsVulnerable = false;
+        }
+    	yield:
+            while (true) {
+                switch (instructionPointer) {
+                    case 0:
+                    	waitTime = System.currentTimeMillis();
+                    	System.out.println(System.currentTimeMillis()-waitTime);
+                    	instructionPointer = 1;
+                    	break yield;
+                    case 1:
+                    	Point scatterDestination = scatterDestinations[type];
+                    	updateGhostMovement(true, scatterDestination.x, scatterDestination.y, 1, pacmanCatchedAction, 0,1,2,3);
+                    	instructionPointer = 2;
+                    	break yield;
+                    case 2:
+                    	if(System.currentTimeMillis()-waitTime > 1000*60/game.FPS) { // A MODIF j'ai mis 2s pour les tests
+                    		// Scatter for 6 seconds
+                    		instructionPointer = 3;
+                    	}else {
+                           	instructionPointer = 1;
+                    	}
+                    	break yield;
+                    case 3:
+                    	System.out.println("Out!");
+                    	setMode(Mode.NORMAL);
+                    	break yield;
+                }
+            }
+    	
+    	
+    
+    }
+    
+    
     
     private PacmanCatchedAction pacmanCatchedAction = new PacmanCatchedAction();
     
@@ -375,12 +509,73 @@ public class Ghost extends PacmanActor {
 //            game.ghostCatched(Ghost.this);
 //        }
         
+        /**
+         * Old method
+         */
+        /*
         if (type == 0 || type == 1) {
             updateGhostMovement(true, pacman.col, pacman.row, 1, pacmanCatchedAction, 0, 1, 2, 3); // chase movement
         }
         else {
             updateGhostMovement(false, 0, 0, 1, pacmanCatchedAction, 0, 1, 2, 3); // random movement
         }
+         */
+        
+        yield:
+    		while(true) {
+    			switch(type) {
+    				case 0:	// Red ghost : Blinky
+    					updateGhostMovement(true, pacman.col, pacman.row, 1, pacmanCatchedAction, 0, 1, 2, 3);
+    					break yield;
+    				case 1:	// Pink ghost : Pinky
+    					int target_col;
+    					int target_row;
+    					switch(pacman.direction) {	// @TODO try to anticipate pacman direction but 4 tiles ahead (1 tile for now)
+    						case 0:
+    							target_col = pacman.col;
+    							target_row = pacman.row + 1;
+    							updateGhostMovement(true, target_col, target_row, 1, pacmanCatchedAction, 0, 1, 2, 3);
+    							break;
+							case 1:
+								target_col = pacman.col - 1;
+    							target_row = pacman.row;
+    							updateGhostMovement(true, target_col, target_row, 1, pacmanCatchedAction, 0, 1, 2, 3);
+    							break;
+							case 2:
+								target_col = pacman.col;
+    							target_row = pacman.row - 1;
+    							updateGhostMovement(true, target_col, target_row, 1, pacmanCatchedAction, 0, 1, 2, 3);
+    							break;
+							case 3:
+								target_col = pacman.col + 1;
+    							target_row = pacman.row;
+    							updateGhostMovement(true, target_col, target_row, 1, pacmanCatchedAction, 0, 1, 2, 3);
+    							break;
+    					}
+    					break yield;
+    				case 2:	// Cyan ghost : Inky
+    					
+    					//Old method :
+    					updateGhostMovement(false, 0, 0, 1, pacmanCatchedAction, 0, 1, 2, 3);
+    					
+    					// New method but not working :
+//    					waitTime = System.currentTimeMillis();
+//    					if(System.currentTimeMillis() - waitTime > 3000*60/game.FPS) {	// change d'objectif toutes les 3 secondes, en attendant de trouver comment g�n�rer le vrai algo 
+//    						int rand_col = 1 + (int) (Math.random() * 32);
+//    						int rand_row = 1 + (int) (Math.random() * 32);
+//    						updateGhostMovement(true, rand_col, rand_row, 1, pacmanCatchedAction, 0, 1, 2, 3);
+//    					}
+    					break yield;
+    				case 3:	// Orange ghost : Clyde
+    					if((Math.pow((pacman.col - col), 2) + Math.pow((pacman.row - row), 2))>64) {	// if pacman is far of more than 8 tiles
+    						updateGhostMovement(true, pacman.col, pacman.row, 1, pacmanCatchedAction, 0, 1, 2, 3);
+    					}else {
+    						setMode(Mode.SCATTER);
+    						//setMode(Mode.NORMAL);
+    					}
+    					break yield;
+    			}
+    		}
     }
     
     private GhostCatchedAction ghostCatchedAction = new GhostCatchedAction();
@@ -466,6 +661,8 @@ public class Ghost extends PacmanActor {
                     break yield;
             }
         }
+    
+    updatePlaying();
     }    
     
     /**

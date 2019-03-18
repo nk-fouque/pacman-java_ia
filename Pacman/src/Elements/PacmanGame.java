@@ -128,7 +128,6 @@ public class PacmanGame extends Game {
     public void init() {    //FIXME (Matt) : function slowing the game at start, long time for setup
         addAllObjs();   //FIXME (Matt) : we have to make a second version of these 2, to init a game with the current state of our game, to resume from "main" game position
         initAllObjs();
-        totalFood = currentFoodCount;
     }
     
     private void addAllObjs() {
@@ -162,6 +161,7 @@ public class PacmanGame extends Game {
         actors.add(new Ready(this));
         actors.add(new GameOver(this));
         actors.add(new HUD(this));
+        totalFood = foodCount;
     }
     
     private void initAllObjs() {

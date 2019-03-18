@@ -87,7 +87,7 @@ public class Ghosts extends PacmanActor {
      */
     private void setMode(Mode mode) {
         this.mode = mode;
-        modeChanged();
+        //modeChanged();
     }
     
     /**
@@ -272,7 +272,7 @@ public class Ghosts extends PacmanActor {
     		}
     	}
     	scatterCount++;
-    	this.mode = Mode.NORMAL;
+    setMode(Mode.NORMAL);
     }
     
     
@@ -284,19 +284,19 @@ public class Ghosts extends PacmanActor {
         while (true) {
             switch (type) {
                 case 0:
-                	this.mode = Mode.NORMAL;
+                	setMode(Mode.NORMAL);
 	                break yield;
                 case 1:
-                	this.mode = Mode.NORMAL;
+                	setMode(Mode.NORMAL);
                 	break yield;
                 case 2:		// Inky doesn't get out of the cage before 30 foods have been eaten
                 	if((game.totalFood - game.currentFoodCount)>30) {
-                		this.mode = Mode.NORMAL;
+                		setMode(Mode.NORMAL);
                 	}
                 	break yield;
                 case 3:		// Clyde doesn't get out of the cage before a third of the foods have been eaten
                 	if((game.totalFood - game.currentFoodCount)>(game.totalFood/3)) {
-                		this.mode = Mode.NORMAL;
+                		setMode(Mode.NORMAL);
                 	}
                 	break yield;
             }
@@ -329,6 +329,37 @@ public class Ghosts extends PacmanActor {
             setMode(Mode.VULNERABLE);
             markAsVulnerable = false;
         }
+    	
+    	// for debbuging purposes
+//      if (Keyboard.keyPressed[KeyEvent.VK_Q] && type == 0) {
+//          game.currentCatchedGhostScoreTableIndex = 0;
+//          game.ghostCatched(Ghost.this);
+//      }
+//      else if (Keyboard.keyPressed[KeyEvent.VK_W] && type == 1) {
+//          game.currentCatchedGhostScoreTableIndex = 0;
+//          game.ghostCatched(Ghost.this);
+//      }
+//      else if (Keyboard.keyPressed[KeyEvent.VK_E] && type == 2) {
+//          game.currentCatchedGhostScoreTableIndex = 0;
+//          game.ghostCatched(Ghost.this);
+//      }
+//      else if (Keyboard.keyPressed[KeyEvent.VK_R] && type == 3) {
+//          game.currentCatchedGhostScoreTableIndex = 0;
+//          game.ghostCatched(Ghost.this);
+//      }
+      
+    	/**
+    	 * Old method
+    	 */
+    /*
+      if (type == 0 || type == 1) {
+          updateGhostMovement(true, pacman.col, pacman.row, 1, pacmanCatchedAction, 0, 1, 2, 3); // chase movement
+      }
+      else {
+          updateGhostMovement(false, 0, 0, 1, pacmanCatchedAction, 0, 1, 2, 3); // random movement
+      }
+     */
+    	
     	yield:
     		while(true) {
     			switch(type) {
@@ -373,7 +404,7 @@ public class Ghosts extends PacmanActor {
     					if((Math.pow((pacman.col - col), 2) + Math.pow((pacman.row - row), 2))>64) {	// if pacman is far of more than 8 tiles
     						updateGhostMovement(true, pacman.col, pacman.row, 1, pacmanCatchedAction, 0, 1, 2, 3);
     					}else {
-    						this.mode = Mode.SCATTER;
+    						setMode(Mode.SCATTER);
     					}
     					break yield;
     			}
@@ -383,9 +414,9 @@ public class Ghosts extends PacmanActor {
     /**
      * FIXME uncomment to make it work
      * @author Gregre
-     *
+     */
     private GhostCatchedAction ghostCatchedAction = new GhostCatchedAction();
-    */
+    
     
     /**
      * The ghosts dies
@@ -395,14 +426,14 @@ public class Ghosts extends PacmanActor {
     /**
      * FIXME uncomment to make it work
      * @author Gregre
-     *
+     */
     private class GhostCatchedAction implements Runnable {
         @Override
         public void run() {
-            game.ghostCatched(Ghosts.this);
+            //game.ghostCatched(Ghosts.this);
         }
     }
-         */
+         
     
     /**
      * Vulnerable mode of the ghosts : unmarked them to avoid keeping them in the state then run away movement. Stop the vulnerable state after 8s
@@ -415,9 +446,9 @@ public class Ghosts extends PacmanActor {
         /**
          * FIXME uncomment to make it work
          * @author Gregre
-         *
+         */
         updateGhostMovement(true, pacman.col, pacman.row, 1, ghostCatchedAction, 2, 3, 0, 1); // run away movement
-        */
+        
         
         // return to normal mode after 8 seconds
         if (!checkVulnerableModeTime()) {
@@ -646,8 +677,9 @@ public class Ghosts extends PacmanActor {
         collider.setLocation((int) (x + 4), (int) (y + 4));
     }
     
+    
     private void modeChanged() {
-        instructionPointer = 0;
+    	updatePlaying();
     }
     
     // broadcast messages

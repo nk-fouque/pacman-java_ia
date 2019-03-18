@@ -4,6 +4,9 @@ import IA.IA;
 import Elements.PacmanActor;
 import Elements.PacmanGame;
 import Elements.PacmanGame.State;
+import Elements.infra.Keyboard;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import java.awt.Rectangle;
 
@@ -137,20 +140,20 @@ public class Pacman extends PacmanActor {
         }
         
         /* Comments by Nicolas */
-//        /*if (Keyboard.keyPressed[KeyEvent.VK_LEFT]) {
-//            desiredDirection = 2;
-//        }
-//        else if (Keyboard.keyPressed[KeyEvent.VK_RIGHT]) {
-//            desiredDirection = 0;
-//        }
-//        else if (Keyboard.keyPressed[KeyEvent.VK_UP]) {
-//            desiredDirection = 3;
-//        }
-//        else if (Keyboard.keyPressed[KeyEvent.VK_DOWN]) {
-//            desiredDirection = 1;
-//        }*
+		 if (Keyboard.keyPressed[KeyEvent.VK_LEFT]) {
+		 desiredDirection = 2;
+		 }
+		 else if (Keyboard.keyPressed[KeyEvent.VK_RIGHT]) {
+		 desiredDirection = 0;
+		 }
+		 else if (Keyboard.keyPressed[KeyEvent.VK_UP]) {
+		 desiredDirection = 3;
+		 }
+		 else if (Keyboard.keyPressed[KeyEvent.VK_DOWN]) {
+		 desiredDirection = 1;
+		 }
 
-        desiredDirection = ia.randDirection(desiredDirection,game);
+       // desiredDirection = ia.randDirection(desiredDirection,game);
         
         /* Manage the movement of pacman */
         yield:
