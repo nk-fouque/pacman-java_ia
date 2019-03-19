@@ -292,6 +292,7 @@ public class Ghost extends PacmanActor {
                     instructionPointer = 1;
                 /* Pseudo-random movements */
                 case 1:
+                	updateAnimation();
                 	if (moveToTargetPosition((int) x, 134 + 4, 1)) {
                         break yield;
                     }
@@ -443,7 +444,6 @@ public class Ghost extends PacmanActor {
             setMode(Mode.VULNERABLE);
             markAsVulnerable = false;
         }
-    	updateAnimation();
     	
     	yield:
             while (true) {
@@ -504,7 +504,6 @@ public class Ghost extends PacmanActor {
             setMode(Mode.VULNERABLE);
             markAsVulnerable = false;
         }
-    	updateAnimation();
         
         // for debbuging purposes
 //        if (Keyboard.keyPressed[KeyEvent.VK_Q] && type == 0) {
