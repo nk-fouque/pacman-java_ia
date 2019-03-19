@@ -26,7 +26,7 @@ public class GameState {
     /**
      * Activates the debug prints
      */
-    private boolean verbose = true;
+    private boolean verbose = false;
 
     /**
      * Debug feature,
@@ -81,9 +81,9 @@ public class GameState {
      * @param game
      * @param dir  : the direction we will have gone to get there, only for "future gamestates"
      */
-    public GameState(PacmanGame game, int lastInput, int dir) {
+    public GameState(PacmanGame game, int lastInput, int dir,int newScore) {
         this.game = game;
-        this.newScore = game.getScoreInt();
+        this.newScore = newScore;
         this.dir = dir;
         this.lastInput=dir;
         for (Actor a : game.actors) {
@@ -246,36 +246,36 @@ public class GameState {
         GameState[] res = new GameState[4];
         if (!wallRight()) {
             if (lastInput!=2 || uTurnAllowed) {
-                res[0] = new GameState(game,lastInput, 0);
+                res[0] = new GameState(game,lastInput, 0,newScore);
             } else {
-                System.out.println("Right is U turn");
+                if(verbose) System.out.println("Right is U turn");
             }
         } else {
             if (verbose) System.out.println("Wall on right");
         }
         if (!wallDown()) {
             if (lastInput!=3 || uTurnAllowed) {
-                res[1] = new GameState(game,lastInput, 1);
+                res[1] = new GameState(game,lastInput, 1,newScore);
             } else {
-                System.out.println("Down is U turn");
+                if(verbose) System.out.println("Down is U turn");
             }
         } else {
             if (verbose) System.out.println("Wall on down");
         }
         if (!wallLeft()) {
             if (lastInput!=0 || uTurnAllowed) {
-                res[2] = new GameState(game,lastInput, 2);
+                res[2] = new GameState(game,lastInput, 2,newScore);
             } else {
-                System.out.println("Left is U turn");
+                if(verbose) System.out.println("Left is U turn");
             }
         } else {
             if (verbose) System.out.println("Wall on left");
         }
         if (!wallUp()) {
             if (lastInput!=1 || uTurnAllowed) {
-                res[3] = new GameState(game,lastInput, 3);
+                res[3] = new GameState(game,lastInput, 3,newScore);
             } else {
-                System.out.println("Up is U turn");
+                if(verbose) System.out.println("Up is U turn");
             }
         } else {
             if (verbose) System.out.println("Wall on up");
