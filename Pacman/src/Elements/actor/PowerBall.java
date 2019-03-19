@@ -30,6 +30,14 @@ public class PowerBall extends PacmanActor {
         this.row = row;
     }
 
+    public int getRow() {
+        return row;
+    }
+
+    public int getCol() {
+        return col;
+    }
+
     /**
      * Initializes one powerball (position on the board, collider), but doesn't display it
      * At the initialization the powerball is considered as eaten, the boolean eaten being set to false when the game is in the state READY (at the very beginning of the game)

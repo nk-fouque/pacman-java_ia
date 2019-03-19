@@ -1,5 +1,7 @@
 package IA;
 
+import main.Main;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -10,7 +12,7 @@ public class PathfindNode {
     public List<Integer> bestDirection;
     private GameState[] states;
     private int[] scoreByDir;
-    public boolean verbose = false;
+    public boolean verbose = Main.verbose;
 
     public PathfindNode(GameState state){
         bestDirection = new ArrayList<>();
