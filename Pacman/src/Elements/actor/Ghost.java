@@ -465,8 +465,8 @@ public class Ghost extends PacmanActor {
                     	}
                     	break yield;
                     case 3:
-                    	setMode(Mode.NORMAL);
                     	scatterCount ++;
+                    	setMode(Mode.NORMAL);
                     	instructionPointer2 = 0;
                     	break yield;
                 }
@@ -583,8 +583,8 @@ public class Ghost extends PacmanActor {
     					if((Math.pow((pacman.col - col), 2) + Math.pow((pacman.row - row), 2))>64) {	// if pacman is far of more than 8 tiles 
     						updateGhostMovement(true, pacman.col, pacman.row, 1, pacmanCatchedAction, 0, 1, 2, 3);
     					}else {
-    						setMode(Mode.SCATTER);
-    						//setMode(Mode.NORMAL);
+    						Point scatterDestination = scatterDestinations[type];
+                        	updateGhostMovement(true, scatterDestination.x, scatterDestination.y, 1, pacmanCatchedAction, 0,1,2,3);
     					}
     					break yield;
     			}
