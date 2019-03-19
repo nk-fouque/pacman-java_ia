@@ -30,6 +30,7 @@ public class Ghost extends PacmanActor {
      * Trying to code better ghosts
      * @author Gregre
      */
+    private int scatterCount;
     public Point[] scatterDestinations = { 
             new Point(4, 28), new Point(4, 2), 
             new Point(31, 2), new Point(31, 28)};
@@ -78,6 +79,7 @@ public class Ghost extends PacmanActor {
         this.pacman = pacman;
         this.type = type;
         this.pathFinder = new ShortestPathFinder(game.maze);
+        this.scatterCount=0;
     }
 
     public int getCol() {
@@ -343,8 +345,8 @@ public class Ghost extends PacmanActor {
                     instructionPointer = 8;
                 case 8:
                 	instructionPointer = 0;
-                	setMode(Mode.SCATTER);
-                	//setMode(Mode.NORMAL);
+                	//setMode(Mode.SCATTER);
+                	setMode(Mode.NORMAL);
                     break yield;
             }
         }
@@ -444,16 +446,16 @@ public class Ghost extends PacmanActor {
                 switch (instructionPointer) {
                     case 0:
                     	waitTime = System.currentTimeMillis();
-                    	System.out.println(System.currentTimeMillis()-waitTime);
                     	instructionPointer = 1;
                     	break yield;
                     case 1:
                     	Point scatterDestination = scatterDestinations[type];
-                    	updateGhostMovement(true, scatterDestination.x, scatterDestination.y, 1, pacmanCatchedAction, 0,1,2,3);
+                    	//updateGhostMovement(true, scatterDestination.x, scatterDestination.y, 1, pacmanCatchedAction, 0,1,2,3);
+                    	updateGhostMovement(true, 5, 3, 1, pacmanCatchedAction, 2,3,0,1);
                     	instructionPointer = 2;
                     	break yield;
                     case 2:
-                    	if(System.currentTimeMillis()-waitTime > 1000*60/game.FPS) { // A MODIF j'ai mis 2s pour les tests
+                    	if(System.currentTimeMillis()-waitTime > 6000*60/game.FPS) { // A MODIF j'ai mis 2s pour les tests
                     		// Scatter for 6 seconds
                     		instructionPointer = 3;
                     	}else {
@@ -461,8 +463,9 @@ public class Ghost extends PacmanActor {
                     	}
                     	break yield;
                     case 3:
-                    	System.out.println("Out!");
                     	setMode(Mode.NORMAL);
+                    	scatterCount ++;
+                    	instructionPointer = 0;
                     	break yield;
                 }
             }
@@ -575,12 +578,12 @@ public class Ghost extends PacmanActor {
 //    					}
     					break yield;
     				case 3:	// Orange ghost : Clyde
-    					if((Math.pow((pacman.col - col), 2) + Math.pow((pacman.row - row), 2))>64) {	// if pacman is far of more than 8 tiles
+    					/*if((Math.pow((pacman.col - col), 2) + Math.pow((pacman.row - row), 2))>64) {	// if pacman is far of more than 8 tiles */
     						updateGhostMovement(true, pacman.col, pacman.row, 1, pacmanCatchedAction, 0, 1, 2, 3);
-    					}else {
-    						setMode(Mode.SCATTER);
+    					//}else {
+    						//setMode(Mode.SCATTER);
     						//setMode(Mode.NORMAL);
-    					}
+    					//}
     					break yield;
     			}
     		}
