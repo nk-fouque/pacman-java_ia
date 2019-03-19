@@ -443,6 +443,7 @@ public class Ghost extends PacmanActor {
             setMode(Mode.VULNERABLE);
             markAsVulnerable = false;
         }
+    	updateAnimation();
     	
     	yield:
             while (true) {
@@ -503,6 +504,7 @@ public class Ghost extends PacmanActor {
             setMode(Mode.VULNERABLE);
             markAsVulnerable = false;
         }
+    	updateAnimation();
         
         // for debbuging purposes
 //        if (Keyboard.keyPressed[KeyEvent.VK_Q] && type == 0) {
