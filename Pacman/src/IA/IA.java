@@ -11,6 +11,7 @@ public class IA {
 
     private final int[] uTurn = new int[]{2, 3, 0, 1};
     private int lastInput;
+    private boolean verbose = false;
 
     public IA(){
         lastInput=3;
@@ -32,8 +33,8 @@ public class IA {
     public int askDirectionEatmaxTreeSearch(PacmanGame game){
         int res = 0;
         GameState state = new GameState(game,lastInput);
-        res = state.searchBestGamestate(4);
-        System.out.println("\n");
+        res = state.searchBestGamestate(6);
+        if(verbose) System.out.println("\n");
         lastInput=res; //Records the input before sending it
         return res;
     }

@@ -10,7 +10,7 @@ public class PathfindNode {
     public List<Integer> bestDirection;
     private GameState[] states;
     private int[] scoreByDir;
-    public boolean verbose = true;
+    public boolean verbose = false;
 
     public PathfindNode(GameState state){
         bestDirection = new ArrayList<>();
