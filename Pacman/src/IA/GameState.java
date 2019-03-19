@@ -5,6 +5,7 @@ import Elements.actor.*;
 import Elements.infra.*;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -16,8 +17,8 @@ public class GameState {
      */
     public PacmanGame game;
     public ArrayList<Ghost> ghosts = new ArrayList<>();
-    public ArrayList<Food> food= new ArrayList<>();
-    public ArrayList<PowerBall> powerBalls= new ArrayList<>();
+    public ArrayList<Food> food = new ArrayList<>();
+    public ArrayList<PowerBall> powerBalls = new ArrayList<>();
 
     public int pacmanRow;
     public int pacmanCol;
@@ -26,6 +27,12 @@ public class GameState {
      * Activates the debug prints
      */
     private boolean verbose = true;
+
+    /**
+     * Debug feature,
+     * TODO ultimately should be able to run with true but doesn't work for now
+     */
+    private boolean uTurnAllowed = false;
 
     /**
      * Stores the score once calculated
@@ -38,25 +45,30 @@ public class GameState {
      */
     public int dir;
 
+
+    public int lastInput;
+
     /**
      * Base constructor
+     *
      * @param game
      */
-    public GameState(PacmanGame game){
+    public GameState(PacmanGame game,int lastInput) {
         this.game = game;
-        this.newScore=game.getScoreInt();
+        this.newScore = game.getScoreInt();
         this.dir = -1;
-        for(Actor a : game.actors){
-            if (a instanceof Ghost){
-                ghosts.add((Ghost)a);
+        this.lastInput = lastInput;
+        for (Actor a : game.actors) {
+            if (a instanceof Ghost) {
+                ghosts.add((Ghost) a);
             }
-            if(a instanceof Food){
-                food.add((Food)a);
+            if (a instanceof Food) {
+                food.add((Food) a);
             }
-            if(a instanceof PowerBall ){
-                powerBalls.add((PowerBall)a);
+            if (a instanceof PowerBall) {
+                powerBalls.add((PowerBall) a);
             }
-            if(a instanceof Pacman ){
+            if (a instanceof Pacman) {
                 this.pacmanCol = ((Pacman) a).getCol();
                 this.pacmanRow = ((Pacman) a).getRow();
             }
@@ -65,42 +77,45 @@ public class GameState {
 
     /**
      * Constructor for "future gamestates"
+     *
      * @param game
-     * @param dir : the direction we will have input to get there
+     * @param dir  : the direction we will have gone to get there, only for "future gamestates"
      */
-    public GameState(PacmanGame game,int dir){
+    public GameState(PacmanGame game, int lastInput, int dir) {
         this.game = game;
-        this.newScore=game.getScoreInt();
-        this.dir= dir;
-        for(Actor a : game.actors){
-            if (a instanceof Ghost){
-                ghosts.add((Ghost)a);
+        this.newScore = game.getScoreInt();
+        this.dir = dir;
+        this.lastInput=dir;
+        for (Actor a : game.actors) {
+            if (a instanceof Ghost) {
+                ghosts.add((Ghost) a);
             }
-            if(a instanceof Food){
-                food.add((Food)a);
+            if (a instanceof Food) {
+                food.add((Food) a);
             }
-            if(a instanceof PowerBall ){
-                powerBalls.add((PowerBall)a);
+            if (a instanceof PowerBall) {
+                powerBalls.add((PowerBall) a);
             }
-            if(a instanceof Pacman ){
-                this.pacmanRow = ((Pacman) a).getRow()+dRow();
-                this.pacmanCol = ((Pacman) a).getCol()+dCol();
+            if (a instanceof Pacman) {
+                this.pacmanRow = ((Pacman) a).getRow() + dRow();
+                this.pacmanCol = ((Pacman) a).getCol() + dCol();
             }
         }
     }
 
     /**
      * converts a direction into a vertical deplacement
+     *
      * @return 1 = down, -1 = down
      */
-    public int dRow(){
+    public int dRow() {
         int res = 0;
-        switch(dir){
-            case 1 : {
+        switch (dir) {
+            case 1: {
                 res++;
                 break;
             }
-            case 3 : {
+            case 3: {
                 res--;
                 break;
             }
@@ -110,16 +125,17 @@ public class GameState {
 
     /**
      * converts a direction into a horizontal deplacement
+     *
      * @return 1 = right, -1 = left
      */
-    public int dCol(){
+    public int dCol() {
         int res = 0;
-        switch(dir){
-            case 0 : {
+        switch (dir) {
+            case 0: {
                 res++;
                 break;
             }
-            case 2 : {
+            case 2: {
                 res--;
                 break;
             }
@@ -129,15 +145,16 @@ public class GameState {
 
     /**
      * Currently factors eating food, capturing a ghost and dying
+     *
      * @return the new score if we obtain this gamestate
      */
-    public int newScore(){
-        newScore+=pacmanEat();
+    public int newScore() {
+        newScore += pacmanEat();
         int getghost = pacmanGetGhost();
-        if (getghost == -1){
+        if (getghost == -1) {
             newScore = 0;
         } else {
-            newScore += (game.catchedGhostScoreTable[game.currentCatchedGhostScoreTableIndex]*getghost);
+            newScore += (game.catchedGhostScoreTable[game.currentCatchedGhostScoreTableIndex] * getghost);
         }
 
         return newScore;
@@ -145,21 +162,36 @@ public class GameState {
 
     /**
      * Checks if pacman will be able to eat there and updates the score
+     *
      * @return
      */
-    public int pacmanEat(){
+    public int pacmanEat() {
         int res = 0;
-        if (pacmanGetFood()){
+        if (pacmanGetFood()) {
+            res += 10;
+        }
+        if(pacmanOnFood()){
             res += 10;
         }
         return res;
     }
 
-    public boolean pacmanGetFood(){
+    public boolean pacmanGetFood() {
         boolean res = false;
-        for(Food f : food){
-            if (f.getCol()==pacmanCol+dCol() && f.getRow() == pacmanRow+dRow() && f.visible==true){
-                res= true;
+        for (Food f : food) {
+            if (f.getCol() == pacmanCol + dCol() && f.getRow() == pacmanRow + dRow() && f.visible == true) {
+                res = true;
+                break;
+            }
+        }
+        return res;
+    }
+
+    public boolean pacmanOnFood() {
+        boolean res = false;
+        for (Food f : food) {
+            if (f.getCol() == pacmanCol && f.getRow() == pacmanRow && f.visible == true) {
+                res = true;
                 break;
             }
         }
@@ -167,14 +199,13 @@ public class GameState {
     }
 
     /**
-     *
      * @return 0 if no ghost, 1 if vulnerable ghost, -1 if normal ghost
      */
-    public int pacmanGetGhost(){
+    public int pacmanGetGhost() {
         int res = 0;
-        for(Ghost g : ghosts){
-            if (g.getCol()==pacmanCol+dCol() && g.getRow() == pacmanRow+dRow() && g.visible==true){
-                if (g.markAsVulnerable){
+        for (Ghost g : ghosts) {
+            if (g.getCol() == pacmanCol + dCol() && g.getRow() == pacmanRow + dRow() && g.visible == true) {
+                if (g.markAsVulnerable) {
                     res = 1;
                 } else {
                     res = -1;
@@ -187,47 +218,65 @@ public class GameState {
 
     /**
      * Check if pacman has walls around him
+     *
      * @return
      */
-    public boolean wallRight(){
-        return this.game.maze[pacmanRow][pacmanCol+1]==-1;
+    public boolean wallRight() {
+        return this.game.maze[pacmanRow][pacmanCol + 1] == -1;
     }
 
-    public boolean wallLeft(){
-        return this.game.maze[pacmanRow][pacmanCol-1]==-1;
+    public boolean wallLeft() {
+        return this.game.maze[pacmanRow][pacmanCol - 1] == -1;
     }
 
-    public boolean wallDown(){
-        return this.game.maze[pacmanRow+1][pacmanCol]==-1;
+    public boolean wallDown() {
+        return this.game.maze[pacmanRow + 1][pacmanCol] == -1;
     }
 
-    public boolean wallUp(){
-        return this.game.maze[pacmanRow-1][pacmanCol]==-1;
+    public boolean wallUp() {
+        return this.game.maze[pacmanRow - 1][pacmanCol] == -1;
     }
 
     /**
      * Tries every different positions
+     *
      * @return all possible GameStates
      */
-    public GameState[] possibleFollowingStates(){
-       GameState[] res = new GameState[4];
-        if(!wallRight()) {
-            res[0]=new GameState(game,0);
+    public GameState[] possibleFollowingStates() {
+        GameState[] res = new GameState[4];
+        if (!wallRight()) {
+            if (lastInput!=2 || uTurnAllowed) {
+                res[0] = new GameState(game,lastInput, 0);
+            } else {
+                System.out.println("Right is U turn");
+            }
         } else {
-            if(verbose) System.out.println("Wall on right");
+            if (verbose) System.out.println("Wall on right");
         }
         if (!wallDown()) {
-            res[1] = new GameState(game,1);
+            if (lastInput!=3 || uTurnAllowed) {
+                res[1] = new GameState(game,lastInput, 1);
+            } else {
+                System.out.println("Down is U turn");
+            }
         } else {
             if (verbose) System.out.println("Wall on down");
         }
         if (!wallLeft()) {
-            res[2] = new GameState(game,2);
+            if (lastInput!=0 || uTurnAllowed) {
+                res[2] = new GameState(game,lastInput, 2);
+            } else {
+                System.out.println("Left is U turn");
+            }
         } else {
             if (verbose) System.out.println("Wall on left");
         }
         if (!wallUp()) {
-            res[3] = new GameState(game,3);
+            if (lastInput!=1 || uTurnAllowed) {
+                res[3] = new GameState(game,lastInput, 3);
+            } else {
+                System.out.println("Up is U turn");
+            }
         } else {
             if (verbose) System.out.println("Wall on up");
         }
@@ -237,15 +286,15 @@ public class GameState {
 
     /**
      * Activate tree search
+     *
      * @param depth
      * @return
      */
-    public int searchBestGamestate(int depth){
+    public int searchBestGamestate(int depth) {
         PathfindNode tree = new PathfindNode(this);
         tree.node(depth);
-        return tree.bestDirection;
+        return tree.choose();
     }
-
 
 
 }

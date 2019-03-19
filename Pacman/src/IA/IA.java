@@ -32,7 +32,7 @@ public class IA {
     public int askDirectionEatmaxTreeSearch(PacmanGame game){
         int res = 0;
         GameState state = new GameState(game,lastInput);
-        res = state.searchBestGamestate(0);
+        res = state.searchBestGamestate(4);
         System.out.println("\n");
         lastInput=res; //Records the input before sending it
         return res;
