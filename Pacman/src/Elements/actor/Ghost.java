@@ -46,7 +46,11 @@ public class Ghost extends PacmanActor {
      * Actual state of the ghost
      */
     public Mode mode = Mode.CAGE;
-    
+
+    public Mode getMode() {
+        return mode;
+    }
+
     /**
      * Position of the ghost
      */

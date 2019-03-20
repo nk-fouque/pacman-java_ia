@@ -25,30 +25,20 @@ public class GameState {
 
     public int pacmanRow;
     public int pacmanCol;
-    private boolean willBeSuper;
+    public boolean willBeSuper;
     
-    /**
-     * Bonus attribut to define the ghosts
-     * ghostPosition[0] is the position of the red ghost (type = 0)
-     * ghostModes[0] is the mode of the red ghost (type = 0)
-     */
-    public Point[] ghostPositions = { 
-            new Point(18, 11), new Point(16, 14), 
-            new Point(18, 14), new Point(20, 14)};
-    public Ghost.Mode[] ghostModes = {
-    		Ghost.Mode.CAGE,Ghost.Mode.CAGE,
-    		Ghost.Mode.CAGE,Ghost.Mode.CAGE};
+
 
     /**
      * Activates the debug prints
      */
-    private boolean verbose = Main.verbose;
+    protected boolean verbose = Main.verbose;
 
     /**
      * Debug feature,
-     * TODO ultimately should be able to run with true but doesn't work for now
+     * TODO ultimately should be able to run with true but this tends to make him hesitate too much in empty spaces
      */
-    private boolean uTurnAllowed = true;
+    protected boolean uTurnAllowed = false;
 
     /**
      * Stores the score once calculated
@@ -113,11 +103,9 @@ public class GameState {
             if (a instanceof PowerBall) {
                 powerBalls.add((PowerBall) a);
             }
-
-
         }
-        this.pacmanRow = row+dRow();
-        this.pacmanCol = col+dCol();
+        this.pacmanRow = row+dRow(dir);
+        this.pacmanCol = col+dCol(dir);
         this.willBeSuper=willBeSuper;
     }
 
@@ -126,9 +114,9 @@ public class GameState {
      *
      * @return 1 = down, -1 = down
      */
-    public int dRow() {
+    public int dRow(int direction) {
         int res = 0;
-        switch (dir) {
+        switch (direction) {
             case 1: {
                 res++;
                 break;
@@ -146,9 +134,9 @@ public class GameState {
      *
      * @return 1 = right, -1 = left
      */
-    public int dCol() {
+    public int dCol(int direction) {
         int res = 0;
-        switch (dir) {
+        switch (direction) {
             case 0: {
                 res++;
                 break;
@@ -167,12 +155,12 @@ public class GameState {
         } else if (pacmanCol > 32) {
             return 3;
         } else {
-            return pacmanCol + dCol();
+            return pacmanCol + dCol(dir);
         }
     }
 
     public int newRow(){
-        return pacmanRow + dRow();
+        return pacmanRow + dRow(dir);
     }
 
     /**
@@ -335,10 +323,9 @@ public class GameState {
      * @return
      */
     public int searchBestGamestate(int depth) {
-        PathfindTree tree = new PathfindTree(this);
+        PathfindTree tree = new PathfindTree(this,false);
         tree.node(depth);
         return tree.choose();
     }
-
 
 }

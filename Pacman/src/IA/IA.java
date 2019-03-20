@@ -39,7 +39,15 @@ public class IA {
      */
     public int askDirectionEatmaxTreeSearch(PacmanGame game){
         GameState state = new GameState(game,lastInput);
-        int res = state.searchBestGamestate(8); // TODO Apparently the maximum depends on the GPU and not the CPU, max 8 on NVIDIA GTX 1060
+        int res = state.searchBestGamestate(7); // TODO Apparently the maximum depends on the GPU and not the CPU, max 8 on NVIDIA GTX 1060
+        if(verbose) System.out.println("\n");
+        lastInput=res; //Records the input before sending it
+        return res;
+    }
+
+    public int askDirectionMinMaxTreeSearch(PacmanGame game){
+        GameStatePlus state = new GameStatePlus(game,lastInput);
+        int res = state.searchBestGamestate(7);
         if(verbose) System.out.println("\n");
         lastInput=res; //Records the input before sending it
         return res;
