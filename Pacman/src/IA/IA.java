@@ -19,6 +19,7 @@ public class IA {
     }
 
     /**
+     * Return a random direction for Pacman
      * @return 0 = RIGHT, 1 = DOWN, 2 = LEFT, 3 = UP
      */
     public int randDirection(int actualDirectionPacman, Game game){
@@ -31,6 +32,11 @@ public class IA {
         return res;
     }
 
+    /**
+     * Use a treesearch {@link PathfindNode.java} to find the best gamestate
+     * @param game the current game
+     * @return the new direction of Pacman
+     */
     public int askDirectionEatmaxTreeSearch(PacmanGame game){
         GameState state = new GameState(game,lastInput);
         int res = state.searchBestGamestate(8); // TODO Apparently
@@ -38,6 +44,13 @@ public class IA {
         lastInput=res; //Records the input before sending it
         return res;
     }
-
+    
+    
+    
+    
+    
+    
+    
+    
 
 }
