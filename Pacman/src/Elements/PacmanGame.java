@@ -72,7 +72,8 @@ public class PacmanGame extends Game {
         , PLAYING, PACMAN_DIED, GHOST_CATCHED, LEVEL_CLEARED, GAME_OVER }
     
     public State state = State.INITIALIZING;
-    public int lives = 3;
+    public static int LIVES = 3; //TODO Modify to change the base number of lives
+    public int lives = LIVES;
     private int score;
     private int hiscore;
     
@@ -86,13 +87,13 @@ public class PacmanGame extends Game {
 
 
     
-    public PacmanGame() {
+    public PacmanGame(boolean verbose) {
         screenSize = new Dimension(224, 288);
         screenScale = new Point2D.Double(2, 2);
         FPS = 60; // Used only by the base game
     }
 
-    public PacmanGame(long fps) {
+    public PacmanGame(boolean verbose, long fps) {
         screenSize = new Dimension(224, 288);
         screenScale = new Point2D.Double(2, 2);
         FPS = fps;
@@ -225,13 +226,13 @@ public class PacmanGame extends Game {
     }
 
     public void returnToTitle() {
-        lives = 3;
+        lives = LIVES;
         score = 0;
         setState(State.TITLE);
     }
 
     public void returnToReady() {
-        lives = 3;
+        lives = LIVES;
         score = 0;
         setState(State.READY);
     }

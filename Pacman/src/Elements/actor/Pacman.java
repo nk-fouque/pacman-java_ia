@@ -152,32 +152,25 @@ public class Pacman extends PacmanActor {
     
     @Override
     public void updatePlaying() {;
-//        System.out.println("row : "+row+" col : "+col+" maze : "+game.maze[row][col-1]);
+//        System.out.println("row : "+row+" col : "+col+" maze : "+game.maze[row][col]);
         if (!visible) {
             return;
         }
-        
-        /* Comments by Nicolas */
-//		 if (Keyboard.keyPressed[KeyEvent.VK_LEFT]) {
-//		 desiredDirection = 2;
-//		 }
-//		 else if (Keyboard.keyPressed[KeyEvent.VK_RIGHT]) {
-//		 desiredDirection = 0;
-//		 }
-//		 else if (Keyboard.keyPressed[KeyEvent.VK_UP]) {
-//		 desiredDirection = 3;
-//		 }
-//		 else if (Keyboard.keyPressed[KeyEvent.VK_DOWN]) {
-//		 desiredDirection = 1;
-//		 }
-
-       // desiredDirection = ia.randDirection(desiredDirection,game);
 
         //Change this string depending on what you want to do
         //manual is self explanatory, maddog is random and eatmax is bugged
         String movementMode = "eatmax";
 
         switch (movementMode) {
+
+            case "maddog": {
+                desiredDirection = ia.randDirection(desiredDirection, game);
+                break;
+            }
+            case "eatmax": {
+                desiredDirection = ia.askDirectionEatmaxTreeSearch(game);
+                break;
+            }
             case "manual": {
                 if (Keyboard.keyPressed[KeyEvent.VK_LEFT]) {
                     desiredDirection = 2;
@@ -188,12 +181,7 @@ public class Pacman extends PacmanActor {
                 } else if (Keyboard.keyPressed[KeyEvent.VK_DOWN]) {
                     desiredDirection = 1;
                 }
-            }
-            case "maddog": {
-                desiredDirection = ia.randDirection(desiredDirection, game);
-            }
-            case "eatmax": {
-                desiredDirection = ia.askDirectionEatmaxTreeSearch(game);
+                break;
             }
         }
         

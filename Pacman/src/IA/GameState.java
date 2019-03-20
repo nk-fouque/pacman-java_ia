@@ -3,6 +3,7 @@ package IA;
 import Elements.*;
 import Elements.actor.*;
 import Elements.infra.*;
+import main.Main;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,11 +23,12 @@ public class GameState {
 
     public int pacmanRow;
     public int pacmanCol;
+    private boolean willBeSuper;
 
     /**
      * Activates the debug prints
      */
-    private boolean verbose = false;
+    private boolean verbose = Main.verbose;
 
     /**
      * Debug feature,
@@ -73,6 +75,7 @@ public class GameState {
                 this.pacmanRow = ((Pacman) a).getRow();
             }
         }
+        this.willBeSuper=false;
     }
 
     /**
@@ -81,7 +84,7 @@ public class GameState {
      * @param game
      * @param dir  : the direction we will have gone to get there, only for "future gamestates"
      */
-    public GameState(PacmanGame game, int lastInput, int dir,int newScore) {
+    public GameState(PacmanGame game, int lastInput, int dir,int newScore,boolean willBeSuper) {
         this.game = game;
         this.newScore = newScore;
         this.dir = dir;
@@ -101,6 +104,7 @@ public class GameState {
                 this.pacmanCol = ((Pacman) a).getCol() + dCol();
             }
         }
+        this.willBeSuper=willBeSuper;
     }
 
     /**
@@ -143,6 +147,20 @@ public class GameState {
         return res;
     }
 
+    public int newCol(){
+        if(pacmanCol < 2){
+            return 33;
+        } else if (pacmanCol > 32) {
+            return 3;
+        } else {
+            return pacmanCol + dCol();
+        }
+    }
+
+    public int newRow(){
+        return pacmanRow + dRow();
+    }
+
     /**
      * Currently factors eating food, capturing a ghost and dying
      *
@@ -150,6 +168,7 @@ public class GameState {
      */
     public int newScore() {
         newScore += pacmanEat();
+        becomeSuper();
         int getghost = pacmanGetGhost();
         if (getghost == -1) {
             newScore = 0;
@@ -179,7 +198,7 @@ public class GameState {
     public boolean pacmanGetFood() {
         boolean res = false;
         for (Food f : food) {
-            if (f.getCol() == pacmanCol + dCol() && f.getRow() == pacmanRow + dRow() && f.visible == true) {
+            if (f.getCol() == newCol() && f.getRow() == newRow() && f.visible == true) {
                 res = true;
                 break;
             }
@@ -199,13 +218,25 @@ public class GameState {
     }
 
     /**
+     *
+     */
+    public void becomeSuper(){
+        for (PowerBall p : powerBalls) {
+            if (p.getCol() == newCol() && p.getRow() == newRow() && p.visible == true) {
+                willBeSuper = true;
+                break;
+            }
+        }
+    }
+
+    /**
      * @return 0 if no ghost, 1 if vulnerable ghost, -1 if normal ghost
      */
     public int pacmanGetGhost() {
         int res = 0;
         for (Ghost g : ghosts) {
-            if (g.getCol() == pacmanCol + dCol() && g.getRow() == pacmanRow + dRow() && g.visible == true) {
-                if (g.markAsVulnerable) {
+            if (g.getCol() == newCol() && g.getRow() == newRow() && g.visible == true) {
+                if (g.mode== Ghost.Mode.VULNERABLE || willBeSuper) {
                     res = 1;
                 } else {
                     res = -1;
@@ -222,19 +253,19 @@ public class GameState {
      * @return
      */
     public boolean wallRight() {
-        return this.game.maze[pacmanRow][pacmanCol + 1] == -1;
+        return this.game.maze[pacmanRow][pacmanCol + 1] < 0;
     }
 
     public boolean wallLeft() {
-        return this.game.maze[pacmanRow][pacmanCol - 1] == -1;
+        return this.game.maze[pacmanRow][pacmanCol - 1] < 0;
     }
 
     public boolean wallDown() {
-        return this.game.maze[pacmanRow + 1][pacmanCol] == -1;
+        return this.game.maze[pacmanRow + 1][pacmanCol] < 0;
     }
 
     public boolean wallUp() {
-        return this.game.maze[pacmanRow - 1][pacmanCol] == -1;
+        return this.game.maze[pacmanRow - 1][pacmanCol] < 0;
     }
 
     /**
@@ -246,7 +277,7 @@ public class GameState {
         GameState[] res = new GameState[4];
         if (!wallRight()) {
             if (lastInput!=2 || uTurnAllowed) {
-                res[0] = new GameState(game,lastInput, 0,newScore);
+                res[0] = new GameState(game,lastInput, 0,newScore,willBeSuper);
             } else {
                 if(verbose) System.out.println("Right is U turn");
             }
@@ -255,7 +286,7 @@ public class GameState {
         }
         if (!wallDown()) {
             if (lastInput!=3 || uTurnAllowed) {
-                res[1] = new GameState(game,lastInput, 1,newScore);
+                res[1] = new GameState(game,lastInput, 1,newScore,willBeSuper);
             } else {
                 if(verbose) System.out.println("Down is U turn");
             }
@@ -264,7 +295,7 @@ public class GameState {
         }
         if (!wallLeft()) {
             if (lastInput!=0 || uTurnAllowed) {
-                res[2] = new GameState(game,lastInput, 2,newScore);
+                res[2] = new GameState(game,lastInput, 2,newScore,willBeSuper);
             } else {
                 if(verbose) System.out.println("Left is U turn");
             }
@@ -273,7 +304,7 @@ public class GameState {
         }
         if (!wallUp()) {
             if (lastInput!=1 || uTurnAllowed) {
-                res[3] = new GameState(game,lastInput, 3,newScore);
+                res[3] = new GameState(game,lastInput, 3,newScore,willBeSuper);
             } else {
                 if(verbose) System.out.println("Up is U turn");
             }

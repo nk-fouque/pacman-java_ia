@@ -15,6 +15,7 @@ import javax.swing.SwingUtilities;
 public class Main {
 
     public static boolean visibleGame;       //Used to switch between to versions of the game running
+    public static final boolean verbose = true;
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
@@ -23,7 +24,7 @@ public class Main {
             public void run() {
                 visibleGame = true;       //TODO : set it to true to play a normal game, false will make the game play in background
 
-                Game game = new PacmanGame(60);    //FIXME (Matthieu) : param fps is the "speed" of the game, 1<fps<1000, COOL = 60
+                Game game = new PacmanGame(verbose,50);    //FIXME (Matthieu) : param fps is the "speed" of the game, 1<fps<1000, COOL = 60
 
                 Display view = new Display(game);
                 JFrame frame = new JFrame();
