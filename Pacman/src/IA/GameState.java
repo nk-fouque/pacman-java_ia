@@ -181,7 +181,6 @@ public class GameState {
 
     /**
      * Checks if pacman will be able to eat there and updates the score
-     *
      * @return
      */
     public int pacmanEat() {

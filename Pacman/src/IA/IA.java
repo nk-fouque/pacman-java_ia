@@ -33,13 +33,13 @@ public class IA {
     }
 
     /**
-     * Use a treesearch {@link PathfindNode.java} to find the best gamestate
+     * Use a treesearch {@link PathfindTree} to find the best gamestate
      * @param game the current game
      * @return the new direction of Pacman
      */
     public int askDirectionEatmaxTreeSearch(PacmanGame game){
         GameState state = new GameState(game,lastInput);
-        int res = state.searchBestGamestate(8); // TODO Apparently
+        int res = state.searchBestGamestate(8); // TODO Apparently the maximum depends on the GPU and not the CPU, max 8 on NVIDIA GTX 1060
         if(verbose) System.out.println("\n");
         lastInput=res; //Records the input before sending it
         return res;

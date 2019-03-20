@@ -81,7 +81,7 @@ public class PacmanGame extends Game {
     public int currentCatchedGhostScoreTableIndex = 0;
     public final int[] catchedGhostScoreTable = { 200, 400, 800, 1600 };
     
-    private int foodCount;
+    public int foodCount;
     public int currentFoodCount;
     public int totalFood;
 
