@@ -2,9 +2,11 @@ package IA;
 
 import Elements.*;
 import Elements.actor.*;
+import Elements.actor.Ghost.Mode;
 import Elements.infra.*;
 import main.Main;
 
+import java.awt.Point;
 import java.util.ArrayList;
 
 /**
@@ -24,6 +26,18 @@ public class GameState {
     public int pacmanRow;
     public int pacmanCol;
     private boolean willBeSuper;
+    
+    /**
+     * Bonus attribut to define the ghosts
+     * ghostPosition[0] is the position of the red ghost (type = 0)
+     * ghostModes[0] is the mode of the red ghost (type = 0)
+     */
+    public Point[] ghostPositions = { 
+            new Point(18, 11), new Point(16, 14), 
+            new Point(18, 14), new Point(20, 14)};
+    public Ghost.Mode[] ghostModes = {
+    		Ghost.Mode.CAGE,Ghost.Mode.CAGE,
+    		Ghost.Mode.CAGE,Ghost.Mode.CAGE};
 
     /**
      * Activates the debug prints
