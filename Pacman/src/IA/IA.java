@@ -47,9 +47,30 @@ public class IA {
     
     
     
+    /**
+     * Gregre's workspace
+     * WIP
+     */
+    public int ExpectiValue(PacmanGame game) {
+//    	if(true) {
+//    		return ExpectiMaxValue(game);
+//    	}
+//    	if(true) {
+//    		return ExpectiExpValue(game);
+//    	}
+//    	if(true) {
+//    		return 0;
+//    	}
+		return 0;
+    }
     
+    public int ExpectiMaxValue(PacmanGame game) {
+    	return 0;
+    }
     
-    
+    public int ExpectiExpValue(PacmanGame game) {
+    	return 0;
+    }
     
     
 
