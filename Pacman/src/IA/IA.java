@@ -33,7 +33,7 @@ public class IA {
     }
 
     /**
-     * Use a treesearch {@link PathfindNode.java} to find the best gamestate
+     * Use a treesearch {@link PathfindTree.java} to find the best gamestate
      * @param game the current game
      * @return the new direction of Pacman
      */
