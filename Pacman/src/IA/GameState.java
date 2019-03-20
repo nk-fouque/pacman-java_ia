@@ -150,8 +150,8 @@ public class GameState {
     }
 
     public int newCol(){
-        if(pacmanCol < 2){
-            return 33;
+        if(pacmanCol < 3){
+            return 32;
         } else if (pacmanCol > 32) {
             return 3;
         } else {
