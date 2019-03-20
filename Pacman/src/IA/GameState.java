@@ -6,8 +6,6 @@ import Elements.infra.*;
 import main.Main;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 /**
  * Stores important information about the board, temporary class until we can play real games
@@ -34,7 +32,7 @@ public class GameState {
      * Debug feature,
      * TODO ultimately should be able to run with true but doesn't work for now
      */
-    private boolean uTurnAllowed = false;
+    private boolean uTurnAllowed = true;
 
     /**
      * Stores the score once calculated
@@ -84,7 +82,7 @@ public class GameState {
      * @param game
      * @param dir  : the direction we will have gone to get there, only for "future gamestates"
      */
-    public GameState(PacmanGame game, int lastInput, int dir,int newScore,boolean willBeSuper) {
+    public GameState(PacmanGame game, int lastInput, int dir,int newScore,boolean willBeSuper, int row, int col) {
         this.game = game;
         this.newScore = newScore;
         this.dir = dir;
@@ -99,11 +97,11 @@ public class GameState {
             if (a instanceof PowerBall) {
                 powerBalls.add((PowerBall) a);
             }
-            if (a instanceof Pacman) {
-                this.pacmanRow = ((Pacman) a).getRow() + dRow();
-                this.pacmanCol = ((Pacman) a).getCol() + dCol();
-            }
+
+
         }
+        this.pacmanRow = row+dRow();
+        this.pacmanCol = col+dCol();
         this.willBeSuper=willBeSuper;
     }
 
@@ -171,7 +169,7 @@ public class GameState {
         becomeSuper();
         int getghost = pacmanGetGhost();
         if (getghost == -1) {
-            newScore = 0;
+            newScore = -1000;
         } else {
             newScore += (game.catchedGhostScoreTable[game.currentCatchedGhostScoreTableIndex] * getghost);
         }
@@ -277,7 +275,7 @@ public class GameState {
         GameState[] res = new GameState[4];
         if (!wallRight()) {
             if (lastInput!=2 || uTurnAllowed) {
-                res[0] = new GameState(game,lastInput, 0,newScore,willBeSuper);
+                res[0] = new GameState(game,lastInput, 0,newScore,willBeSuper,pacmanRow,pacmanCol);
             } else {
                 if(verbose) System.out.println("Right is U turn");
             }
@@ -286,7 +284,7 @@ public class GameState {
         }
         if (!wallDown()) {
             if (lastInput!=3 || uTurnAllowed) {
-                res[1] = new GameState(game,lastInput, 1,newScore,willBeSuper);
+                res[1] = new GameState(game,lastInput, 1,newScore,willBeSuper,pacmanRow,pacmanCol);
             } else {
                 if(verbose) System.out.println("Down is U turn");
             }
@@ -295,7 +293,7 @@ public class GameState {
         }
         if (!wallLeft()) {
             if (lastInput!=0 || uTurnAllowed) {
-                res[2] = new GameState(game,lastInput, 2,newScore,willBeSuper);
+                res[2] = new GameState(game,lastInput, 2,newScore,willBeSuper,pacmanRow,pacmanCol);
             } else {
                 if(verbose) System.out.println("Left is U turn");
             }
@@ -304,7 +302,7 @@ public class GameState {
         }
         if (!wallUp()) {
             if (lastInput!=1 || uTurnAllowed) {
-                res[3] = new GameState(game,lastInput, 3,newScore,willBeSuper);
+                res[3] = new GameState(game,lastInput, 3,newScore,willBeSuper,pacmanRow,pacmanCol);
             } else {
                 if(verbose) System.out.println("Up is U turn");
             }
@@ -322,7 +320,7 @@ public class GameState {
      * @return
      */
     public int searchBestGamestate(int depth) {
-        PathfindNode tree = new PathfindNode(this);
+        PathfindTree tree = new PathfindTree(this);
         tree.node(depth);
         return tree.choose();
     }
