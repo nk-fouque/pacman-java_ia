@@ -62,6 +62,7 @@ public class Ghost extends PacmanActor {
     public int desiredDirection;
     public static final int[] backwardDirections = { 2, 3, 0, 1 };
     
+    public long scatterModeStartTime;
     public long vulnerableModeStartTime;
     public boolean markAsVulnerable;
     
@@ -267,7 +268,7 @@ public class Ghost extends PacmanActor {
     
     
     /**
-     * Update the behavior of the ghost while it's in scatter (?) mode
+     * Update the behavior of the ghost while it's in cage mode
      * - case 0 : initialisation of the ghosts
      * - case 1-3 : move the ghost so it looks alive
      * - case 4 : check the type of the ghost for the next case
@@ -444,6 +445,8 @@ public class Ghost extends PacmanActor {
             setMode(Mode.VULNERABLE);
             markAsVulnerable = false;
         }
+//    	scatterModeStartTime = System.currentTimeMillis();
+    	Point scatterDestination = scatterDestinations[type];
     	
     	yield:
             while (true) {
@@ -453,12 +456,11 @@ public class Ghost extends PacmanActor {
                     	instructionPointer2 = 1;
                     	break yield;
                     case 1:
-                    	Point scatterDestination = scatterDestinations[type];
-                    	updateGhostMovement(true, scatterDestination.x, scatterDestination.y, 1, pacmanCatchedAction, 0,1,2,3);
+                    	updateGhostMovement(true, scatterDestination.x, scatterDestination.y, 1, pacmanCatchedAction, 2,3,0,1);
                     	instructionPointer2 = 2;
                     	break yield;
                     case 2:
-                    	if(System.currentTimeMillis()-waitTime > 6000*60/game.FPS) { // A MODIF j'ai mis 2s pour les tests
+                    	if(System.currentTimeMillis()-waitTime > 6000*60/game.FPS) {
                     		// Scatter for 6 seconds
                     		instructionPointer2 = 3;
                     	}else {
@@ -473,9 +475,26 @@ public class Ghost extends PacmanActor {
                 }
             }
     	
-    	
+
+//        
+//        updateGhostMovement(true, scatterDestination.x,scatterDestination.y, 1, ghostCatchedAction, 2, 3, 0, 1);
+//        // return to normal mode after 6 seconds
+//        if (!checkScatterModeTime()) {
+//            setMode(Mode.NORMAL);
+//        }
     
     }
+    
+    /**
+     * Chronometer for the scatter mode
+     * @return true after 6 seconds
+     * WIP
+     */
+    private boolean checkScatterModeTime() {
+        return System.currentTimeMillis() - scatterModeStartTime <= 6000*60/game.FPS;
+    }
+    
+    
     
     
     

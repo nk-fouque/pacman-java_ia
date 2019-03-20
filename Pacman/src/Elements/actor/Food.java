@@ -43,7 +43,7 @@ public class Food extends PacmanActor {
         /* x et y sont les coordonnées d'un collider */
         x = col * 8 + 3 - 32;				// cf le système de coordonnées du collider ?
         y = (row + 3) * 8 + 3;			// same
-        collider = new Rectangle(0, 0, 2, 2);	// collider associé
+        collider = new Rectangle(0, 0, 3, 3);	// collider associé
     }
 
     /**
