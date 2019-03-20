@@ -11,6 +11,8 @@ import java.util.Objects;
 
 /**
  * Stores important information about the board, temporary class until we can play real games
+ *
+ * Test
  */
 public class GameState {
     /**
