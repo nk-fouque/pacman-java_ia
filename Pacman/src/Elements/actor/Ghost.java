@@ -117,7 +117,7 @@ public class Ghost extends PacmanActor {
             ghostFrameNames[12 + i] = "/res/ghost_died_" + i + ".png";
         }
         loadFrames(ghostFrameNames);
-        collider = new Rectangle(0, 0, 8, 8);
+        collider = new Rectangle(0, 0, 4, 4);
         setMode(Mode.CAGE);
     }
     

@@ -15,7 +15,7 @@ import javax.swing.SwingUtilities;
 public class Main {
 
     public static boolean visibleGame;       //Used to switch between to versions of the game running
-    public static final boolean verbose = true;
+    public static final boolean verbose = false;
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {

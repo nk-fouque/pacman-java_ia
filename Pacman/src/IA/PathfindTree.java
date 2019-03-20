@@ -7,14 +7,14 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class PathfindNode {
+public class PathfindTree {
     public int bestScore;
     public List<Integer> bestDirection;
     private GameState[] states;
     private int[] scoreByDir;
     public boolean verbose = Main.verbose;
 
-    public PathfindNode(GameState state){
+    public PathfindTree(GameState state){
         bestDirection = new ArrayList<>();
         bestScore = 0;
         states=state.possibleFollowingStates();
@@ -45,10 +45,11 @@ public class PathfindNode {
         if(depth == 0){
             leaf();
         } else {
-            PathfindNode[] sons = new PathfindNode[4];
+            PathfindTree[] sons = new PathfindTree[4];
             for(int i = 0;i<4;i++){
                 if(!Objects.isNull(states[i])) {
-                    sons[i] = new PathfindNode(states[i]);
+                    states[i].newScore();
+                    sons[i] = new PathfindTree(states[i]);
                     sons[i].node(depth -1);
                     scoreByDir[i]=sons[i].bestScore;
                 }
