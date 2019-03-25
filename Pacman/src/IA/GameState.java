@@ -112,7 +112,7 @@ public class GameState {
     /**
      * converts a direction into a vertical deplacement
      *
-     * @return 1 = down, -1 = down
+     * @return 1 = down, -1 = up
      */
     public int dRow(int direction) {
         int res = 0;

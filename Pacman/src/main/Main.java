@@ -26,7 +26,7 @@ public class Main {
 
                 Game game = new PacmanGame(verbose,50);    //FIXME (Matthieu) : param fps is the "speed" of the game, 1<fps<1000, COOL = 60
 
-                Display view = new Display(game);
+                Display view = new Display(game, visibleGame);
                 JFrame frame = new JFrame();
                 frame.setTitle("Pacman");
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

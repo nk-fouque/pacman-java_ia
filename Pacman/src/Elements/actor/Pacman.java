@@ -37,10 +37,12 @@ public class Pacman extends PacmanActor {
     
     /* Intelligence of pacman */
     private IA ia;
+    private boolean visibleGame;
 
     
-    public Pacman(PacmanGame game) {
+    public Pacman(PacmanGame game, boolean visi) {
         super(game);
+        this.visibleGame = visi;
     }
 
     /**
@@ -48,7 +50,7 @@ public class Pacman extends PacmanActor {
      */
     @Override
     public void init() {
-        if(Main.visibleGame) {
+        if(visibleGame) {
             String[] pacmanFrameNames = new String[30];
             for (int d = 0; d < 4; d++) {
                 for (int i = 0; i < 4; i++) {
@@ -80,7 +82,7 @@ public class Pacman extends PacmanActor {
         col = 18;
         row = 23;
         updatePosition();
-        if(Main.visibleGame)
+        if(visibleGame)
             frame = frames[0];
         direction = desiredDirection = 0;
     }
@@ -146,7 +148,7 @@ public class Pacman extends PacmanActor {
                     break yield;
             }
         }
-        if(Main.visibleGame)
+        if(visibleGame)
             updateAnimation();
     }
     

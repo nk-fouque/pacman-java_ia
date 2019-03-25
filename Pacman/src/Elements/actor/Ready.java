@@ -12,15 +12,18 @@ import main.Main;
  */
 public class Ready extends PacmanActor {
 
-    public Ready(PacmanGame game) {
+    private boolean visibleGame;
+
+    public Ready(PacmanGame game, boolean visi) {
         super(game);
+        this.visibleGame = visi;
     }
 
     @Override
     public void init() {
         x = 11 * 8;
         y = 20 * 8;
-        if(Main.visibleGame)
+        if(visibleGame)
             loadFrames("/res/ready.png");
     }
 
@@ -35,7 +38,7 @@ public class Ready extends PacmanActor {
                     waitTime = System.currentTimeMillis();
                     instructionPointer = 1;
                 case 1:
-                    if(Main.visibleGame) {
+                    if(visibleGame) {
                        if (System.currentTimeMillis() - waitTime < 2000) { // || game.sounds.get("start").isPlaying()) {
                             break yield;
                        }
@@ -52,13 +55,13 @@ public class Ready extends PacmanActor {
         while (true) {
             switch (instructionPointer) {
                 case 0:
-                    if(Main.visibleGame) {
+                    if(visibleGame) {
                         game.broadcastMessage("showAll");
                     }
                     waitTime = System.currentTimeMillis();
                     instructionPointer = 1;
                 case 1:
-                    if(Main.visibleGame) {
+                    if(visibleGame) {
                         if (System.currentTimeMillis() - waitTime < 2000) { // || game.sounds.get("start").isPlaying()) {
                             break yield;
                         }
