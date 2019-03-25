@@ -2,7 +2,6 @@ package IA;
 
 import Elements.PacmanGame;
 import Elements.actor.Ghost;
-import Elements.infra.ShortestPathFinder;
 
 import java.awt.*;
 
@@ -18,7 +17,6 @@ public class GameStatePlus extends GameState {
     public int[] ghostRows = new int[4];
     public int[] ghostCols = new int[4];
     public Ghost.Mode[] ghostModes = new Ghost.Mode[4];
-    public ShortestPathFinder pathFinder;
 
 	/** 
 	 * Constructor : initialize ghost's values with actual ghost's values
@@ -32,7 +30,6 @@ public class GameStatePlus extends GameState {
             ghostCols[g.type]=g.getCol();
             ghostModes[g.type]=g.getMode();
         }
-        this.pathFinder = new ShortestPathFinder(game.maze);
     }
 
     /** 
