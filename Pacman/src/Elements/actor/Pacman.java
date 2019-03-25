@@ -161,7 +161,7 @@ public class Pacman extends PacmanActor {
 
         //Change this string depending on what you want to do
         //manual is self explanatory, maddog is random and eatmax is bugged
-        String movementMode = "eatmax";
+        String movementMode = "manual";
 
         switch (movementMode) {
 

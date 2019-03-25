@@ -150,13 +150,13 @@ public class GameState {
     }
 
     public int newCol(){
-        if(pacmanCol < 3){
-            return 32;
-        } else if (pacmanCol > 32) {
-            return 3;
-        } else {
-            return pacmanCol + dCol(dir);
+        int res = pacmanCol + dCol(dir);
+        if(res < 3){
+            res = 32;
+        } else if (res > 32) {
+            res = 3;
         }
+        return res;
     }
 
     public int newRow(){
@@ -239,7 +239,7 @@ public class GameState {
             if (g.getCol() == newCol() && g.getRow() == newRow() && g.visible == true) {
                 if (g.mode== Ghost.Mode.VULNERABLE || willBeSuper) {
                     res = 1;
-                } else {
+                } else if(g.mode==Mode.NORMAL||g.mode==Mode.SCATTER){
                     res = -1;
                 }
                 break;

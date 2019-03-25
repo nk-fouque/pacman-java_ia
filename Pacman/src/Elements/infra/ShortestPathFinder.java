@@ -46,6 +46,7 @@ public class ShortestPathFinder {
     private int[] neighbors = { 1, 0, -1, 0, 0, 1, 0, -1 };
     
     public void find(int srcX, int srcY, int destX, int destY) {
+    	System.out.println("Debug1");
         path.clear();
         clearMap();
         int score = 1;
