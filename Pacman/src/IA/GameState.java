@@ -175,7 +175,12 @@ public class GameState {
         if (getghost == -1) {
             newScore = -1000;
         } else {
-            newScore += (game.catchedGhostScoreTable[game.currentCatchedGhostScoreTableIndex] * getghost);
+            try {
+                newScore += (game.catchedGhostScoreTable[game.currentCatchedGhostScoreTableIndex] * getghost);
+            } catch (java.lang.ArrayIndexOutOfBoundsException e) {
+                System.out.println("Too many ghosts");
+                e.printStackTrace();
+            }
         }
 
         return newScore;
@@ -237,13 +242,13 @@ public class GameState {
         int res = 0;
         for (Ghost g : ghosts) {
             if (g.getCol() == pacmanCol && g.getRow() == pacmanRow && g.visible == true) {
-                if(verbose) System.out.print("Ghost on "+g.getRow()+":"+g.getCol());
+                if(true) System.out.print("Ghost on "+g.getRow()+":"+g.getCol());
                 if (g.mode== Ghost.Mode.VULNERABLE || willBeSuper) {
                     res = 1;
-                    if(verbose) System.out.println(", good");
-                } else if(g.mode==Mode.NORMAL||g.mode==Mode.SCATTER){
+                    if(true) System.out.println(", good");
+                } else {
                     res = -1;
-                    if(verbose) System.out.println(", not good");
+                    if(true) System.out.println(", not good");
                 }
                 break;
             }

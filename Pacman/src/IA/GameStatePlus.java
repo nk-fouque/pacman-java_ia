@@ -67,7 +67,7 @@ public class GameStatePlus extends GameState {
      * @return an array with the 4 possible gamestates
      */
     @Override
-    public GameState[] possibleFollowingStates() {
+    public GameState[] possibleFollowingStates() { //TODO I think if we replace these walls tests with a 3D matrix [col][row][direction] containing booleans, we might solve our tunnel problems and other things
         GameStatePlus[] res = new GameStatePlus[4];
         if (!wallRight()) {
             if (lastInput != 2 || uTurnAllowed) {
@@ -118,26 +118,30 @@ public class GameStatePlus extends GameState {
      */
     public int shortestPathToPacman(int ghostRow, int ghostCol, FloydWarshall fw, boolean vulnerable) {
         int[][][][] d = fw.d;
-        int scoreRight = d[ghostRow][ghostCol + 1][pacmanRow][pacmanCol];
-        int scoreDown = d[ghostRow + 1][ghostCol][pacmanRow][pacmanCol];
-        int scoreLeft = d[ghostRow][ghostCol - 1][pacmanRow][pacmanCol];
-        int scoreUp = d[ghostRow - 1][ghostCol][pacmanRow][pacmanCol];
+        int distRight = d[ghostRow][ghostCol + 1][pacmanRow][pacmanCol];
+        int distDown = d[ghostRow + 1][ghostCol][pacmanRow][pacmanCol];
+        int distLeft = d[ghostRow][ghostCol - 1][pacmanRow][pacmanCol];
+        int distUp = d[ghostRow - 1][ghostCol][pacmanRow][pacmanCol];
         int value;
         if (!vulnerable) {
             value = Math.min(
-                    Math.min(scoreUp, scoreDown), Math.min(scoreLeft, scoreRight)
+                    Math.min(distUp, distDown), Math.min(distLeft, distRight)
             );
         } else {
+            if(distRight>1000)distRight=0;
+            if(distDown>1000)distDown=0;
+            if(distLeft>1000)distLeft=0;
+            if(distUp>1000)distUp=0;
             value = Math.max(
-                    Math.max(scoreUp, scoreDown), Math.max(scoreLeft, scoreRight)
+                    Math.max(distUp, distDown), Math.max(distLeft, distRight)
             );
         }
 
         ArrayList<Integer> choice = new ArrayList<>();
-        if (scoreRight == value) choice.add(0);
-        if (scoreDown == value) choice.add(1);
-        if (scoreLeft == value) choice.add(2);
-        if (scoreUp == value) choice.add(3);
+        if (distRight == value) choice.add(0);
+        if (distDown == value) choice.add(1);
+        if (distLeft == value) choice.add(2);
+        if (distUp == value) choice.add(3);
 
         int res = choice.get(ThreadLocalRandom.current().nextInt(0, choice.size()));
 
@@ -149,7 +153,7 @@ public class GameStatePlus extends GameState {
      */
     public void moveGhosts(FloydWarshall fw) {
         for (int i = 0; i < 4; i++) {
-            int direction = shortestPathToPacman(ghostRows[i], ghostCols[i], fw,false);
+            int direction = shortestPathToPacman(ghostRows[i], ghostCols[i], fw,ghostModes[i]== Ghost.Mode.VULNERABLE);
             ghostRows[i] += dRow(direction);
             ghostCols[i] += dCol(direction);
         }

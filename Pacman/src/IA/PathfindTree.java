@@ -32,9 +32,10 @@ public class PathfindTree {
      * Activates debug prints, can be set to true, false or @Link Main.verbose
      */
     public boolean verbose = Main.verbose;
+    public int verboseLevel = 7;
 
     /**
-     * The constructor and initialization
+     * The constructor and initialization of parameters
      * @param state the state from which we build the following states, not stored
      */
 
@@ -89,7 +90,7 @@ public class PathfindTree {
                 }
                 consider(i);                                        // and decide if we want to follow this son
             }
-            if(verbose) System.out.println("Node : "+bestDirection+" Score : "+bestScore);
+            if(verbose||depth==verboseLevel) System.out.println("Node Level "+depth+" : "+bestDirection+" Score : "+bestScore);
         }
     }
 
@@ -108,7 +109,7 @@ public class PathfindTree {
                 }
                 consider(i);                                        // and decide if we want to follow this son
             }
-            if(verbose) System.out.println("Node : "+bestDirection+" Score : "+bestScore);
+            if(verbose||depth>=verboseLevel) System.out.println("Node Level "+depth+" : "+bestDirection+" Score : "+bestScore);
         }
     }
 
