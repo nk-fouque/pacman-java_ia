@@ -24,7 +24,7 @@ public class Main {
             public void run() {
                 visibleGame = true;       //TODO : set it to true to play a normal game, false will make the game play in background
 
-                Game game = new PacmanGame(verbose,60);    //FIXME (Matthieu) : param fps is the "speed" of the game, 1<fps<1000, COOL = 60
+                Game game = new PacmanGame(verbose,50);    //FIXME (Matthieu) : param fps is the "speed" of the game, 1<fps<1000, COOL = 60
 
                 Display view = new Display(game, visibleGame);
                 JFrame frame = new JFrame();

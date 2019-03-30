@@ -682,6 +682,7 @@ public class Ghost extends PacmanActor {
 	 * Update the behavior of the ghost when they died : they go beck to the cage
 	 * using a pathfinder
 	 */
+	private boolean debug = false;
 	private void updateGhostDied() {
 		yield: while (true) {
 			switch (instructionPointer) {
@@ -695,9 +696,9 @@ public class Ghost extends PacmanActor {
 				}
 				Point nextPosition = pathFinder.getNext();
 				col = nextPosition.x;
-				System.out.println("Debug col : "+col);
+				if (debug) System.out.println("Debug col : "+col);
 				row = nextPosition.y;
-				System.out.println("Debug row : "+row);
+				if(debug) System.out.println("Debug row : "+row);
 				instructionPointer = 2;
 			case 2:
 				if (!moveToGridPosition(col, row, 4)) {

@@ -13,9 +13,13 @@ public class IA {
     private final int[] uTurn = new int[]{2, 3, 0, 1};
     private int lastInput;
     private boolean verbose = Main.verbose;
+    private FloydWarshall fw;
 
     public IA(){
         this.lastInput=3;
+        this.fw = new FloydWarshall();
+        fw.algoFW();
+        System.out.println("Floyd Warshall Ready");
     }
 
     /**
@@ -47,7 +51,7 @@ public class IA {
 
     public int askDirectionMinMaxTreeSearch(PacmanGame game){
         GameStatePlus state = new GameStatePlus(game,lastInput);
-        int res = state.searchBestGamestate(8);
+        int res = state.searchBestGamestate(8,fw);
         if(verbose) System.out.println("\n");
         lastInput=res; //Records the input before sending it
         return res;

@@ -52,10 +52,7 @@ public class FloydWarshall {
 
     private int nbSommets = 306;
 
-    private int distances[][] = new int[nbSommets][nbSommets];
-    private int adjencyMatrix[][] = new int[nbSommets][nbSommets];
-
-    private int d[][][][] = new int[nbRow][nbCol][nbRow][nbCol]; //si sj s2i s2j
+    protected int d[][][][] = new int[nbRow][nbCol][nbRow][nbCol]; //si sj s2i s2j
 
     public void initD(){
         // fills d with infinity

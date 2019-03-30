@@ -161,7 +161,7 @@ public class Pacman extends PacmanActor {
 
         //Change this string depending on what you want to do
         //manual is self explanatory, maddog is random and eatmax is bugged
-        String movementMode = "manual";
+        String movementMode = "minmax";
 
         switch (movementMode) {
 
@@ -171,6 +171,10 @@ public class Pacman extends PacmanActor {
             }
             case "eatmax": {
                 desiredDirection = ia.askDirectionEatmaxTreeSearch(game);
+                break;
+            }
+            case "minmax": {
+                desiredDirection = ia.askDirectionMinMaxTreeSearch(game);
                 break;
             }
             case "manual": {

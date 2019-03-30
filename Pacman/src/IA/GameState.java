@@ -151,10 +151,10 @@ public class GameState {
 
     public int newCol(){
         int res = pacmanCol + dCol(dir);
-        if(res < 3){
-            res = 32;
-        } else if (res > 32) {
-            res = 3;
+        if(res < 2){
+            res = 33;
+        } else if (res > 33) {
+            res = 2;
         }
         return res;
     }
@@ -236,7 +236,8 @@ public class GameState {
     public int pacmanGetGhost() {
         int res = 0;
         for (Ghost g : ghosts) {
-            if (g.getCol() == newCol() && g.getRow() == newRow() && g.visible == true) {
+            if (g.getCol() == pacmanCol && g.getRow() == pacmanRow && g.visible == true) {
+                System.out.println();
                 if (g.mode== Ghost.Mode.VULNERABLE || willBeSuper) {
                     res = 1;
                 } else if(g.mode==Mode.NORMAL||g.mode==Mode.SCATTER){
@@ -323,7 +324,7 @@ public class GameState {
      * @return
      */
     public int searchBestGamestate(int depth) {
-        PathfindTree tree = new PathfindTree(this,false);
+        PathfindTree tree = new PathfindTree(this);
         tree.node(depth);
         return tree.choose();
     }
