@@ -237,11 +237,13 @@ public class GameState {
         int res = 0;
         for (Ghost g : ghosts) {
             if (g.getCol() == pacmanCol && g.getRow() == pacmanRow && g.visible == true) {
-                System.out.println();
+                if(verbose) System.out.print("Ghost on "+g.getRow()+":"+g.getCol());
                 if (g.mode== Ghost.Mode.VULNERABLE || willBeSuper) {
                     res = 1;
+                    if(verbose) System.out.println(", good");
                 } else if(g.mode==Mode.NORMAL||g.mode==Mode.SCATTER){
                     res = -1;
+                    if(verbose) System.out.println(", not good");
                 }
                 break;
             }
