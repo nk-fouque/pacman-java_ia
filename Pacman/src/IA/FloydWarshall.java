@@ -1,5 +1,6 @@
 package IA;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
 
@@ -12,6 +13,7 @@ public class FloydWarshall {
     */
 
     //36 x 31
+    public static int infinity = 1000000;
 
     private int maze[][] = {
             {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
@@ -59,7 +61,7 @@ public class FloydWarshall {
         for (int[][][] r : d)
             for(int[][] c : r)
                 for(int[] rc : c)
-                    Arrays.fill(rc, 1000000);    //simulates the infinity
+                    Arrays.fill(rc, infinity);    //simulates the infinity
 
         // changes infinity to 1 for adjency vertices
         for(int i=0; i<nbRow; i++){
@@ -123,7 +125,7 @@ public class FloydWarshall {
     public void algo(){
         //Init distances with infinity in each case
         for (int[] row : distances)
-            Arrays.fill(row, 100000);    //simulates the infinity
+            Arrays.fill(row, infinity);    //simulates the infinity
 
         // Changes the distance from infinity to 1 for the vertices
         calcAdj();
@@ -154,9 +156,25 @@ public class FloydWarshall {
         //fw.calculateNbSommets();
         //System.out.println(fw.nbSommets);
         fw.algoFW();
-        fw.printGrid(2,5);
+        fw.printGrid(14,1);
+        System.out.println(fw.possibleMoves()[14][1]);
     }
 
+    public ArrayList<Integer>[][] possibleMoves(){
+        ArrayList<Integer>[][] res= new ArrayList[nbRow][nbCol];
+        for (int i = 1;i<nbRow-1;i++){
+            for(int j = 1;j<nbCol-1;j++){
+               if(d[i][j][i][j]!=infinity) res[i][j]=new ArrayList<>();
+               if(d[i][j][i][j+1]!=infinity) res[i][j].add(0);
+               if(d[i][j][i+1][j]!=infinity) res[i][j].add(1);
+               if(d[i][j][i][j-1]!=infinity) res[i][j].add(2);
+               if(d[i][j][i-1][j]!=infinity) res[i][j].add(3);
+            }
+        }
+        res[14][1].add(2);
+        res[14][34].add(0);
+        return res;
+    }
 
 
 }

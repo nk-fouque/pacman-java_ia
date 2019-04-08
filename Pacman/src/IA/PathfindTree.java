@@ -32,7 +32,7 @@ public class PathfindTree {
      * Activates debug prints, can be set to true, false or @Link Main.verbose
      */
     public boolean verbose = Main.verbose;
-    public int verboseLevel = 7;
+    public int verboseLevel = 6;
 
     /**
      * The constructor and initialization of parameters
@@ -41,11 +41,11 @@ public class PathfindTree {
 
     public PathfindTree(GameState state){
         bestDirection = new ArrayList<>();
-        bestScore = 0;
+        bestScore = -1;
         states=state.possibleFollowingStates();
         scoreByDir = new int[4];
         for(int i = 0;i<4;i++){
-            scoreByDir[i]=0;
+            scoreByDir[i]=-1;
         }
     }
 
@@ -104,10 +104,10 @@ public class PathfindTree {
                     ((GameStatePlus)states[i]).moveGhosts(fw);      // FIXME decides if we consider the ghosts' moves or not
                     states[i].newScore();                           // we calculate the "score if we get there"
                     sons[i] = new PathfindTree(states[i]);          // we build a son from it
-                    sons[i].node(depth -1,fw);                   // and call the node function recursively
+                    sons[i].node(depth -1,fw);                // and call the node function recursively
                     scoreByDir[i]=sons[i].bestScore;                // then we get the best score the son is capable of
+                    consider(i);                                    // and decide if we want to follow this son
                 }
-                consider(i);                                        // and decide if we want to follow this son
             }
             if(verbose||depth>=verboseLevel) System.out.println("Node Level "+depth+" : "+bestDirection+" Score : "+bestScore);
         }
@@ -130,7 +130,7 @@ public class PathfindTree {
     public int choose(){
         if(bestDirection.isEmpty()){                                            //If we have no valid direction FIXME (which should not happen)
             int res = ThreadLocalRandom.current().nextInt(0, 4);   //We choose a random one
-            if(verbose) System.out.println("No good direction, chose"+res);
+            if(true) System.out.println("No good direction, chose"+res);
             return res;
         } else {                                                                //else
             int index = ThreadLocalRandom.current().nextInt(0, bestDirection.size());

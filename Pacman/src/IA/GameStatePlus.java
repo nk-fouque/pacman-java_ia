@@ -27,8 +27,8 @@ public class GameStatePlus extends GameState {
      * @param game      the game
      * @param lastInput the last move of Pacman
      */
-    public GameStatePlus(PacmanGame game, int lastInput) {
-        super(game, lastInput);
+    public GameStatePlus(PacmanGame game, int lastInput, ArrayList<Integer>[][] possibleMoves) {
+        super(game, lastInput,possibleMoves);
         for (Ghost g : ghosts) {
             ghostRows[g.type] = g.getRow();
             ghostCols[g.type] = g.getCol();
@@ -50,8 +50,8 @@ public class GameStatePlus extends GameState {
      * @param ghostCols
      * @param ghostModes
      */
-    public GameStatePlus(PacmanGame game, int lastInput, int dir, int newScore, boolean willBeSuper, int row, int col, int[] ghostRows, int[] ghostCols, Ghost.Mode[] ghostModes) {
-        super(game, lastInput, dir, newScore, willBeSuper, row, col);
+    public GameStatePlus(PacmanGame game, int lastInput, int dir, int newScore, boolean willBeSuper, int row, int col, int[] ghostRows, int[] ghostCols, Ghost.Mode[] ghostModes, ArrayList<Integer>[][] possibleMoves) {
+        super(game, lastInput, dir, newScore, willBeSuper, row, col,possibleMoves);
         System.arraycopy(ghostRows, 0, this.ghostRows, 0, 4);
         System.arraycopy(ghostCols, 0, this.ghostCols, 0, 4);
         System.arraycopy(ghostModes, 0, this.ghostModes, 0, 4);
@@ -69,41 +69,13 @@ public class GameStatePlus extends GameState {
     @Override
     public GameState[] possibleFollowingStates() { //TODO I think if we replace these walls tests with a 3D matrix [col][row][direction] containing booleans, we might solve our tunnel problems and other things
         GameStatePlus[] res = new GameStatePlus[4];
-        if (!wallRight()) {
-            if (lastInput != 2 || uTurnAllowed) {
-                res[0] = new GameStatePlus(game, lastInput, 0, newScore, willBeSuper, pacmanRow, pacmanCol, ghostRows, ghostCols, ghostModes);
-            } else {
-                if (verbose) System.out.println("Right is U turn");
+        try {
+            for(Integer i : possibleMoves[pacmanRow][pacmanCol]){
+                res[i] = new GameStatePlus(game, lastInput, i, newScore, willBeSuper, pacmanRow, pacmanCol, ghostRows, ghostCols, ghostModes,possibleMoves);
+
             }
-        } else {
-            if (verbose) System.out.println("Wall on right");
-        }
-        if (!wallDown()) {
-            if (lastInput != 3 || uTurnAllowed) {
-                res[1] = new GameStatePlus(game, lastInput, 1, newScore, willBeSuper, pacmanRow, pacmanCol, ghostRows, ghostCols, ghostModes);
-            } else {
-                if (verbose) System.out.println("Down is U turn");
-            }
-        } else {
-            if (verbose) System.out.println("Wall on down");
-        }
-        if (!wallLeft()) {
-            if (lastInput != 0 || uTurnAllowed) {
-                res[2] = new GameStatePlus(game, lastInput, 2, newScore, willBeSuper, pacmanRow, pacmanCol, ghostRows, ghostCols, ghostModes);
-            } else {
-                if (verbose) System.out.println("Left is U turn");
-            }
-        } else {
-            if (verbose) System.out.println("Wall on left");
-        }
-        if (!wallUp()) {
-            if (lastInput != 1 || uTurnAllowed) {
-                res[3] = new GameStatePlus(game, lastInput, 3, newScore, willBeSuper, pacmanRow, pacmanCol, ghostRows, ghostCols, ghostModes);
-            } else {
-                if (verbose) System.out.println("Up is U turn");
-            }
-        } else {
-            if (verbose) System.out.println("Wall on up");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return res;
     }
@@ -145,6 +117,28 @@ public class GameStatePlus extends GameState {
 
         int res = choice.get(ThreadLocalRandom.current().nextInt(0, choice.size()));
 
+        return res;
+    }
+
+    /**
+     * @return 0 if no ghost, 1 if vulnerable ghost, -1 if normal ghost
+     */
+    @Override
+    public int pacmanGetGhost() {
+        int res = 0;
+        for (Ghost g : ghosts) {
+            if ((ghostCols[g.type] == pacmanCol || g.getCol()==pacmanCol) && (ghostRows[g.type] == pacmanRow||g.getRow()==pacmanRow) && g.visible == true) {
+                if(verbose) System.out.print("Ghost on "+g.getRow()+":"+g.getCol());
+                if (ghostModes[g.type]== Ghost.Mode.VULNERABLE || willBeSuper) {
+                    res = 1;
+                    if(verbose) System.out.println(", good");
+                } else {
+                    res = -1;
+                    if(verbose) System.out.println(", not good");
+                }
+                break;
+            }
+        }
         return res;
     }
 
