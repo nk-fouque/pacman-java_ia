@@ -21,9 +21,11 @@ public class Display extends Canvas {
     private Game game;
     private boolean running;
     private BufferStrategy bs;
+    private boolean visibleGame;
 
-    public Display(Game game) {
+    public Display(Game game, boolean visi) {
         this.game = game;
+        this.visibleGame = visi;
         int sx = (int) (game.screenSize.width * game.screenScale.getX());
         int sy = (int) (game.screenSize.height * game.screenScale.getY());
         setPreferredSize(new Dimension(sx, sy));
@@ -35,7 +37,7 @@ public class Display extends Canvas {
         if (running) {
             return;
         }
-        if(Main.visibleGame) {
+        if(visibleGame) {
             createBufferStrategy(3);
             bs = getBufferStrategy();
         }
@@ -73,11 +75,11 @@ public class Display extends Canvas {
                 while (unprocessedTime >= desiredFrameRateTime) {
                     unprocessedTime -= desiredFrameRateTime;
                     update(); //<-- This is what actually runs the game
-                    if(Main.visibleGame)
+                    if(visibleGame)
                         needsRender = true; //useless for running in the back, uncomment for graphics
                 }
 
-                if(main.Main.visibleGame) {
+                if(visibleGame) {
                     /** If it's time to render, draws everything */
                     // Removes the whole graphic update and visual drawing (Matthieu)
                     if (needsRender) {

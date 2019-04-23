@@ -5,6 +5,7 @@ import Elements.actor.Pacman;
 import Elements.infra.Game;
 import main.Main;
 
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -13,10 +14,18 @@ public class IA {
     private final int[] uTurn = new int[]{2, 3, 0, 1};
     private int lastInput;
     private boolean verbose = Main.verbose;
+    private FloydWarshall fw;
+    private ArrayList<Integer>[][] possibleMoves;
 
     public IA(){
         this.lastInput=3;
+        this.fw = new FloydWarshall();
+        fw.algoFW();
+        System.out.println("Floyd Warshall Ready");
+        possibleMoves=fw.possibleMoves();
     }
+
+
 
     /**
      * Return a random direction for Pacman
@@ -38,7 +47,7 @@ public class IA {
      * @return the new direction of Pacman
      */
     public int askDirectionEatmaxTreeSearch(PacmanGame game){
-        GameState state = new GameState(game,lastInput);
+        GameState state = new GameState(game,lastInput,possibleMoves);
         int res = state.searchBestGamestate(8);
         if(verbose) System.out.println("\n");
         lastInput=res; //Records the input before sending it
@@ -46,14 +55,14 @@ public class IA {
     }
 
     public int askDirectionMinMaxTreeSearch(PacmanGame game){
-        GameStatePlus state = new GameStatePlus(game,lastInput);
-        int res = state.searchBestGamestate(8);
+        GameStatePlus state = new GameStatePlus(game,lastInput,possibleMoves);
+        int res = state.searchBestGamestate(8,fw);
         if(verbose) System.out.println("\n");
         lastInput=res; //Records the input before sending it
         return res;
     }
     
-    
+
     
     
     

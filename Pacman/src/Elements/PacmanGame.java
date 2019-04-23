@@ -135,12 +135,12 @@ public class PacmanGame extends Game {
     
     @Override
     public void init() {    //FIXME (Matt) : function slowing the game at start, long time for setup
-        addAllObjs();   //FIXME (Matt) : we have to make a second version of these 2, to init a game with the current state of our game, to resume from "main" game position
+        addAllObjs();   //FIXME (Matt) : we have to make a second version of these 2, to init a game with the current state of our game, to resume from "Controller" game position
         initAllObjs();
     }
     
     private void addAllObjs() {
-        Pacman pacman = new Pacman(this);
+        Pacman pacman = new Pacman(this, true);
         if(main.Main.visibleGame) {
             actors.add(new Initializer(this));
             actors.add(new OLPresents(this));
@@ -171,8 +171,8 @@ public class PacmanGame extends Game {
         }
         actors.add(pacman);
         actors.add(new Point(this, pacman));
-        actors.add(new Ready(this));
-        actors.add(new GameOver(this));
+        actors.add(new Ready(this, true));
+        actors.add(new GameOver(this, true));
         actors.add(new HUD(this));
         totalFood = foodCount;
     }

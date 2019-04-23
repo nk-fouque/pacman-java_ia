@@ -682,6 +682,7 @@ public class Ghost extends PacmanActor {
 	 * Update the behavior of the ghost when they died : they go beck to the cage
 	 * using a pathfinder
 	 */
+	private boolean debug = false;
 	private void updateGhostDied() {
 		pathFinder.find(col, row, 18, 11);
 		Point nextPosition = new Point();

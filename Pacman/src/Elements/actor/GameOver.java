@@ -12,9 +12,12 @@ import main.Main;
  * @author Leonardo Ono (ono.leo@gmail.com)
  */
 public class GameOver extends PacmanActor {
-    
-    public GameOver(PacmanGame game) {
+
+    private boolean visibleGame;
+
+    public GameOver(PacmanGame game, boolean visi) {
         super(game);
+        this.visibleGame = visi;
     }
 
     /**
@@ -25,7 +28,7 @@ public class GameOver extends PacmanActor {
     public void init() {
         x = 77;
         y = 160;
-        if(Main.visibleGame)
+        if(visibleGame)
             loadFrames("/res/gameover.png");
     }
     
@@ -34,7 +37,7 @@ public class GameOver extends PacmanActor {
      */
     @Override
     public void updateGameOver() {
-        if(Main.visibleGame){
+        if(visibleGame){
             yield:
             while (true) {
                 switch (instructionPointer) {
