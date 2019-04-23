@@ -683,53 +683,63 @@ public class Ghost extends PacmanActor {
 	 * using a pathfinder
 	 */
 	private void updateGhostDied() {
-		yield: while (true) {
-			switch (instructionPointer) {
-			case 0:
-				pathFinder.find(col, row, 18, 11);
-				instructionPointer = 1;
-			case 1:
-				if (!pathFinder.hasNext()) {
-					instructionPointer = 3;
-					continue yield;
-				}
-				Point nextPosition = pathFinder.getNext();
-				col = nextPosition.x;
-				System.out.println("Debug col : "+col);
-				row = nextPosition.y;
-				System.out.println("Debug row : "+row);
-				instructionPointer = 2;
-			case 2:
-				if (!moveToGridPosition(col, row, 4)) {
-					if (row == 11 && (col == 17 || col == 18)) {
-						instructionPointer = 3;
-						continue yield;
-					}
-					instructionPointer = 1;
-					continue yield;
-				}
-				break yield;
-			case 3:
-				if (!moveToTargetPosition(105, 110, 4)) {
-					instructionPointer = 4;
-					continue yield;
-				}
-				break yield;
-			case 4:
-				if (!moveToTargetPosition(105, 134, 4)) {
-					instructionPointer = 5;
-					continue yield;
-				}
-				break yield;
-			case 5:
-				setMode(Mode.CAGE);
-				instructionPointer = 0;
-				break yield;
-			}
+		pathFinder.find(col, row, 18, 11);
+		Point nextPosition = new Point();
+		while(pathFinder.hasNext() || (col != 18 && row != 11)) {
+			nextPosition = pathFinder.getNext();
+			col = nextPosition.x;
+			row = nextPosition.y;
+			moveToGridPosition(nextPosition.x, nextPosition.y, 4);
 		}
-
-		updateAnimation();
+		setMode(Mode.CAGE);
 		updatePlaying();
+		
+//		
+//		yield: while (true) {
+//			switch (instructionPointer) {
+//			case 0:
+//				pathFinder.find(col, row, 18, 11);
+//				instructionPointer = 1;
+//			case 1:
+//				if (!pathFinder.hasNext()) {
+//					instructionPointer = 3;
+//					continue yield;
+//				}
+//				Point nextPosition = pathFinder.getNext();
+//				col = nextPosition.x;
+//				System.out.println("Debug col : "+col);
+//				row = nextPosition.y;
+//				System.out.println("Debug row : "+row);
+//				instructionPointer = 2;
+//			case 2:
+//				if (!moveToGridPosition(col, row, 4)) {
+//					if (row == 11 && (col == 17 || col == 18)) {
+//						instructionPointer = 3;
+//						continue yield;
+//					}
+//					instructionPointer = 1;
+//					continue yield;
+//				}
+//				break yield;
+//			case 3:
+//				if (!moveToTargetPosition(105, 110, 4)) {
+//					instructionPointer = 4;
+//					continue yield;
+//				}
+//				break yield;
+//			case 4:
+//				if (!moveToTargetPosition(105, 134, 4)) {
+//					instructionPointer = 5;
+//					continue yield;
+//				}
+//				break yield;
+//			case 5:
+//				setMode(Mode.CAGE);
+//				instructionPointer = 0;
+//				break yield;
+//			}
+//		}
+//		updatePlaying();
 	}
 
 	/**
