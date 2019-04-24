@@ -586,25 +586,25 @@ public class Ghost extends PacmanActor {
 			case 1: // Pink ghost : Pinky
 				int target_col;
 				int target_row;
-				switch (pacman.direction) { // @TODO try to anticipate pacman direction but 4 tiles ahead (1 tile for
+				switch (pacman.direction) { // @TODO try to anticipate pacman direction but 4 tiles ahead (2 tile for
 											// now)
 				case 0:
 					target_col = pacman.col;
-					target_row = pacman.row + 1;
+					target_row = pacman.row + 2;
 					updateGhostMovement(true, target_col, target_row, 1, pacmanCatchedAction, 0, 1, 2, 3);
 					break;
 				case 1:
-					target_col = pacman.col - 1;
+					target_col = pacman.col - 2;
 					target_row = pacman.row;
 					updateGhostMovement(true, target_col, target_row, 1, pacmanCatchedAction, 0, 1, 2, 3);
 					break;
 				case 2:
 					target_col = pacman.col;
-					target_row = pacman.row - 1;
+					target_row = pacman.row - 2;
 					updateGhostMovement(true, target_col, target_row, 1, pacmanCatchedAction, 0, 1, 2, 3);
 					break;
 				case 3:
-					target_col = pacman.col + 1;
+					target_col = pacman.col + 2;
 					target_row = pacman.row;
 					updateGhostMovement(true, target_col, target_row, 1, pacmanCatchedAction, 0, 1, 2, 3);
 					break;
