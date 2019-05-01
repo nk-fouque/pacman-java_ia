@@ -1,5 +1,5 @@
 Tests/*
 .idea/vcs.xml
-Pacman/out/*
+Pacman/out/production/*
 .project
 .classpath

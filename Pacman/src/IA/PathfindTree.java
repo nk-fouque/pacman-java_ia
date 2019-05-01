@@ -32,7 +32,7 @@ public class PathfindTree {
      * Activates debug prints, can be set to true, false or @Link Main.verbose
      */
     public boolean verbose = Main.verbose;
-    public int verboseLevel = 6;
+    public int verboseLevel = 10;
 
     /**
      * The constructor and initialization of parameters
@@ -134,12 +134,12 @@ public class PathfindTree {
     public int choose(){
         if(bestDirection.isEmpty()){                                            //If we have no valid direction FIXME (which should not happen)
             int res = ThreadLocalRandom.current().nextInt(0, 4);   //We choose a random one
-            if(true) System.out.println("No good direction, chose"+res);
+            if(verbose) System.out.println("No good direction, chose"+res);
             return res;
         } else {                                                                //else
             int index = ThreadLocalRandom.current().nextInt(0, bestDirection.size());
             int res=bestDirection.get(index);                                   //We choose a random direction among the ones leading to the best score
-            if(true) System.out.println("Chose "+res);
+            if(verbose) System.out.println("Chose "+res);
             return res;
         }
     }

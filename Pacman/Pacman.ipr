@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactManager">
+    <artifact type="jar" name="Pacman:jar">
+      <output-path>$PROJECT_DIR$/out/artifacts/Pacman_jar</output-path>
+      <root id="archive" name="Pacman.jar">
+        <element id="module-output" name="Pacman" />
+      </root>
+    </artifact>
+  </component>
   <component name="Encoding" addBOMForNewFiles="with NO BOM" />
   <component name="InspectionProjectProfileManager">
     <profile version="1.0">

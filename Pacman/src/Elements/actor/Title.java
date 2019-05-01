@@ -68,9 +68,9 @@ public class Title extends PacmanActor {
                     instructionPointer = 4;
                 case 4:
                     pushSpaceToStartVisible = ((int) (System.nanoTime() * 0.0000000075) % 3) > 0;
-                    if (Keyboard.keyPressed[KeyEvent.VK_SPACE]) {
+//                    if (Keyboard.keyPressed[KeyEvent.VK_SPACE]) {
                         game.startGame();
-                    }
+//                    }
                     break yield;
             }
         }
