@@ -1,12 +1,10 @@
 package IA;
 
 import Elements.PacmanGame;
-import Elements.actor.Pacman;
 import Elements.infra.Game;
 import main.Main;
 
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class IA {
