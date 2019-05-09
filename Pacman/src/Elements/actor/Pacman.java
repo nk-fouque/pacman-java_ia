@@ -1,17 +1,10 @@
 package Elements.actor;
-import Elements.infra.Keyboard;
-import IA.IA;
 
+import IA.IA;
 import Elements.PacmanActor;
 import Elements.PacmanGame;
 import Elements.PacmanGame.State;
-import Elements.infra.Keyboard;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import main.Main;
-
 import java.awt.Rectangle;
-import java.awt.event.KeyEvent;
 
 /**
  * Pacman class.
@@ -40,9 +33,9 @@ public class Pacman extends PacmanActor {
     private boolean visibleGame;
 
     
-    public Pacman(PacmanGame game, boolean visi) {
+    public Pacman(PacmanGame game, boolean visibility) {
         super(game);
-        this.visibleGame = visi;
+        this.visibleGame = visibility;
     }
 
     /**
@@ -64,7 +57,7 @@ public class Pacman extends PacmanActor {
         }
         reset();
         collider = new Rectangle(0, 0, 8, 8);
-        ia = new IA();
+        ia = new IA(this);
     }
 
     public int getRow() {
@@ -73,6 +66,10 @@ public class Pacman extends PacmanActor {
 
     public int getCol() {
         return col;
+    }
+
+    public int getDesiredDirection() {
+        return desiredDirection;
     }
 
     /**
@@ -159,37 +156,7 @@ public class Pacman extends PacmanActor {
             return;
         }
 
-        //Change this string depending on what you want to do
-        //manual is self explanatory, maddog is random and eatmax is bugged
-        String movementMode = "minmax";
-
-        switch (movementMode) {
-
-            case "maddog": {
-                desiredDirection = ia.randDirection(desiredDirection, game);
-                break;
-            }
-            case "eatmax": {
-                desiredDirection = ia.askDirectionEatmaxTreeSearch(game);
-                break;
-            }
-            case "minmax": {
-                desiredDirection = ia.askDirectionMinMaxTreeSearch(game);
-                break;
-            }
-            case "manual": {
-                if (Keyboard.keyPressed[KeyEvent.VK_LEFT]) {
-                    desiredDirection = 2;
-                } else if (Keyboard.keyPressed[KeyEvent.VK_RIGHT]) {
-                    desiredDirection = 0;
-                } else if (Keyboard.keyPressed[KeyEvent.VK_UP]) {
-                    desiredDirection = 3;
-                } else if (Keyboard.keyPressed[KeyEvent.VK_DOWN]) {
-                    desiredDirection = 1;
-                }
-                break;
-            }
-        }
+        desiredDirection = ia.askDirection(game);
         
         /* Manage the movement of pacman */
         yield:

@@ -1,9 +1,12 @@
 package IA;
 
 import Elements.PacmanGame;
+import Elements.actor.Pacman;
 import Elements.infra.Game;
+import Elements.infra.Keyboard;
 import main.Main;
 
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -15,27 +18,62 @@ public class IA {
     private FloydWarshall fw;
     private ArrayList<Integer>[][] possibleMoves;
 
-    public IA(){
+    private Pacman pacman;
+
+    //Change this string depending on what you want to do
+    //manual is literally manual input where the player directs Pacman, maddog is random and eatmax is bugged
+    //The real good one is "minmax"
+    private String mode = "minmax";
+
+    public IA(Pacman pacman){
         this.lastInput=3;
         this.fw = new FloydWarshall();
         fw.algoFW();
         System.out.println("Floyd Warshall Ready");
         possibleMoves=fw.possibleMoves();
+        this.pacman=pacman;
     }
 
-
+    public int askDirection(PacmanGame game){
+        int res = 0;
+        switch(mode){
+            case "maddog": {
+                res =  randDirection(game);
+                break;
+            }
+            case "eatmax": {
+                res = askDirectionEatmaxTreeSearch(game);
+                break;
+            }
+            case "minmax": {
+                res = askDirectionMinMaxTreeSearch(game);
+                break;
+            }
+            case "manual": {
+                if (Keyboard.keyPressed[KeyEvent.VK_LEFT]) {
+                    res = 2;
+                } else if (Keyboard.keyPressed[KeyEvent.VK_RIGHT]) {
+                    res = 0;
+                } else if (Keyboard.keyPressed[KeyEvent.VK_UP]) {
+                    res = 3;
+                } else if (Keyboard.keyPressed[KeyEvent.VK_DOWN]) {
+                    res = 1;
+                }
+                break;
+            }
+        }
+        return res;
+    }
 
     /**
      * Return a random direction for Pacman
      * @return 0 = RIGHT, 1 = DOWN, 2 = LEFT, 3 = UP
      */
-    public int randDirection(int actualDirectionPacman, Game game){
-        int res = ThreadLocalRandom.current().nextInt(0, 4);
-        while(res == uTurn[actualDirectionPacman]){
-            //System.out.println("Res is "+res+" and Pacman goes "+actualDirectionPacman);
-            res = ThreadLocalRandom.current().nextInt(0, 4);
-        }
-        //System.out.println("Now he goes :"+res);
+    public int randDirection(PacmanGame game){
+        int res;
+        do{
+            res = ThreadLocalRandom.current().nextInt(0, 4); //Chooses a random direction
+        }while(res == uTurn[pacman.getDesiredDirection()]);                 //Checks if the chosen direction isn't the opposite of the way we're currently headed to avoid staying stuck
         return res;
     }
 
