@@ -85,6 +85,7 @@ public class PacmanGame extends Game {
     public int currentFoodCount;
     public int totalFood;
 
+    public String IAMode;
 
     
     public PacmanGame(boolean verbose) {

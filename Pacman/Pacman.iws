@@ -8,7 +8,10 @@
   <component name="ChangeListManager">
     <list default="true" id="0b9cffbb-2e40-4eae-a4fd-e47475cddbe7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/Pacman.iws" beforeDir="false" afterPath="$PROJECT_DIR$/Pacman.iws" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Elements/PacmanGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Elements/PacmanGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Elements/actor/HUD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Elements/actor/HUD.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Elements/actor/Pacman.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Elements/actor/Pacman.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Elements/infra/ShortestPathFinder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Elements/infra/ShortestPathFinder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/IA/IA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IA/IA.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -32,11 +35,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Elements/actor/Pacman.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" selection-start-line="7" selection-end-line="7" />
+            <state relative-caret-position="195">
+              <caret line="157" column="28" lean-forward="true" selection-start-line="157" selection-start-column="28" selection-end-line="157" selection-end-column="28" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1781#1782#0" expanded="true" />
@@ -56,11 +59,41 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Elements/actor/HUD.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="435">
+              <caret line="36" column="39" lean-forward="true" selection-start-line="36" selection-start-column="39" selection-end-line="36" selection-end-column="39" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Elements/infra/Game.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="213">
+              <caret line="39" column="9" lean-forward="true" selection-start-line="39" selection-start-column="9" selection-end-line="39" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Elements/PacmanGame.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-285">
+              <caret line="87" column="25" lean-forward="true" selection-start-line="87" selection-start-column="25" selection-end-line="87" selection-end-column="25" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/IA/IA.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-166">
-              <caret line="25" column="35" lean-forward="true" selection-start-line="25" selection-start-column="35" selection-end-line="25" selection-end-column="35" />
+            <state relative-caret-position="270">
+              <caret line="43" column="27" lean-forward="true" selection-start-line="43" selection-start-column="27" selection-end-line="43" selection-end-column="27" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -69,29 +102,31 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/IA/GameState.java">
+        <entry file="file://$PROJECT_DIR$/src/Elements/infra/ShortestPathFinder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="218" column="111" selection-start-line="218" selection-start-column="111" selection-end-line="218" selection-end-column="111" />
+            <state relative-caret-position="690">
+              <caret line="48" column="10" selection-start-line="48" selection-start-column="10" selection-end-line="48" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Elements/actor/Title.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="85" column="18" selection-start-line="85" selection-start-column="18" selection-end-line="85" selection-end-column="18" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#8290#8291#0" expanded="true" />
-                <element signature="e#8390#8391#0" expanded="true" />
-                <element signature="e#8490#8491#0" expanded="true" />
-                <element signature="e#8588#8589#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/IA/GameStatePlus.java">
+        <entry file="file://$PROJECT_DIR$/src/Elements/infra/Actor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1185">
-              <caret line="8" column="37" selection-start-line="8" selection-start-column="37" selection-end-line="8" selection-end-column="37" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="198">
+              <caret line="41" column="16" selection-start-line="41" selection-start-column="16" selection-end-line="41" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -116,11 +151,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find />
-      <find>mark</find>
-      <find>searc</find>
-      <find>outside</find>
-      <find>lives</find>
       <find>34</find>
       <find>utur</find>
       <find>colli</find>
@@ -146,14 +176,19 @@
       <find>thread</find>
       <find>possi</find>
       <find>ran</find>
+      <find>keyevent</find>
+      <find>High</find>
+      <find>debug1</find>
+      <find>high s</find>
+      <find>keypr</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/src/br/ol/pacman/actor</dir>
       <dir>$PROJECT_DIR$/src/br/ol/pacman</dir>
       <dir>$PROJECT_DIR$/src/Elements/actor</dir>
-      <dir>$PROJECT_DIR$/src</dir>
       <dir>$PROJECT_DIR$/src/Elements</dir>
       <dir>$PROJECT_DIR$/src/IA</dir>
+      <dir>$PROJECT_DIR$/src</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -178,7 +213,6 @@
         <option value="$PROJECT_DIR$/src/Elements/actor/PowerBall.java" />
         <option value="$PROJECT_DIR$/src/Elements/infra/Game.java" />
         <option value="$PROJECT_DIR$/src/IA/PathfindNode.java" />
-        <option value="$PROJECT_DIR$/src/Elements/PacmanGame.java" />
         <option value="$PROJECT_DIR$/src/Elements/actor/Food.java" />
         <option value="$PROJECT_DIR$/src/Elements/actor/Ghost.java" />
         <option value="$PROJECT_DIR$/src/IA/FloydWarshall.java" />
@@ -188,6 +222,9 @@
         <option value="$PROJECT_DIR$/src/main/Main.java" />
         <option value="$PROJECT_DIR$/src/IA/GameState.java" />
         <option value="$PROJECT_DIR$/src/IA/GameStatePlus.java" />
+        <option value="$PROJECT_DIR$/src/Elements/infra/ShortestPathFinder.java" />
+        <option value="$PROJECT_DIR$/src/Elements/PacmanGame.java" />
+        <option value="$PROJECT_DIR$/src/Elements/actor/HUD.java" />
         <option value="$PROJECT_DIR$/src/IA/IA.java" />
         <option value="$PROJECT_DIR$/src/Elements/actor/Pacman.java" />
       </list>
@@ -266,7 +303,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557410811300" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557412190375" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -339,7 +376,7 @@
       <workItem from="1556707413081" duration="487000" />
       <workItem from="1556711868167" duration="1579000" />
       <workItem from="1557336233849" duration="1782000" />
-      <workItem from="1557406516613" duration="4618000" />
+      <workItem from="1557406516613" duration="5618000" />
     </task>
     <task id="LOCAL-00001" summary="Ajout du jeu Pacman déjà codé">
       <created>1551793955622</created>
@@ -551,11 +588,18 @@
       <option name="project" value="LOCAL" />
       <updated>1557409895329</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Commentary of IA class, moved the mode selection to IA instead of Pacman">
+      <created>1557411160457</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1557411160457</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="91988000" />
+    <option name="totallyTimeSpent" value="92988000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -578,8 +622,8 @@
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4964029" visible="true" weight="0.32937366" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49142224" weight="0.32937366" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49584946" weight="0.32937366" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49031544" visible="true" weight="0.32937366" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39956802" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -588,7 +632,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4969563" weight="0.32397407" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50359714" side_tool="true" visible="true" weight="0.32937366" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50968456" side_tool="true" visible="true" weight="0.32937366" />
       <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.4986165" weight="0.32937366" />
       <window_info anchor="bottom" id="Duplicate detector" order="13" weight="0.32937366" />
       <window_info anchor="bottom" id="Thumbnails" order="14" sideWeight="0.4997233" weight="0.32937366" />
@@ -668,7 +712,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added param Game to randDirection, to be processed later" />
     <MESSAGE value="Created class Gamestate (no comments but self explaining variable names)&#10;repaired imports&#10;cut gameover screen" />
     <MESSAGE value="Improved AI by eatmax, doesn't see walls correctly&#10;Set up a different way of choosing controls" />
     <MESSAGE value="Cleaned a bit" />
@@ -693,7 +736,8 @@
     <MESSAGE value="Try, catch for when pacman eats all the ghosts" />
     <MESSAGE value="Beautification of the code, commentary of the Gamestate class" />
     <MESSAGE value="Commentary of the GameStatePlus class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Commentary of the GameStatePlus class" />
+    <MESSAGE value="Commentary of IA class, moved the mode selection to IA instead of Pacman" />
+    <option name="LAST_COMMIT_MESSAGE" value="Commentary of IA class, moved the mode selection to IA instead of Pacman" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/br/ol/pacman/infra/Keyboard.java" />
@@ -715,13 +759,6 @@
     <entry file="file://$PROJECT_DIR$/src/br/ol/pacman/PacmanGame.java" />
     <entry file="file://$PROJECT_DIR$/src/br/ol/pacman/actor/Point.java" />
     <entry file="file://$PROJECT_DIR$/src/br/ol/pacman/actor/GameOver.java" />
-    <entry file="file://$PROJECT_DIR$/src/Elements/infra/Actor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="16" selection-start-column="16" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Elements/infra/BitmapFontRenderer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -759,13 +796,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/res/background_0.png">
       <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Elements/actor/HUD.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="23" selection-start-column="23" selection-end-column="23" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/build/classes/IA/IA.class">
       <provider selected="true" editor-type-id="text-editor" />
@@ -812,13 +842,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Elements/infra/ShortestPathFinder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="26" column="5" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Elements/actor/Food.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="299">
@@ -849,15 +872,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="765">
           <caret line="56" column="75" selection-start-line="56" selection-start-column="75" selection-end-line="56" selection-end-column="75" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Elements/actor/Title.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -895,6 +909,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/IA/FloydWarshall.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="539">
+          <caret line="174" column="27" selection-start-line="174" selection-start-column="27" selection-end-line="174" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Elements/infra/Actor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="41" column="16" selection-start-line="41" selection-start-column="16" selection-end-line="41" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Elements/actor/Title.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="85" column="18" selection-start-line="85" selection-start-column="18" selection-end-line="85" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Elements/infra/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="39" column="9" lean-forward="true" selection-start-line="39" selection-start-column="9" selection-end-line="39" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
@@ -905,34 +950,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Elements/actor/HUD.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="36" column="39" lean-forward="true" selection-start-line="36" selection-start-column="39" selection-end-line="36" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Elements/PacmanGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="539">
-          <caret line="83" column="10" selection-start-line="83" selection-start-column="10" selection-end-line="83" selection-end-column="10" />
+        <state relative-caret-position="-285">
+          <caret line="87" column="25" lean-forward="true" selection-start-line="87" selection-start-column="25" selection-end-line="87" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Elements/infra/Game.java">
+    <entry file="file://$PROJECT_DIR$/src/Elements/infra/ShortestPathFinder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="25" column="20" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="20" />
+        <state relative-caret-position="690">
+          <caret line="48" column="10" selection-start-line="48" selection-start-column="10" selection-end-line="48" selection-end-column="10" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/IA/FloydWarshall.java">
+    <entry file="file://$PROJECT_DIR$/src/IA/IA.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="539">
-          <caret line="174" column="27" selection-start-line="174" selection-start-column="27" selection-end-line="174" selection-end-column="27" />
+        <state relative-caret-position="270">
+          <caret line="43" column="27" lean-forward="true" selection-start-line="43" selection-start-column="27" selection-end-line="43" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Elements/actor/Pacman.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        <state relative-caret-position="195">
+          <caret line="157" column="28" lean-forward="true" selection-start-line="157" selection-start-column="28" selection-end-line="157" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1781#1782#0" expanded="true" />
@@ -947,16 +1002,6 @@
             <element signature="e#9951#9952#0" expanded="true" />
             <element signature="e#9980#9981#0" expanded="true" />
             <element signature="e#10011#10012#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/IA/IA.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-166">
-          <caret line="25" column="35" lean-forward="true" selection-start-line="25" selection-start-column="35" selection-end-line="25" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

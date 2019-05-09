@@ -155,7 +155,7 @@ public class Pacman extends PacmanActor {
         if (!visible) {
             return;
         }
-
+        ia.changeMode(game);
         desiredDirection = ia.askDirection(game);
         
         /* Manage the movement of pacman */

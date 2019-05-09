@@ -31,11 +31,21 @@ public class IA {
         fw.algoFW();
         System.out.println("Floyd Warshall Ready");
         possibleMoves=fw.possibleMoves();
+        pacman.game.IAMode = mode;
         this.pacman=pacman;
     }
 
+    public void changeMode(PacmanGame game){
+        if (Keyboard.keyPressed[KeyEvent.VK_M]) {
+            mode = "manual";
+        } else if (Keyboard.keyPressed[KeyEvent.VK_L]) {
+            mode = "minmax";
+        }
+        game.IAMode = mode;
+    }
+
     public int askDirection(PacmanGame game){
-        int res = 0;
+        int res = pacman.getDesiredDirection();
         switch(mode){
             case "maddog": {
                 res =  randDirection(game);
