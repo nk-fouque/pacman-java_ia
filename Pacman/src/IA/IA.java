@@ -45,7 +45,7 @@ public class IA {
      * @return the new direction of Pacman
      */
     public int askDirectionEatmaxTreeSearch(PacmanGame game){
-        GameState state = new GameState(game,lastInput,possibleMoves);
+        GameState state = new GameState(game,lastInput);
         int res = state.searchBestGamestate(8);
         if(verbose) System.out.println("\n");
         lastInput=res; //Records the input before sending it

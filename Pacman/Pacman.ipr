@@ -136,6 +136,13 @@
       </item>
     </group>
   </component>
+  <component name="ProjectDictionaryState">
+    <dictionary name="nicolas">
+      <words>
+        <w>pacman</w>
+      </words>
+    </dictionary>
+  </component>
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Pacman.iml" filepath="$PROJECT_DIR$/Pacman.iml" />
