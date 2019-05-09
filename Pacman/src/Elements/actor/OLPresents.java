@@ -13,7 +13,7 @@ import java.awt.Graphics2D;
  */
 public class OLPresents extends PacmanActor {
     
-    private String text = "YOLO Matthieu \n j'ai deja trouve \n ou ecrire";
+    private String text = "AI 3INFO";
     private int textIndex;
 
     public OLPresents(PacmanGame game) {
@@ -24,7 +24,7 @@ public class OLPresents extends PacmanActor {
     public void updateOLPresents() {
         yield:
         while (true) {
-            switch (3) { //originally switch instructionPointer
+            switch (instructionPointer) {
                 case 0:
                     waitTime = System.currentTimeMillis();
                     instructionPointer = 1;
@@ -47,10 +47,10 @@ public class OLPresents extends PacmanActor {
                     waitTime = System.currentTimeMillis();
                     instructionPointer = 3;
                 case 3:
-//                    while (System.currentTimeMillis() - waitTime < 1500) {
-//                        break yield;
-//                    }
-                    game.setState(State.READY);
+                    while (System.currentTimeMillis() - waitTime < 1500) {
+                        break yield;
+                    }
+                    game.setState(State.TITLE);
                     break yield;
             }
         }
@@ -61,7 +61,7 @@ public class OLPresents extends PacmanActor {
         if (!visible) {
             return;
         }
-        game.drawText(g, text.substring(0, textIndex), 60, 130);
+        game.drawText(g, text.substring(0, textIndex), 80, 130);
     }
 
     

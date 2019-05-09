@@ -44,6 +44,7 @@ public class Title extends PacmanActor {
     public void updateTitle() {
         yield:
         while (true) {
+
             switch (instructionPointer) {
                 case 0:
                     waitTime = System.currentTimeMillis();
@@ -68,9 +69,14 @@ public class Title extends PacmanActor {
                     instructionPointer = 4;
                 case 4:
                     pushSpaceToStartVisible = ((int) (System.nanoTime() * 0.0000000075) % 3) > 0;
-//                    if (Keyboard.keyPressed[KeyEvent.VK_SPACE]) {
+                    if (Keyboard.keyPressed[KeyEvent.VK_M]) {
+                        game.setIAMode("manual");
+                    } else if (Keyboard.keyPressed[KeyEvent.VK_L]) {
+                        game.setIAMode("minmax");
+                    }
+                    if (Keyboard.keyPressed[KeyEvent.VK_SPACE]) {
                         game.startGame();
-//                    }
+                    }
                     break yield;
             }
         }
@@ -87,6 +93,8 @@ public class Title extends PacmanActor {
             if (pushSpaceToStartVisible) {
                 game.drawText(g, "PUSH SPACE TO START", 37, 170);
             }
+            game.drawText(g, "PUSH M/L TO CHANGE AI MODE",6,50);
+            game.drawText(g, "AI BY TEAM PIACMAN 2019", 19,225);
             game.drawText(g, "PROGRAMMED BY O.L. 2017", 20, 240);
             game.drawText(g, "ORIGINAL GAME BY NAMCO 1980", 5, 255);
         }

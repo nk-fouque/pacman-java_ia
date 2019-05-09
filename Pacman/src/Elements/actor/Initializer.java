@@ -31,7 +31,7 @@ public class Initializer extends PacmanActor {
                     }
                     instructionPointer = 2;
                 case 2:
-                    game.setState(State.OL_PRESENTS);
+                    game.setState(State.TITLE);
                     break yield;
             }
         }

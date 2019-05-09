@@ -85,7 +85,7 @@ public class PacmanGame extends Game {
     public int currentFoodCount;
     public int totalFood;
 
-    public String IAMode;
+    private String IAMode = "minmax";
 
     
     public PacmanGame(boolean verbose) {
@@ -110,7 +110,15 @@ public class PacmanGame extends Game {
             broadcastMessage("stateChanged");
         }
     }
-    
+
+    public String getIAMode() {
+        return IAMode;
+    }
+
+    public void setIAMode(String IAMode) {
+        this.IAMode = IAMode;
+    }
+
     public void addScore(int point) {
         score += point;
         if (score > hiscore) {

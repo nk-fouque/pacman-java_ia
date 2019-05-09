@@ -35,7 +35,7 @@ public class HUD extends PacmanActor {
             g.drawImage(frame, 60 + 20 * lives, 272, null);
         }
         game.drawText(g, "MODE",180,1);
-        game.drawText(g,game.IAMode.toUpperCase(),170,10);
+        game.drawText(g,game.getIAMode().toUpperCase(),170,10);
     }
 
     // broadcast messages

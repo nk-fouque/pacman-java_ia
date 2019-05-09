@@ -2,7 +2,6 @@ package IA;
 
 import Elements.PacmanGame;
 import Elements.actor.Pacman;
-import Elements.infra.Game;
 import Elements.infra.Keyboard;
 import main.Main;
 
@@ -23,7 +22,7 @@ public class IA {
     //Change this string depending on what you want to do
     //manual is literally manual input where the player directs Pacman, maddog is random and eatmax is bugged
     //The real good one is "minmax"
-    private String mode = "minmax";
+    private String mode;
 
     public IA(Pacman pacman){
         this.lastInput=3;
@@ -31,17 +30,17 @@ public class IA {
         fw.algoFW();
         System.out.println("Floyd Warshall Ready");
         possibleMoves=fw.possibleMoves();
-        pacman.game.IAMode = mode;
+        this.mode = pacman.game.getIAMode();
         this.pacman=pacman;
     }
 
     public void changeMode(PacmanGame game){
         if (Keyboard.keyPressed[KeyEvent.VK_M]) {
-            mode = "manual";
+            game.setIAMode("manual");
         } else if (Keyboard.keyPressed[KeyEvent.VK_L]) {
-            mode = "minmax";
+            game.setIAMode("minmax");
         }
-        game.IAMode = mode;
+        mode = game.getIAMode();
     }
 
     public int askDirection(PacmanGame game){
