@@ -18,7 +18,7 @@ public class HUD extends PacmanActor {
 
     @Override
     public void init() {
-        loadFrames("/res/pacman_life.png");    
+        loadFrames("/res/pacman_life.png");
     }
 
     @Override
