@@ -1,4 +1,4 @@
-# IA-PacMan
+﻿# IA-PacMan
 
 ## Launch of the program
 ### Execution
@@ -68,5 +68,7 @@ The main issue with it is that it doesn’t take into account the real behavior 
 ### ExpectiMax (work in progress)
 We also wanted to code an Expectimax algorithm, for PacMan to anticipate ghosts movements (instead of thinking they were just aggressive like the red one). We had little time for coding this algorithm and the way the game was implemented in Java made the thing harder. This algorithm is not finished yet, in Expectimax.java (the code is commented to avoid error messages). Expectimax is similar to MinMan algorithm, but the ‘min’ is calculated based on the theoric behaviour of the ghosts. The red ghost is aggressive (aggressiveGhostChoice), the pink one anticipates the trajectory (trickyGhostChoice) and blue and orange ghosts act randomly (randomGhostChoice). If they are in Vulnerable mode, they run away from Pacman (scaredGhostChoice). PacMan’s choice of direction is then calculated depending on the game state after the theoric ghosts’ movements.
 
-## Arbitrage vidéo
+## Demonstration
+The demo is available following this link : https://youtu.be/ztCCebl6Bbc
+
 In this video we will show the strength and weakness of PacMan with the MinMax algorithm. It doesn't win every game it plays but with few tries it can finish the first level.
