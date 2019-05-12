@@ -42,7 +42,7 @@ To improve our code we implemented a more efficient method to go over all the po
 
 ### MinMax
 
-We then implemented the MinMax algorithm, where PacMan thinks all ghosts are out to get him and takes his decisions accordingly. 
+We then implemented the MinMax algorithm, where PacMan thinks all ghosts are out to get him and takes his decisions accordingly.
 The AI still uses the search tree, but instead of only considering its own moves, it has both itself and the ghosts play one after the other, thinking that the ghosts will always move in the direction that will bring them closer to PacMan in normal mode, and in the direction that will take them away from him when they are in vulnerable mode.
 We kept the same base as in the EatMax algorithm, but our PacMan uses the GameStatePlus class instead of the GameState class, and in particular the functions moveGhosts and shortestPathToPacman.
 From now on, at the beginning of each game the AI uses the Floyd-Warshall algorithm in order to fill a matrix containing the distances between all the squares of the map, and a matrix containing lists of the possible directions from each square (possibleMoves). The functions moveGhosts and shortestPathToPacman use those matrixes to compute the best moves for the four ghosts in the ‘min’ part of the algorithm.
@@ -58,3 +58,16 @@ We also wanted to code an Expectimax algorithm, for PacMan to anticipate ghosts 
 
 ## Arbitrage vidéo
 In this video we will show the strength and weakness of PacMan with the MinMax algorithm. It doesn't win every game it plays but with few tries it can finish the first level.
+
+# Launching the Game
+## Execution
+Either :
+	- Go in your IDE and launch the main() from the Main class
+	- Go to Executable/ and execute Piacman.jar
+		- On Windows, a simple double-click is enough
+		- On Linux, sometimes due to problems with intelliJ .jar building, a double-click doesn't work, in this case, you may use ```java -jar Piacman.jar```
+The folder still contains the original JavaPacman.jar, in any need of comparison
+
+## Switching Modes
+On the Title Screen, you can see on top-right that by default the game is played by MinMax.
+On the Title Screen (or at any time during play) you can press M to go to Manual mode or K to go to EatMax, you can go back to MinMax by pressing L
