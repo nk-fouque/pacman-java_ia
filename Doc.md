@@ -1,6 +1,18 @@
 # IA-PacMan
 
 ## Launch of the program
+### Execution
+Either :
+	- Go in your IDE and launch the main() from the Main class
+	- Go to Executable/ and execute Piacman.jar
+		- On Windows, a simple double-click is enough
+		- On Linux, sometimes due to problems with intelliJ .jar building, a double-click doesn't work, in this case, you may use ```java -jar Piacman.jar```
+The folder still contains the original JavaPacman.jar, in any need of comparison
+
+### Switching Modes
+On the Title Screen, you can see on top-right that by default the game is played by MinMax.
+On the Title Screen (or at any time during play) you can press M to go to Manual mode or K to go to EatMax, you can go back to MinMax by pressing L
+
 
 
 ## Source code
@@ -58,16 +70,3 @@ We also wanted to code an Expectimax algorithm, for PacMan to anticipate ghosts 
 
 ## Arbitrage vidéo
 In this video we will show the strength and weakness of PacMan with the MinMax algorithm. It doesn't win every game it plays but with few tries it can finish the first level.
-
-# Launching the Game
-## Execution
-Either :
-	- Go in your IDE and launch the main() from the Main class
-	- Go to Executable/ and execute Piacman.jar
-		- On Windows, a simple double-click is enough
-		- On Linux, sometimes due to problems with intelliJ .jar building, a double-click doesn't work, in this case, you may use ```java -jar Piacman.jar```
-The folder still contains the original JavaPacman.jar, in any need of comparison
-
-## Switching Modes
-On the Title Screen, you can see on top-right that by default the game is played by MinMax.
-On the Title Screen (or at any time during play) you can press M to go to Manual mode or K to go to EatMax, you can go back to MinMax by pressing L
