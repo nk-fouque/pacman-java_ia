@@ -3,10 +3,8 @@
 ## Launch of the program
 ### Execution
 Either :
-	- Go in your IDE and launch the main() from the Main class
-	- Go to Executable/ and execute Piacman.jar
-		- On Windows, a simple double-click is enough
-		- On Linux, sometimes due to problems with intelliJ .jar building, a double-click doesn't work, in this case, you may use ```java -jar Piacman.jar```
+* Go in your IDE and launch the main() from the Main class OR Go to Executable/ and execute Piacman.jar
+* On Windows, a simple double-click is enough OR On Linux, sometimes due to problems with intelliJ .jar building, a double-click doesn't work, in this case, you may use ```java -jar Piacman.jar```
 The folder still contains the original JavaPacman.jar, in any need of comparison
 
 ### Switching Modes
