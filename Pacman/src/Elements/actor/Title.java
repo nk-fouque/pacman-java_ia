@@ -73,6 +73,8 @@ public class Title extends PacmanActor {
                         game.setIAMode("manual");
                     } else if (Keyboard.keyPressed[KeyEvent.VK_L]) {
                         game.setIAMode("minmax");
+                    } else if (Keyboard.keyPressed[KeyEvent.VK_K]) {
+                        game.setIAMode("eatmax");
                     }
                     if (Keyboard.keyPressed[KeyEvent.VK_SPACE]) {
                         game.startGame();
@@ -93,7 +95,7 @@ public class Title extends PacmanActor {
             if (pushSpaceToStartVisible) {
                 game.drawText(g, "PUSH SPACE TO START", 37, 170);
             }
-            game.drawText(g, "PUSH M/L TO CHANGE AI MODE",6,50);
+            game.drawText(g, "PUSH K/M/L TO CHANGE AI MODE",0,50);
             game.drawText(g, "AI BY TEAM PIACMAN 2019", 19,225);
             game.drawText(g, "PROGRAMMED BY O.L. 2017", 20, 240);
             game.drawText(g, "ORIGINAL GAME BY NAMCO 1980", 5, 255);

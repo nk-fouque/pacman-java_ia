@@ -39,6 +39,8 @@ public class IA {
             game.setIAMode("manual");
         } else if (Keyboard.keyPressed[KeyEvent.VK_L]) {
             game.setIAMode("minmax");
+        } else if (Keyboard.keyPressed[KeyEvent.VK_K]) {
+            game.setIAMode("eatmax");
         }
         mode = game.getIAMode();
     }
