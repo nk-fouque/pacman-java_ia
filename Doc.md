@@ -1,56 +1,60 @@
-# IA-Pacman
+# IA-PacMan
 
-## Lancement du programme
-
-
-## Code
-Le code provient d'un programme opensource d'un certain Leonardo Ono qui a fait une version simplifiée en java du célèbre jeu Pac-Man.
-
-Le programme s'organise en deux branches importantes : les éléments acteurs du jeu et son infrastructure. La plupart des classes héritent donc de PacmanActor . Dans les acteurs on retrouve les fantômes, les boules de nourritures, les powerballs (qui permettent à Pacman de manger des fantômes) et tous les éléments s'affichant à l'écran (titre, game over,...).
-
-Une des premières difficultés que nous avons rencontré est l’implémentation de PacMan par Leonardo Ono. Son implémentation ne correspondait pas exactement au fonctionnement original du jeu et nous avons passé un certain temps à commenter et recoder certaines classes, notamment les fantômes. Les fantômes de PacMan ont un comportement très spécifique en fonction de leur couleur. Dans le jeu original :
-* le rouge, Blinky, cherchait à rattraper Pacman
-* le rose, Pinky, anticipait ses mouvements en essayant d’atteindre un emplacement 4 cases devant Pacman
-* le bleu, Inky, tentait de parvenir à une case qui correspondait au double du vecteur reliant le fantôme rouge à la 2e case devant Pacman. Ca donne l’impression qu’il agit aléatoirement mais ce n’est pas totalement vrai
-* le orange, Clyde, cherchait à atteindre Pacman tant que celui-ci était à plus de 8 cases de lui. Sinon, il entrait en “Scatter Mode”. 
-
-Le Scatter Mode est un mode de déplacement des fantômes où ils ne cherchent plus à attraper Pacman mais où ils tentent d’atteindre un des quatre coins de la zone  de jeu. C’est le mode dans lequel ils sont après être sortis de leur cage centrale, pendant 7 secondes. D’ailleurs, les fantômes ne sortent pas tous en même temps de la cage : le rouge est directement dehors, le rose sort immédiatement mais le bleu attend que Pacman ait mangé 30 éléments de nourriture et le orange un tier de la nourriture totale. Parmi toutes ces spécificités des fantômes, **pas une seule** n’avait été implémentée par le développeur du jeu en java. Nous n’avons pas pu toutes les implémenter non plus, parce que certaines fonctionnalités n’étaient pas compatibles avec l’état actuel du code, mais nous n’avions pas non plus le temps de recoder tout le jeu nous même. Nos fantômes agissent comme dans le jeu original, à quelques exceptions près : 
-* le fantôme rose anticipe à 2 cases et non à 4
-* un bug graphique arrive parfois lorsque Pacman mange une Powerball alors que le fantôme orange est dans la cage : il reste affiché comme vulnérable (bleu et effrayé) quand il en sort alors que son état est en Scattermode ou Normalmode
-* le fantôme bleu a un comportement totalement aléatoire, l’implémentation de son véritable comportement n’est pas compatible avec le code qui l’entoure
-* les fantômes sont censés aller plus lentement quand ils sont en mode “vulnérable”, mais cette implémentation n’est pas compatible avec le code qui l’entoure
+## Launch of the program
 
 
-Mais une fois le code modifié, nous pouvions faire quelques algorithmes.
+## Source code
+The opensource code was provided by Leonardo Ono. It is a simplified version of the famous video game: PacMan
 
-## Algorithmes et IA
+The program is divided in two main branches : the actor elements and its infrastructure. Most of the classes inherite from PacmanActor. The different actors are for example ghosts, food balls, powerballs (which make PacMan able to eat the ghosts) and all the elements displayed on the screen (title, game over,...)
+
+One of the first difficulty we met was the implementation of the game by Leonardo Ono. His programm wasn’t faithful to the original game and we spent some time commenting and rewriting some classes, especially the ghosts. PacMan’s ghosts have a very specific behaviour depending on their color.
+In the original game, the ghosts’ NormalMode is :
+* the red one, Blinky, tries to catch PacMan
+* the pink one, Pinky, anticipates its movements, it tries to reach 4 tiles ahead of PacMan
+* the blue one, Inky, tries to reach a specific tile : the case is determined by tracing twice the vector between the position of Blinky and two tiles ahead of PacMan. From an external point of view, it looks like Inky’s movements are random
+* the orange one, Clyde, tries to reach PacMan while they are at least 8 tiles apart. If it gets closer, Clyde enters its ‘ScatterMode’
+
+ScatterMode is a mode in which the ghosts don’t try to catch PacMan but instead try to reach one of the 4 corners of the map. When they come out of their cage (at the beginning or after being eaten), they stay in ScatterMode for 7s. At the beginning, the ghosts don’t get out of their cage at the same time: the red one starts outside the cage, the pink one gets out immediately, the blue one waits until PacMan ate at least 30 food balls and the orange one waits until it ate a third of the total food.
+
+Among those features, not **one of them** were implemented by the developer of this game in Java. We couldn’t implement them all either, sometimes because they weren’t compatible with the actual code. And we did not have the time to recode everything ourselves.
+
+Our ghosts act like in the original game, with some exceptions :
+* the pink ghost anticipates 2 tiles ahead instead of 4
+* a graphic bug happens sometimes : when PacMan eats a Powerball while the orange ghost is still in its cage, it stays displayed as ‘vulnerable’ (its frame is blue and scared) but its actual mode is not affected
+* the blue ghost only has a random behaviour, its true behaviour wasn’t compatible with the actual code
+* ghosts are supposed to be slower when chased by PacMan after eating a Powerball, but it wasn’t compatible with the actual code
+* ghosts are supposed to visually return to their cage after being eaten, but they only teleport themselves in the cage : it wasn’t compatible with the actual code
+
+Once the code was modified, we could start to code some AI algorithms.
+
+## Algorithms and AI
 
 ### EatMax
 
-Le premier algorithme que nous avons cherché à mettre en place est un algorithme MinMax simplifié (EatMax). Il fait appel à un arbre de recherche qui explore les possibilités d'évolution de Pacman jusqu'à 8 cases devant lui avec comme objectif de maximiser son score. Il choisit donc la direction la plus favorable, là où il y a de la nourriture..
-Cet arbre de recherche est programmé dans la classe PathfindTree.java et tient surtout compte des murs et des possibilités de mouvements de Pacman
+The first algorithm we tried to implement was a simplified version of the MinMax algorithm (EatMax). It uses a search tree to explore the different possibilities of progression of PacMan 8 squares ahead, with the objective to maximize its score. It consequently choses the most favorable direction, where there is food.
+The search tree is implemented in the PathFindTree.java class, and mostly takes into account the walls and PacMan’s possibility of movement.
 
-La première version de l’algorithme ne cherchait qu’à maximiser le score, sans essayer de prévoir le mouvement des fantômes. C’est la partie “Max” d’un “MinMax”, il s’agit de l’algorithme “EatMax”, qui utilise la classe GameState. Cependant, Pacman prenait souvent les fantômes en compte trop tard. C’est un algorithme très naïf qui nous a permis de savoir ce qui manquait à notre Pacman pour devenir meilleur. De plus, nous avons pendant longtemps eu un problème au niveau du tunnel reliant les côtés gauche et droit de la carte : Pacman ne comprenait pas qu’il pourrait être intéressant pour lui de traverser, et ne les utilisait donc quasiment jamais, quitte à être attrapé par un fantôme. C’était d’autant plus embêtant que des boules de nourriture se trouvent à l’entrée des tunnels, et il n’allait quasiment jamais les chercher.
 
-Pour améliorer notre code nous avons implémenté une méthode plus efficace pour parcourir les possibilités : la classe FloydWarshall.java. Cette classe permet de calculer plus facilement la distance entre tous les points de la zone de jeu. Elle nous permet d’améliorer l’algorithme et d’implémenter ensuite le “Min” de “MinMax”.
+Therefore, the first version of the algorithm only seeked to maximize its score, without trying to predict the moves of the ghosts. It is the ‘max’ part of a ‘MinMax’, in this case the ‘EatMax’ algorithm, which uses the GameState class. However, with this implementation, PacMan often took the ghosts into account only when it was to late. It is a very naive algorithm that allowed us to see what our PacMan lacked in order to become better. Moreover, we had for a long time a problem concerning the tunnel connecting the left and right sides of the map: PacMan didn’t understand that it could be interesting for him to cross, and so he hardly ever used it, even if it meant being caught by a ghost. It was all the more annoying that it meant that PacMan almost never got the food that was in the entrance of the tunnel.
 
+To improve our code we implemented a more efficient method to go over all the possibilities: the FloydWarshall.java class. This class allows us to compute more easily the distances between all the points of the map, thus it allows us to improve our algorithm and to then implement the ‘min’ part of ‘MinMax’.
 
 ### MinMax
 
-Nous avons donc mis en place un algorithme MinMax, où Pacman pense que tous les fantômes vont essayer de l’attraper, et va donc prendre cela en compte dans ses décisions. 
-Il va ainsi continuer à faire un arbre de recherche, mais il fera jouer l’un après l’autre Pacman et les fantômes, en considérant que les fantômes vont toujours aller dans la direction qui les rapproche le plus de lui s’ils sont en mode normal, et qui les éloigne le plus s’ils sont en mode vulnérable.
-Nous avons gardé la même base que EatMax, mais notre Pacman utilise la classe GameStatePlus, et en particulier les fonctions moveGhosts et shortestPathToPacman. 
-Désormais, au début de chaque partie, notre IA utilise l’algorithme de Floyd-Warshall pour remplir une matrice contenant les distances entre tous les points de la carte, et une matrice contenant une liste des différentes directions possibles en partant de chaque case (possibleMoves). Les fonctions moveGhosts et shortestPathToPacman vont utiliser ces matrices pour calculer les meilleur mouvement des quatre fantômes dans la partie “min” de l’algorithme.
+We then implemented the MinMax algorithm, where PacMan thinks all ghosts are out to get him and takes his decisions accordingly. 
+The AI still uses the search tree, but instead of only considering its own moves, it has both itself and the ghosts play one after the other, thinking that the ghosts will always move in the direction that will bring them closer to PacMan in normal mode, and in the direction that will take them away from him when they are in vulnerable mode.
+We kept the same base as in the EatMax algorithm, but our PacMan uses the GameStatePlus class instead of the GameState class, and in particular the functions moveGhosts and shortestPathToPacman.
+From now on, at the beginning of each game the AI uses the Floyd-Warshall algorithm in order to fill a matrix containing the distances between all the squares of the map, and a matrix containing lists of the possible directions from each square (possibleMoves). The functions moveGhosts and shortestPathToPacman use those matrixes to compute the best moves for the four ghosts in the ‘min’ part of the algorithm.
 
-Il y a également quelques autres différences entre l’implémentation d’EatMax et de MinMax, qui ne sont pas liés au changement d’algorithme mais plutôt à une amélioration globale de notre code. Ainsi, la matrice possibleMoves est réutilisée pour la fonction donnant les états suivants possibles de Pacman. L’utilisation de la matrice de distances a également permis de régler le bug du tunnel.
+There are also some other differences between the implementation of EatMax and MinMax, but they are not actually linked to the change in algorithm, just to a global improvement in our code. Thus the possibleMoves matrix is reused in order to give the possible following states of PacMan. The distance matrix also allowed us to fix the tunnel bug.
 
-Cet algorithme parvient à de meilleurs résultats que le précédent.
-Le problème avec cet algorithme est qu’il ne prend pas en compte le comportement réel des fantômes, qui bougent parfois de façon aléatoire (ScatterMode), et qui pour certains n’essayent pas d’attraper Pacman quel que soit leur mode.
+This algorithm achieves better results than the  previous one.
+The main issue with it is that it doesn’t take into account the real behavior of the ghosts, which sometimes move in a random way (ScatterMode), or don’t always try to catch PacMan regardless of their mode (blue ghost).
+
 
 ### ExpectiMax (work in progress)
-Nous voulions aussi programmer un algorithme ExpectiMax pour que notre Pacman puisse anticiper les mouvements des fantômes (plutôt que de croire qu’ils étaient juste agressifs). Nous avions peu de temps pour développer cet algorithme, et la programmation originelle du jeu ne permettaient pas un implémentation facile. Le travail est donc inachevé, dans la classe Expectimax.java. Mais en terme d’algorithme, Expectimax est comme le MinMax, sauf que le “min” est calculé à partir du comportement théorique de chaque fantôme. Le fantôme rouge est agressif, le fantôme rose anticipe la trajectoire, et les deux autres ont un comportement semi-aléatoire. Le choix de PacMan est alors calculé en fonction de l’état du jeu après le mouvement théorique des fantômes. 
+We also wanted to code an Expectimax algorithm, for PacMan to anticipate ghosts movements (instead of thinking they were just aggressive like the red one). We had little time for coding this algorithm and the way the game was implemented in Java made the thing harder. This algorithm is not finished yet, in Expectimax.java (the code is commented to avoid error messages). Expectimax is similar to MinMan algorithm, but the ‘min’ is calculated based on the theoric behaviour of the ghosts. The red ghost is aggressive (aggressiveGhostChoice), the pink one anticipates the trajectory (trickyGhostChoice) and blue and orange ghosts act randomly (randomGhostChoice). If they are in Vulnerable mode, they run away from Pacman (scaredGhostChoice). PacMan’s choice of direction is then calculated depending on the game state after the theoric ghosts’ movements.
 
 ## Arbitrage vidéo
-bravo pacmouille
-
-
+In this video we will show the strength and weakness of PacMan with the MinMax algorithm. It doesn't win every game it plays but with few tries it can finish the first level.
