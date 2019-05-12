@@ -6,13 +6,10 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0b9cffbb-2e40-4eae-a4fd-e47475cddbe7" name="Default Changelist" comment="Added possibility of changing the Movement mode while playing">
+    <list default="true" id="0b9cffbb-2e40-4eae-a4fd-e47475cddbe7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/Pacman.iws" beforeDir="false" afterPath="$PROJECT_DIR$/Pacman.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Elements/PacmanGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Elements/PacmanGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Elements/actor/HUD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Elements/actor/HUD.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Elements/actor/OLPresents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Elements/actor/OLPresents.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Elements/actor/Title.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Elements/actor/Title.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/IA/IA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IA/IA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Pacman_jar/Pacman level +1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Pacman_jar/Pacman level +2.jar" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -72,19 +69,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Elements/infra/Game.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="39" column="9" selection-start-line="39" selection-start-column="9" selection-end-line="39" selection-end-column="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Elements/PacmanGame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="434">
-              <caret line="87" column="11" selection-start-line="87" selection-start-column="11" selection-end-line="87" selection-end-column="11" />
+            <state relative-caret-position="179">
+              <caret line="73" column="43" selection-start-line="73" selection-start-column="43" selection-end-line="73" selection-end-column="43" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#4816#4817#0" expanded="true" />
@@ -96,11 +84,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Elements/actor/Initializer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="33" column="40" selection-start-line="33" selection-start-column="40" selection-end-line="33" selection-end-column="40" />
+            <state relative-caret-position="150">
+              <caret line="12" column="3" lean-forward="true" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="3" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/IA/ExpectiMax.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-3180">
+              <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -140,7 +137,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>type</find>
       <find>shorte</find>
       <find>pathf</find>
       <find>pathfinder</find>
@@ -170,6 +166,7 @@
       <find>startga</find>
       <find>OL_</find>
       <find>ol_</find>
+      <find>initiali</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/src/br/ol/pacman/actor</dir>
@@ -213,10 +210,11 @@
         <option value="$PROJECT_DIR$/src/Elements/infra/ShortestPathFinder.java" />
         <option value="$PROJECT_DIR$/src/Elements/actor/Pacman.java" />
         <option value="$PROJECT_DIR$/src/Elements/actor/OLPresents.java" />
-        <option value="$PROJECT_DIR$/src/Elements/PacmanGame.java" />
         <option value="$PROJECT_DIR$/src/Elements/actor/HUD.java" />
         <option value="$PROJECT_DIR$/src/IA/IA.java" />
         <option value="$PROJECT_DIR$/src/Elements/actor/Title.java" />
+        <option value="$PROJECT_DIR$/src/Elements/PacmanGame.java" />
+        <option value="$PROJECT_DIR$/src/Elements/actor/Initializer.java" />
       </list>
     </option>
   </component>
@@ -293,7 +291,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557413760710" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557414292873" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -366,7 +364,7 @@
       <workItem from="1556707413081" duration="487000" />
       <workItem from="1556711868167" duration="1579000" />
       <workItem from="1557336233849" duration="1782000" />
-      <workItem from="1557406516613" duration="7062000" />
+      <workItem from="1557406516613" duration="7833000" />
     </task>
     <task id="LOCAL-00001" summary="Ajout du jeu Pacman déjà codé">
       <created>1551793955622</created>
@@ -592,11 +590,18 @@
       <option name="project" value="LOCAL" />
       <updated>1557412261307</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="Improved menu for playable version">
+      <created>1557413813840</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1557413813840</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="94432000" />
+    <option name="totallyTimeSpent" value="95203000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -618,8 +623,8 @@
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49529606" visible="true" weight="0.32937366" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49031544" weight="0.32937366" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49474266" weight="0.32937366" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.48920864" weight="0.32937366" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39956802" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -628,7 +633,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4969563" weight="0.32397407" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50470394" side_tool="true" visible="true" weight="0.32937366" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.51079136" side_tool="true" visible="true" weight="0.32937366" />
       <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.4986165" weight="0.32937366" />
       <window_info anchor="bottom" id="Duplicate detector" order="13" weight="0.32937366" />
       <window_info anchor="bottom" id="Thumbnails" order="14" sideWeight="0.4997233" weight="0.32937366" />
@@ -708,7 +713,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Improved AI by eatmax, doesn't see walls correctly&#10;Set up a different way of choosing controls" />
     <MESSAGE value="Cleaned a bit" />
     <MESSAGE value="Currently thinks wall is on left when it's on right or down" />
     <MESSAGE value="Currently eatmax thinks wall is on left when it's on right or down" />
@@ -733,7 +737,8 @@
     <MESSAGE value="Commentary of the GameStatePlus class" />
     <MESSAGE value="Commentary of IA class, moved the mode selection to IA instead of Pacman" />
     <MESSAGE value="Added possibility of changing the Movement mode while playing" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added possibility of changing the Movement mode while playing" />
+    <MESSAGE value="Improved menu for playable version" />
+    <option name="LAST_COMMIT_MESSAGE" value="Improved menu for playable version" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/br/ol/pacman/infra/Keyboard.java" />
@@ -833,9 +838,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/IA/ExpectiMax.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/IA/PathfindTree.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="765">
@@ -913,16 +915,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="36" column="30" lean-forward="true" selection-start-line="36" selection-start-column="30" selection-end-line="36" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Elements/actor/Background.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -934,13 +926,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
           <caret line="39" column="9" selection-start-line="39" selection-start-column="9" selection-end-line="39" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Elements/actor/HUD.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="37" column="63" selection-start-line="37" selection-start-column="63" selection-end-line="37" selection-end-column="63" />
         </state>
       </provider>
     </entry>
@@ -971,10 +956,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Elements/actor/OLPresents.java">
+    <entry file="file://$PROJECT_DIR$/src/Elements/actor/HUD.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="74">
-          <caret line="23" column="22" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="32" />
+        <state relative-caret-position="450">
+          <caret line="37" column="63" selection-start-line="37" selection-start-column="63" selection-end-line="37" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="36" column="30" lean-forward="true" selection-start-line="36" selection-start-column="30" selection-end-line="36" selection-end-column="30" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -987,8 +982,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Elements/PacmanGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="87" column="11" selection-start-line="87" selection-start-column="11" selection-end-line="87" selection-end-column="11" />
+        <state relative-caret-position="179">
+          <caret line="73" column="43" selection-start-line="73" selection-start-column="43" selection-end-line="73" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#4816#4817#0" expanded="true" />
@@ -999,10 +994,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Elements/actor/OLPresents.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="74">
+          <caret line="23" column="22" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Elements/actor/Initializer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="33" column="40" selection-start-line="33" selection-start-column="40" selection-end-line="33" selection-end-column="40" />
+        <state relative-caret-position="150">
+          <caret line="12" column="3" lean-forward="true" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/IA/ExpectiMax.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3180">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
         </state>
       </provider>
     </entry>
