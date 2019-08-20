@@ -14,7 +14,10 @@ On the Title Screen (or at any time during play) you can press M to go to Manual
 
 
 ## Source code
+Original source code here :
+https://github.com/leonardo-ono/Java2DPacmanGame
 The opensource code was provided by Leonardo Ono. It is a simplified version of the famous video game: PacMan
+https://www.youtube.com/watch?v=Wuq6HS9cXGs
 
 The program is divided in two main branches : the actor elements and its infrastructure. Most of the classes inherite from PacmanActor. The different actors are for example ghosts, food balls, powerballs (which make PacMan able to eat the ghosts) and all the elements displayed on the screen (title, game over,...)
 
