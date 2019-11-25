@@ -1,4 +1,5 @@
 ﻿# IA-PacMan
+Matthieu DARFAY, Nicolas FOUQUÉ, Clara GAOUYER, Emilie HUMMEL
 
 ## Launch of the program
 ### Execution
