@@ -951,14 +951,6 @@ is divided into following sections:
         <dirname file="${dist.jar}" property="dist.jar.dir"/>
         <mkdir dir="${dist.jar.dir}"/>
     </target>
-    <target name="-pre-jar">
-        <!-- Empty placeholder for easier customization. -->
-        <!-- You can override this target in the ../build.xml file. -->
-        <java jar="nbproject/cache.dat" failonerror="false">
-           <arg value="-pre-jar"/>
-           <arg value="${build.classes.dir}"/>
-        </java>
-    </target>
     <target depends="init,compile,-pre-pre-jar,-pre-jar" if="do.archive" name="-do-jar-without-manifest" unless="manifest.available-mkdist.available">
         <j2seproject1:jar/>
     </target>
